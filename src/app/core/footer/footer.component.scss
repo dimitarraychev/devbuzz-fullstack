@@ -1,0 +1,15 @@
+$font-color: white;
+
+footer {
+  position: fixed;
+  bottom: 0;
+  display: flex;
+  justify-content: space-around;
+  padding: 1em 35%;
+  width: 100%;
+  color: $font-color;
+}
+
+footer a {
+  color: $font-color;
+}
