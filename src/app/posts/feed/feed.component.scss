@@ -38,13 +38,14 @@ $bee-yellow: #e9ab17;
   display: flex;
   gap: 1em;
   padding: 0 1em 1em 1em;
-  justify-content: space-evenly;
+  justify-content: space-around;
+  flex-wrap: wrap;
 }
 
 #latestPostsContainer {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
+  grid-template-columns: repeat(auto-fill, minmax(15em, 1fr));
+  grid-template-rows: auto;
   place-items: center;
   gap: 1em;
   padding: 0 1em 1em 1em;
@@ -80,6 +81,11 @@ app-button {
   position: absolute;
   top: 0;
   left: 0;
+  transition: transform 0.5s;
+
+  &:hover {
+    transform: scale(1.1);
+  }
 }
 
 .post-content {
@@ -96,4 +102,23 @@ app-button {
 .post-title {
   margin-bottom: 5px;
   font-size: 18px;
+}
+
+@media screen and (min-width: 1138px) {
+  #latestPostsContainer {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Adjust for smaller screens if needed */
+@media screen and (max-width: 1138px) {
+  #latestPostsContainer {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (max-width: 773px) {
+  #latestPostsContainer {
+    grid-template-columns: 1fr;
+  }
 }
