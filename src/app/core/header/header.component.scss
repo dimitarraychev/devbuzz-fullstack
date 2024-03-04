@@ -1,5 +1,5 @@
-$bg-color: rgb(32, 33, 36, 0.8);
-$light-bg-color: rgba(60, 64, 66, 0.8);
+$nav-bg-color: rgb(32, 33, 36, 0.8);
+$nav-light-bg-color: rgba(60, 64, 66, 0.8);
 $font-color: white;
 $border-radius: 5px;
 
@@ -15,7 +15,7 @@ nav {
   justify-content: space-between;
   padding: 1.5em 3em;
   font-size: 18px;
-  background-color: $bg-color;
+  background-color: $nav-bg-color;
   border-radius: $border-radius;
   user-select: none;
 }
@@ -83,7 +83,7 @@ nav {
   width: 100%;
   border: 1px solid rgba(255, 255, 255, 0.3);
   border-radius: $border-radius;
-  background-color: $light-bg-color;
+  background-color: $nav-light-bg-color;
   box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.8);
 
   &:hover {
