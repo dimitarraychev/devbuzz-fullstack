@@ -1,6 +1,11 @@
 $font-color: white;
-$bg-color: rgb(32, 33, 36, 0.8);
-$light-bg-color: rgba(60, 64, 66, 0.8);
+$bg-color: rgb(41, 41, 41, 1);
+$light-bg-color: rgba(18, 18, 18, 1);
+$ligher-bg-color: rgba(30, 30, 30, 1);
+$border-radius: 10px;
+$bento-border: 1px solid rgba(255, 255, 255, 0.3);
+$bento-border-hover: 1px solid rgba(255, 255, 255, 0.6);
+$bento-shadow-hover: 0 0 5px rgba(255, 255, 255, 0.3);
 
 .home-msg {
   grid-column: span 2;
@@ -29,22 +34,76 @@ $light-bg-color: rgba(60, 64, 66, 0.8);
   color: $font-color;
   width: 70%;
   margin: auto;
+  margin-top: 2em;
 }
 
 .bentogrid div {
   background-color: $light-bg-color;
-  border-radius: 1em;
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  border: $bento-border;
+  border-radius: $border-radius;
   transition: box-shadow 0.5s;
 
   &:hover {
-    box-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
+    border: $bento-border-hover;
+    box-shadow: $bento-shadow-hover;
   }
 
   h3 {
     font-size: 30px;
     margin: auto;
     text-align: center;
-    padding: 1em 0;
+    padding: 0.5em 1em;
+  }
+}
+
+.category {
+  padding: 1em;
+  margin: 0 1em 1em 1em;
+  border: $bento-border;
+  border-radius: $border-radius;
+  background-color: $ligher-bg-color;
+  display: flex;
+  align-items: center;
+
+  &:hover {
+    border: $bento-border-hover;
+    box-shadow: $bento-shadow-hover;
+  }
+
+  img {
+    width: 14em;
+    height: 10em;
+    border-radius: $border-radius;
+    object-fit: cover;
+  }
+
+  section {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    padding: 1em;
+    width: 70%;
+  }
+
+  h4 {
+    font-size: 22px;
+  }
+}
+
+#contributors {
+  display: flex;
+  flex-direction: column;
+
+  p {
+    padding: 0.5em;
+    margin: 0 1em 1em 1em;
+    border: $bento-border;
+    border-radius: $border-radius;
+    background-color: $ligher-bg-color;
+  }
+
+  p:hover {
+    border: $bento-border-hover;
+    box-shadow: $bento-shadow-hover;
   }
 }
