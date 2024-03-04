@@ -7,6 +7,7 @@ $bento-border: 1px solid rgba(255, 255, 255, 0.3);
 $bento-border-hover: 1px solid rgba(255, 255, 255, 0.6);
 $bento-shadow-hover: 0 0 0.5em rgba(255, 255, 255, 0.3);
 $shadow-transition: box-shadow 0.5s;
+$bee-yellow: #e9ab17;
 
 .home-msg {
   grid-column: span 2;
@@ -28,6 +29,10 @@ $shadow-transition: box-shadow 0.5s;
   p {
     line-height: 1.5;
     font-size: 18px;
+  }
+
+  span {
+    color: $bee-yellow;
   }
 }
 
@@ -51,9 +56,10 @@ $shadow-transition: box-shadow 0.5s;
 
   h3 {
     font-size: 30px;
+    letter-spacing: 0.5px;
     margin: auto;
     text-align: center;
-    padding: 0.5em 1em;
+    padding: 1em;
   }
 }
 

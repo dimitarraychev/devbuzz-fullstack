@@ -2,6 +2,7 @@ $nav-bg-color: rgb(32, 33, 36, 0.8);
 $nav-light-bg-color: rgba(60, 64, 66, 0.8);
 $font-color: white;
 $border-radius: 5px;
+$bee-yellow: #e9ab17;
 
 nav {
   position: fixed;
@@ -32,8 +33,12 @@ nav {
     color: $font-color;
   }
 
+  span {
+    color: $bee-yellow;
+  }
+
   a {
-    color: $font-color;
+    color: $bee-yellow;
   }
 }
 
