@@ -95,3 +95,7 @@ nav {
     box-shadow: inset 0 0 7px rgba(0, 0, 0, 0.8);
   }
 }
+
+.menu-opened {
+  filter: brightness(0.7);
+}
