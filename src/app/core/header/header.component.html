@@ -1,11 +1,11 @@
 <nav>
   <div class="logo-container">
-    <a><i class="fa-brands fa-hive"></i></a>
-    <a id="logo">Dev<span>Buzz</span></a>
+    <a routerLink="/home"><i class="fa-brands fa-hive"></i></a>
+    <a id="logo" routerLink="/home">Dev<span>Buzz</span></a>
   </div>
   <div class="user-menu">
     <app-button buttonText="Create" buttonSize="large" />
-    <a id="feedLink">Hive</a>
+    <a id="feedLink" routerLink="/feed">Feed</a>
     <p id="username" (click)="toggleMenu()">Guest</p>
     <i class="fa-solid fa-id-badge" (click)="toggleMenu()"></i>
   </div>
