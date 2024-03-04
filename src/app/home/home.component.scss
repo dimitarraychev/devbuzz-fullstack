@@ -115,3 +115,41 @@ $bee-yellow: #e9ab17;
     box-shadow: $bento-shadow-hover;
   }
 }
+
+@media screen and (max-width: 1000px) {
+  .category img {
+    width: 10em;
+    height: 8em;
+  }
+
+  .bentogrid {
+    font-size: 14px;
+  }
+
+  h3 {
+    font-size: 28px;
+  }
+
+  h4 {
+    font-size: 20px;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .category img {
+    width: 8em;
+    height: 6em;
+  }
+
+  .bentogrid {
+    font-size: 12px;
+  }
+
+  h3 {
+    font-size: 26px;
+  }
+
+  h4 {
+    font-size: 18px;
+  }
+}
