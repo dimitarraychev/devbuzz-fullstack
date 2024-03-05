@@ -23,7 +23,7 @@ $border-radius: 5px;
   width: 40vw;
 }
 
-.details-category-time {
+.details-info-top {
   color: gray;
   align-self: end;
   font-style: italic;
@@ -31,10 +31,10 @@ $border-radius: 5px;
   justify-content: space-between;
   align-items: center;
   justify-items: center;
-}
 
-.post-time {
-  font-size: 12px;
+  .post-time {
+    font-size: 12px;
+  }
 }
 
 .details-title {
@@ -42,14 +42,14 @@ $border-radius: 5px;
   letter-spacing: 1px;
 }
 
-.details-like {
+.details-info-bottom {
   display: flex;
   justify-content: space-between;
-}
 
-.like {
-  height: 10vh;
-  width: 10vh;
+  .like {
+    height: 10vh;
+    width: 10vh;
+  }
 }
 
 #likeBtn {
