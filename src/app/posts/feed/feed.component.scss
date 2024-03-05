@@ -1,26 +1,34 @@
 $font-color: white;
 $dark-bg: rgba(18, 18, 18, 1);
-$light-bg: rgba(30, 30, 30, 1);
-$border-radius: 10px;
-$bento-border: 1px solid rgba(255, 255, 255, 0.3);
-$bento-border-hover: 1px solid rgba(255, 255, 255, 0.6);
-$bento-shadow-hover: 0 0 0.5em rgba(255, 255, 255, 0.3);
-$shadow-transition: box-shadow 0.5s;
-$bee-yellow: #e9ab17;
+
+#top-menu {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1em;
+}
+
+#search-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5em;
+
+  #searchfield {
+    height: 2rem;
+    border-radius: 5px;
+  }
+
+  .fa-magnifying-glass {
+    margin: 0;
+    padding: 0;
+  }
+}
 
 .section {
   color: $font-color;
   width: 70%;
   margin: auto;
   background-color: $dark-bg;
-  border: $bento-border;
-  border-radius: $border-radius;
-  transition: $shadow-transition;
-
-  &:hover {
-    border: $bento-border-hover;
-    box-shadow: $bento-shadow-hover;
-  }
 
   h3 {
     font-size: 30px;
@@ -50,60 +58,6 @@ $bee-yellow: #e9ab17;
   place-items: center;
   gap: 1em;
   padding: 0 1em 1em 1em;
-}
-
-.post {
-  position: relative;
-  width: 15em;
-  height: 15em;
-  overflow: hidden;
-  border-radius: $border-radius;
-  border: $bento-border;
-  transition: $shadow-transition;
-  margin-bottom: 1em;
-
-  &:hover {
-    border: $bento-border-hover;
-    box-shadow: $bento-shadow-hover;
-  }
-
-  &:hover app-button {
-    display: inline-block;
-  }
-
-  &:hover img {
-    transform: scale(1.1);
-  }
-}
-
-app-button {
-  display: none;
-}
-
-.post img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  position: absolute;
-  top: 0;
-  left: 0;
-  transition: transform 0.5s;
-}
-
-.post-content {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  padding: 1em;
-  color: $font-color;
-  text-align: center;
-  background: rgba(0, 0, 0, 0.7);
-}
-
-.post-title {
-  margin-bottom: 5px;
-  font-size: 18px;
 }
 
 @media screen and (min-width: 1138px) {
