@@ -1,1 +1,34 @@
-<p>post-details works!</p>
+<div id="details-container" class="border-glow">
+  <div class="details-info">
+    <div class="details-category-time">
+      <p class="details-category">blockchain</p>
+      <p class="post-time">25th Aug 2023</p>
+    </div>
+
+    <h1 class="details-title">Post Title Post Title</h1>
+
+    <div class="details-like">
+      <div class="details-owner">
+        <p class="owner-name">Alex Techton</p>
+        <app-button buttonSize="small" buttonText="Edit" />
+        <app-button buttonSize="small" buttonText="Delete" />
+      </div>
+      <div class="like">
+        <p>Likes: 25</p>
+        <i class="fa-regular fa-heart interactable" id="likeBtn"></i>
+      </div>
+    </div>
+  </div>
+
+  <img
+    src="./assets/images/blockchain.jpg"
+    onerror="this.src='./images/image-missing.jpg'"
+    alt="Post Image"
+    class="details-img"
+  />
+
+  <p class="details-description">
+    Descriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescription
+    descriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescription
+  </p>
+</div>
