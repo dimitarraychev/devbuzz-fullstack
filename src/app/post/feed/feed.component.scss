@@ -32,6 +32,7 @@ $border-radius: 5px;
     margin: 0;
     padding: 0;
     color: $font-color;
+    cursor: pointer;
   }
 }
 
@@ -42,6 +43,7 @@ select {
   border-radius: $border-radius;
   height: 2em;
   width: 17vw;
+  cursor: pointer;
 }
 
 .section {
