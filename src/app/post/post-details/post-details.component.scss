@@ -21,52 +21,38 @@ $border-radius: 5px;
   padding-left: 3vw;
   grid-template-rows: 0.5fr 1fr 0.5fr;
   width: 40vw;
-}
 
-.details-info-top {
-  color: gray;
-  align-self: end;
-  font-style: italic;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  justify-items: center;
+  .details-info-top {
+    color: gray;
+    align-self: end;
+    font-style: italic;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    justify-items: center;
 
-  .post-time {
-    font-size: 12px;
+    .post-time {
+      font-size: 12px;
+    }
   }
-}
 
-.details-title {
-  font-size: 32px;
-  letter-spacing: 1px;
-}
-
-.details-info-bottom {
-  display: flex;
-  justify-content: space-between;
-
-  .like {
-    height: 10vh;
-    width: 10vh;
+  .details-title {
+    font-size: 32px;
+    letter-spacing: 1px;
   }
-}
 
-#likeBtn {
-  padding: 10px 20px;
-  background-color: blue;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-  margin: auto;
-  font-size: 16px;
+  .details-info-bottom {
+    display: flex;
+    justify-content: space-between;
 
-  &:hover {
-    background-color: white;
-    border: 1px solid black;
-    color: black;
+    .like {
+      height: 10vh;
+      width: 10vh;
+    }
+  }
+
+  app-button {
+    margin-right: 0.5em;
   }
 }
 

@@ -8,6 +8,7 @@ import { Component, Input } from '@angular/core';
 export class ButtonComponent {
   @Input() buttonText: string = '';
   @Input() buttonSize: string = 'default';
+  @Input() isLike: boolean = false;
 
   get buttonStyles(): { [key: string]: string } {
     return {

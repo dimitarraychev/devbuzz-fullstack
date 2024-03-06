@@ -1,1 +1,4 @@
-<button [ngStyle]="buttonStyles">{{ buttonText }}</button>
+<button [ngStyle]="buttonStyles">
+  {{ buttonText }}
+  <i *ngIf="isLike" class="fa-regular fa-heart interactable" id="likeBtn"></i>
+</button>

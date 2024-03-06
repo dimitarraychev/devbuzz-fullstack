@@ -9,7 +9,7 @@ import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
 import { HomeComponent } from './home/home.component';
-import { PostsModule } from './posts/posts.module';
+import { PostModule } from './post/post.module';
 import { environment } from 'src/environments/environment';
 
 @NgModule({
@@ -21,7 +21,7 @@ import { environment } from 'src/environments/environment';
     AppRoutingModule,
     CoreModule,
     SharedModule,
-    PostsModule,
+    PostModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
