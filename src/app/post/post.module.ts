@@ -5,9 +5,10 @@ import { PostRoutingModule } from './post-routing.module';
 import { SharedModule } from '../shared/shared.module';
 import { PostCardComponent } from './post-card/post-card.component';
 import { PostDetailsComponent } from './post-details/post-details.component';
+import { PostCreateComponent } from './post-create/post-create.component';
 
 @NgModule({
-  declarations: [FeedComponent, PostCardComponent, PostDetailsComponent],
+  declarations: [FeedComponent, PostCardComponent, PostDetailsComponent, PostCreateComponent],
   imports: [CommonModule, PostRoutingModule, SharedModule],
 })
 export class PostModule {}
