@@ -8,7 +8,8 @@ import { PostService } from '../post-service/post.service';
 })
 export class FeedComponent implements OnInit {
   postService = inject(PostService);
+
   ngOnInit(): void {
-    this.postService.getPosts().subscribe((post) => console.log(post));
+    this.postService.getPosts().subscribe((posts) => console.log(posts));
   }
 }
