@@ -1,25 +1,10 @@
 <section id="register-form-wrapper" class="border-glow">
   <h2>Register</h2>
   <form id="register-form">
-    <input
-      type="text"
-      name="username"
-      id="register-username"
-      placeholder="Username"
-    />
-    <input type="text" name="email" id="register-email" placeholder="Email" />
-    <input
-      type="password"
-      name="password"
-      id="register-password"
-      placeholder="Password"
-    />
-    <input
-      type="password"
-      name="re-password"
-      id="repeat-password"
-      placeholder="Repeat password"
-    />
+    <input type="text" id="register-username" placeholder="Username" />
+    <input type="text" id="register-email" placeholder="Email" />
+    <input type="password" id="register-password" placeholder="Password" />
+    <input type="password" id="repeat-password" placeholder="Repeat password" />
     <p *ngIf="errorMessage" id="error-msg"></p>
     <app-button buttonSize="large" buttonText="Register" />
   </form>
