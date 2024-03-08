@@ -38,7 +38,7 @@
       formControlName="description"
       [class.invalid]="isValid('description')"
     ></textarea>
-    <p class="error-msg" *ngIf="errorMessage">{{ errorMessage }}</p>
+    <p id="error-msg" *ngIf="errorMessage">{{ errorMessage }}</p>
 
     <app-button buttonSize="large" buttonText="Create" />
   </form>

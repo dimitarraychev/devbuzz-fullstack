@@ -8,7 +8,7 @@ $border-radius: 5px;
   display: flex;
   flex-direction: column;
   place-items: center;
-  gap: 3vh;
+  gap: 4vh;
   width: 60%;
   margin: auto;
   padding: 30px 0 30px 0;
@@ -24,11 +24,10 @@ $border-radius: 5px;
   display: flex;
   flex-direction: column;
   place-items: center;
-  gap: 0.75em;
+  gap: 1em;
 
   input {
     font-size: 18px;
-    display: block;
     align-self: center;
     width: 30vw;
     height: 2rem;
@@ -53,7 +52,6 @@ $border-radius: 5px;
 
   textarea {
     font-size: 18px;
-    display: block;
     width: 50vw;
     min-height: 32vh;
     max-height: 66vh;
@@ -65,11 +63,10 @@ $border-radius: 5px;
   }
 }
 
-.error-msg {
+#error-msg {
   color: red;
   font-size: 12px;
   text-align: center;
-  // padding-bottom: 0.5em;
 }
 
 .invalid {
