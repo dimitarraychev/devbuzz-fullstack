@@ -1,4 +1,6 @@
 <button [ngStyle]="buttonStyles">
   {{ buttonText }}
-  <i *ngIf="isLike" class="fa-regular fa-heart interactable" id="likeBtn"></i>
+  <i *ngIf="buttonIcon === 'like'" class="fa-regular fa-heart interactable"></i>
+  <!-- <i *ngIf="buttonIcon === 'create'" class="fa-solid fa-plus"></i> -->
+  <i *ngIf="buttonIcon === 'create'" class="fa-regular fa-pen-to-square"></i>
 </button>
