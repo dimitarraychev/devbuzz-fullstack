@@ -61,7 +61,7 @@ nav {
   cursor: pointer;
 }
 
-.fa-solid {
+.fa-id-badge {
   font-size: 26px;
   color: $font-color;
   cursor: pointer;
@@ -78,6 +78,15 @@ nav {
   border-radius: $border-radius;
   gap: 0.1em;
   user-select: none;
+
+  a {
+    display: flex;
+    align-items: center;
+  }
+  i {
+    font-size: 10px;
+    margin-right: 0.2em;
+  }
 }
 
 .menu-items a {

@@ -17,8 +17,10 @@
   </div>
 </nav>
 <div class="menu-items" (click)="hideMenu()" *ngIf="isMenuOpen">
-  <a routerLink="/login">Login</a>
-  <a routerLink="/register">Register</a>
-  <a class="user" id="profileBtn">Profile</a>
-  <a class="user" id="logoutBtn">Logout</a>
+  <a routerLink="/login"><i class="fa-solid fa-right-to-bracket"></i>Login</a>
+  <a routerLink="/register"><i class="fa-solid fa-user-plus"></i>Register</a>
+  <a class="user" id="profileBtn"><i class="fa-solid fa-user"></i>Profile</a>
+  <a class="user" id="logoutBtn"
+    ><i class="fa-solid fa-right-from-bracket"></i>Logout</a
+  >
 </div>
