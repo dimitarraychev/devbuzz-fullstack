@@ -4,16 +4,24 @@
     <a id="logo" routerLink="/home">Dev<span>Buzz</span></a>
   </div>
   <div id="user-menu">
-    <app-button buttonText="Create" buttonSize="large" routerLink="/create" />
+    <app-button
+      buttonText="Create"
+      buttonSize="large"
+      buttonIcon="create"
+      routerLink="/create"
+    />
     <a id="feedLink" routerLink="/feed">Feed</a>
     <p id="username" [class.menu-opened]="isMenuOpen" (click)="toggleMenu()">
       Guest
     </p>
     <i
-      class="fa-solid fa-id-badge"
+      class="fa-solid fa-user-secret"
+      id="user-icon"
       [class.menu-opened]="isMenuOpen"
       (click)="toggleMenu()"
     ></i>
+    <!-- When logged in  -->
+    <!-- <i class="fa-solid fa-user-astronaut"></i> -->
   </div>
 </nav>
 <div id="menu-items" (click)="hideMenu()" *ngIf="isMenuOpen">
