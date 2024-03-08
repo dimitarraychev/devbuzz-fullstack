@@ -1,9 +1,9 @@
 <nav>
-  <div class="logo-container">
+  <div id="logo-container">
     <a routerLink="/home"><i class="fa-brands fa-hive"></i></a>
     <a id="logo" routerLink="/home">Dev<span>Buzz</span></a>
   </div>
-  <div class="user-menu">
+  <div id="user-menu">
     <app-button buttonText="Create" buttonSize="large" routerLink="/create" />
     <a id="feedLink" routerLink="/feed">Feed</a>
     <p id="username" [class.menu-opened]="isMenuOpen" (click)="toggleMenu()">
@@ -16,11 +16,9 @@
     ></i>
   </div>
 </nav>
-<div class="menu-items" (click)="hideMenu()" *ngIf="isMenuOpen">
+<div id="menu-items" (click)="hideMenu()" *ngIf="isMenuOpen">
   <a routerLink="/login"><i class="fa-solid fa-right-to-bracket"></i>Login</a>
   <a routerLink="/register"><i class="fa-solid fa-user-plus"></i>Register</a>
-  <a class="user" id="profileBtn"><i class="fa-solid fa-user"></i>Profile</a>
-  <a class="user" id="logoutBtn"
-    ><i class="fa-solid fa-right-from-bracket"></i>Logout</a
-  >
+  <a><i class="fa-solid fa-user"></i>Profile</a>
+  <a><i class="fa-solid fa-right-from-bracket"></i>Logout</a>
 </div>

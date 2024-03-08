@@ -4,6 +4,12 @@ $font-color: white;
 $border-radius: 5px;
 $bee-yellow: #e9ab17;
 
+@mixin hoverEffect {
+  &:hover {
+    filter: brightness(0.8);
+  }
+}
+
 nav {
   position: fixed;
   z-index: 2;
@@ -21,7 +27,7 @@ nav {
   user-select: none;
 }
 
-.logo-container {
+#logo-container {
   font-size: 36px;
   display: flex;
   justify-content: center;
@@ -42,7 +48,7 @@ nav {
   }
 }
 
-.user-menu {
+#user-menu {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -54,20 +60,26 @@ nav {
   color: $font-color;
   margin: 3em;
   cursor: pointer;
+
+  @include hoverEffect;
 }
 
 #username {
   color: $font-color;
   cursor: pointer;
+
+  @include hoverEffect;
 }
 
 .fa-id-badge {
   font-size: 26px;
   color: $font-color;
   cursor: pointer;
+
+  @include hoverEffect;
 }
 
-.menu-items {
+#menu-items {
   z-index: 2;
   position: fixed;
   display: flex;
@@ -79,18 +91,16 @@ nav {
   gap: 0.1em;
   user-select: none;
 
-  a {
-    display: flex;
-    align-items: center;
-  }
   i {
     font-size: 10px;
     margin-right: 0.2em;
+    color: $bee-yellow;
   }
 }
 
-.menu-items a {
-  position: relative;
+#menu-items a {
+  display: flex;
+  align-items: center;
   color: $font-color;
   padding: 5px;
   font-size: 18px;
