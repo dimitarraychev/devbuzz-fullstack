@@ -4,7 +4,7 @@
     <a id="logo" routerLink="/home">Dev<span>Buzz</span></a>
   </div>
   <div class="user-menu">
-    <app-button buttonText="Create" buttonSize="large" />
+    <app-button buttonText="Create" buttonSize="large" routerLink="/create" />
     <a id="feedLink" routerLink="/feed">Feed</a>
     <p id="username" [class.menu-opened]="isMenuOpen" (click)="toggleMenu()">
       Guest
@@ -17,8 +17,8 @@
   </div>
 </nav>
 <div class="menu-items" (click)="hideMenu()" *ngIf="isMenuOpen">
-  <a class="guest" id="loginBtn">Login</a>
-  <a class="guest" id="registerBtn">Register</a>
+  <a routerLink="/login">Login</a>
+  <a routerLink="/register">Register</a>
   <a class="user" id="profileBtn">Profile</a>
   <a class="user" id="logoutBtn">Logout</a>
 </div>

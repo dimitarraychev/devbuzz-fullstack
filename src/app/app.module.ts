@@ -11,6 +11,7 @@ import { SharedModule } from './shared/shared.module';
 import { HomeComponent } from './home/home.component';
 import { PostModule } from './post/post.module';
 import { environment } from 'src/environments/environment';
+import { UserModule } from './user/user.module';
 
 @NgModule({
   declarations: [AppComponent, HomeComponent],
@@ -18,10 +19,11 @@ import { environment } from 'src/environments/environment';
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideFirestore(() => getFirestore()),
     BrowserModule,
-    AppRoutingModule,
     CoreModule,
     SharedModule,
     PostModule,
+    UserModule,
+    AppRoutingModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
