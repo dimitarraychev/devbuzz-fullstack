@@ -11,7 +11,11 @@
         placeholder="Repeat password"
       />
       <p *ngIf="errorMessage" id="error-msg"></p>
-      <app-button buttonSize="large" buttonText="Register" />
+      <app-button
+        buttonSize="large"
+        buttonText="Register"
+        id="register-button"
+      />
     </form>
     <p id="redirect-message">
       Already registered? <a routerLink="/login">Login</a>

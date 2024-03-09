@@ -14,10 +14,10 @@ $border-radius: 5px;
   display: flex;
   flex-direction: column;
   place-items: center;
-  gap: 4vh;
-  width: 60%;
+  gap: 6vh;
+  min-width: 50%;
   margin: auto;
-  padding: 30px 0 30px 0;
+  padding: 2em 0;
   color: $font-color;
   background-color: $dark-bg;
 
@@ -58,7 +58,7 @@ $border-radius: 5px;
 
   textarea {
     font-size: 18px;
-    width: 50vw;
+    width: 40vw;
     min-height: 32vh;
     max-height: 66vh;
     margin: auto;
@@ -67,6 +67,10 @@ $border-radius: 5px;
     color: $font-color;
     background-color: $light-bg;
   }
+}
+
+#create-button {
+  margin-top: 2em;
 }
 
 #error-msg {
