@@ -1,45 +1,47 @@
-<section id="create-form-wrapper" class="border-glow">
-  <h2>Create Post</h2>
-  <form id="create-form" [formGroup]="createForm" (ngSubmit)="onSubmit()">
-    <input
-      type="text"
-      id="title"
-      placeholder="Title"
-      formControlName="title"
-      [class.invalid]="isValid('title')"
-    />
+<div id="create-page-wrapper">
+  <section id="create-form-wrapper" class="border-glow">
+    <h2>Create Post</h2>
+    <form id="create-form" [formGroup]="createForm" (ngSubmit)="onSubmit()">
+      <input
+        type="text"
+        id="title"
+        placeholder="Title"
+        formControlName="title"
+        [class.invalid]="isValid('title')"
+      />
 
-    <select
-      id="category"
-      formControlName="category"
-      [class.invalid]="isValid('category')"
-    >
-      <option value="" disabled selected hidden id="default-option">
-        Select Category...
-      </option>
-      <option value="development">Development</option>
-      <option value="blockchain">Blockchain</option>
-      <option value="artificial-intelligence">Artificial Intelligence</option>
-      <option value="other">Other</option>
-    </select>
+      <select
+        id="category"
+        formControlName="category"
+        [class.invalid]="isValid('category')"
+      >
+        <option value="" disabled selected hidden id="default-option">
+          Select Category...
+        </option>
+        <option value="development">Development</option>
+        <option value="blockchain">Blockchain</option>
+        <option value="artificial-intelligence">Artificial Intelligence</option>
+        <option value="other">Other</option>
+      </select>
 
-    <input
-      type="url"
-      id="image"
-      placeholder="Image URL"
-      formControlName="image"
-      [class.invalid]="isValid('image')"
-    />
+      <input
+        type="url"
+        id="image"
+        placeholder="Image URL"
+        formControlName="image"
+        [class.invalid]="isValid('image')"
+      />
 
-    <textarea
-      type="description"
-      id="description"
-      placeholder="Description"
-      formControlName="description"
-      [class.invalid]="isValid('description')"
-    ></textarea>
-    <p id="error-msg" *ngIf="errorMessage">{{ errorMessage }}</p>
+      <textarea
+        type="description"
+        id="description"
+        placeholder="Description"
+        formControlName="description"
+        [class.invalid]="isValid('description')"
+      ></textarea>
+      <p id="error-msg" *ngIf="errorMessage">{{ errorMessage }}</p>
 
-    <app-button buttonSize="large" buttonText="Create" />
-  </form>
-</section>
+      <app-button buttonSize="large" buttonText="Create" />
+    </form>
+  </section>
+</div>

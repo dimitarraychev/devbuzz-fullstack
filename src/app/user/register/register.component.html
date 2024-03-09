@@ -1,14 +1,20 @@
-<section id="register-form-wrapper" class="border-glow">
-  <h2>Register</h2>
-  <form id="register-form">
-    <input type="text" id="register-username" placeholder="Username" />
-    <input type="text" id="register-email" placeholder="Email" />
-    <input type="password" id="register-password" placeholder="Password" />
-    <input type="password" id="repeat-password" placeholder="Repeat password" />
-    <p *ngIf="errorMessage" id="error-msg"></p>
-    <app-button buttonSize="large" buttonText="Register" />
-  </form>
-  <p id="redirect-message">
-    Already registered? <a routerLink="/login">Login</a>
-  </p>
-</section>
+<div id="register-page-wrapper">
+  <section id="register-form-wrapper" class="border-glow">
+    <h2>Register</h2>
+    <form id="register-form">
+      <input type="text" id="register-username" placeholder="Username" />
+      <input type="text" id="register-email" placeholder="Email" />
+      <input type="password" id="register-password" placeholder="Password" />
+      <input
+        type="password"
+        id="repeat-password"
+        placeholder="Repeat password"
+      />
+      <p *ngIf="errorMessage" id="error-msg"></p>
+      <app-button buttonSize="large" buttonText="Register" />
+    </form>
+    <p id="redirect-message">
+      Already registered? <a routerLink="/login">Login</a>
+    </p>
+  </section>
+</div>

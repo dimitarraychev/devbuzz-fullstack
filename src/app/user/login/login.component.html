@@ -1,13 +1,15 @@
-<section id="login-form-wrapper" class="border-glow">
-  <h2>Login</h2>
-  <form id="login-form">
-    <input type="text" id="email" placeholder="Email" />
-    <input type="password" id="password" placeholder="Password" />
-    <p *ngIf="errorMessage" id="error-msg">An error occured!</p>
-    <app-button buttonSize="large" buttonText="Login" />
-  </form>
-  <p id="redirect-message">
-    Not registered?
-    <a routerLink="/register">Create an account</a>
-  </p>
-</section>
+<div id="login-page-wrapper">
+  <section id="login-form-wrapper" class="border-glow">
+    <h2>Login</h2>
+    <form id="login-form">
+      <input type="text" id="email" placeholder="Email" />
+      <input type="password" id="password" placeholder="Password" />
+      <p *ngIf="errorMessage" id="error-msg">An error occured!</p>
+      <app-button buttonSize="large" buttonText="Login" />
+    </form>
+    <p id="redirect-message">
+      Not registered?
+      <a routerLink="/register">Create an account</a>
+    </p>
+  </section>
+</div>
