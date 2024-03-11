@@ -1,22 +1,43 @@
 <div id="register-page-wrapper">
   <section id="register-form-wrapper" class="border-glow">
     <h2>Register</h2>
-    <form id="register-form">
-      <input type="text" id="register-username" placeholder="Username" />
-      <input type="text" id="register-email" placeholder="Email" />
-      <input type="password" id="register-password" placeholder="Password" />
+    <form id="register-form" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+      <input
+        type="text"
+        id="register-username"
+        placeholder="Username"
+        formControlName="username"
+        [class.invalid]="isValid('username')"
+      />
+      <input
+        type="text"
+        id="register-email"
+        placeholder="Email"
+        formControlName="email"
+        [class.invalid]="isValid('email')"
+      />
+      <input
+        type="password"
+        id="register-password"
+        placeholder="Password"
+        formControlName="password"
+        [class.invalid]="isValid('password')"
+      />
       <input
         type="password"
         id="repeat-password"
         placeholder="Repeat password"
+        formControlName="rePassword"
+        [class.invalid]="isValid('rePassword')"
       />
-      <p *ngIf="errorMessage" id="error-msg"></p>
+      <p id="error-msg" *ngIf="errorMessage">{{ errorMessage }}</p>
       <app-button
         buttonSize="large"
         buttonText="Register"
         id="register-button"
       />
     </form>
+
     <p id="redirect-message">
       Already registered? <a routerLink="/login">Login</a>
     </p>
