@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { UserService } from 'src/app/user/user.service';
 
 @Component({
   selector: 'app-header',
@@ -6,7 +7,13 @@ import { Component } from '@angular/core';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent {
+  constructor(private userService: UserService) {}
+
   isMenuOpen: boolean = false;
+
+  get isLogged(): boolean {
+    return this.userService.isLogged;
+  }
 
   toggleMenu(): void {
     this.isMenuOpen = !this.isMenuOpen;

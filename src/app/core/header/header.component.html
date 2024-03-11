@@ -15,13 +15,13 @@
       Guest
     </p>
     <i
-      class="fa-solid fa-user-secret"
+      class="fa-solid"
+      [class.fa-user-astronaut]="isLogged"
+      [class.fa-user-secret]="!isLogged"
       id="user-icon"
       [class.menu-opened]="isMenuOpen"
       (click)="toggleMenu()"
     ></i>
-    <!-- When logged in  -->
-    <!-- <i class="fa-solid fa-user-astronaut"></i> -->
   </div>
 </nav>
 <div id="menu-items" (click)="hideMenu()" *ngIf="isMenuOpen">
