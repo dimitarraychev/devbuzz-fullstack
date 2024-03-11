@@ -12,6 +12,7 @@ import { HomeComponent } from './home/home.component';
 import { PostModule } from './post/post.module';
 import { environment } from 'src/environments/environment';
 import { UserModule } from './user/user.module';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [AppComponent, HomeComponent],
@@ -23,6 +24,7 @@ import { UserModule } from './user/user.module';
     SharedModule,
     PostModule,
     UserModule,
+    HttpClientModule,
     AppRoutingModule,
   ],
   providers: [],
