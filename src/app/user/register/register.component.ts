@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { UserService } from '../user.service';
 import { CookieService } from 'ngx-cookie-service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -12,7 +13,8 @@ export class RegisterComponent {
   constructor(
     private fb: FormBuilder,
     private userService: UserService,
-    private cookieService: CookieService
+    private cookieService: CookieService,
+    private router: Router
   ) {}
 
   registerForm = this.fb.nonNullable.group({
@@ -41,7 +43,7 @@ export class RegisterComponent {
       this.registerForm.getRawValue();
 
     if (this.registerForm.invalid) {
-      this.errorMessage = this.errorHandler();
+      this.errorMessage = this.validationErrorHandler();
       return;
     }
 
@@ -60,15 +62,20 @@ export class RegisterComponent {
         .subscribe({
           next: (res) => {
             this.cookieService.set('auth', res.token, 7);
+            localStorage.setItem(
+              'user',
+              JSON.stringify({ username: res.username, _id: res._id })
+            );
+            this.router.navigate(['/home']);
+            this.errorMessage = null;
           },
           error: (e) => (this.errorMessage = e.error.message),
           complete: () => console.info('complete'),
         });
     }
-    this.errorMessage = null;
   }
 
-  errorHandler(): string {
+  validationErrorHandler(): string {
     if (
       this.registerForm.get('username')?.hasError('required') ||
       this.registerForm.get('email')?.hasError('required') ||
