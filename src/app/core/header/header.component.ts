@@ -15,6 +15,11 @@ export class HeaderComponent {
     return this.userService.isLogged;
   }
 
+  get userInfo() {
+    if (this.userService.userInfo && this.isLogged)
+      return JSON.parse(this.userService.userInfo);
+  }
+
   toggleMenu(): void {
     this.isMenuOpen = !this.isMenuOpen;
   }

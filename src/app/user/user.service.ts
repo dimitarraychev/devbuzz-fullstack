@@ -17,6 +17,10 @@ export class UserService {
     return !!this.cookieService.get('auth');
   }
 
+  get userInfo() {
+    return localStorage.getItem('user');
+  }
+
   login(userData: User) {
     return this.http.post<User>(this.apiUrl + '/users/login', userData);
   }

@@ -12,7 +12,7 @@
     />
     <a id="feedLink" routerLink="/feed">Feed</a>
     <p id="username" [class.menu-opened]="isMenuOpen" (click)="toggleMenu()">
-      Guest
+      {{ userInfo?.username || "Guest" }}
     </p>
     <i
       class="fa-solid"
