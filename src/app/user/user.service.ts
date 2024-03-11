@@ -18,7 +18,12 @@ export class UserService {
   }
 
   get userInfo() {
-    return localStorage.getItem('user');
+    if (!this.isLogged) return null;
+
+    const info = localStorage.getItem('user');
+    if (!info) return null;
+
+    return JSON.parse(info);
   }
 
   login(userData: User) {
