@@ -1,11 +1,28 @@
 <div id="login-page-wrapper">
   <section id="login-form-wrapper" class="border-glow">
     <h2>Login</h2>
-    <form id="login-form">
-      <input type="text" id="email" placeholder="Email" />
-      <input type="password" id="password" placeholder="Password" />
-      <p *ngIf="errorMessage" id="error-msg">An error occured!</p>
-      <app-button buttonSize="large" buttonText="Login" id="login-button" />
+    <form id="login-form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <input
+        type="text"
+        id="email"
+        placeholder="Email"
+        formControlName="email"
+        [class.invalid]="isValid('email')"
+      />
+      <input
+        type="password"
+        id="password"
+        placeholder="Password"
+        formControlName="password"
+        [class.invalid]="isValid('password')"
+      />
+      <p id="error-msg" *ngIf="errorMessage">{{ errorMessage }}</p>
+      <app-button
+        buttonSize="large"
+        buttonText="Login"
+        id="login-button"
+        [isDisabled]="isButtonDisabled"
+      />
     </form>
     <p id="redirect-message">
       Not registered?
