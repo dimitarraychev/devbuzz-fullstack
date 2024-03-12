@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { UserService } from '../user.service';
-import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -13,7 +12,6 @@ export class RegisterComponent {
   constructor(
     private fb: FormBuilder,
     private userService: UserService,
-    private cookieService: CookieService,
     private router: Router
   ) {}
 
@@ -26,6 +24,7 @@ export class RegisterComponent {
 
   errorMessage: string | null = null;
   isSubmitted: boolean = false;
+  isButtonDisabled: boolean = false;
 
   isValid(element: string): boolean | undefined {
     return (
@@ -52,27 +51,22 @@ export class RegisterComponent {
       return;
     }
 
-    if (username != undefined && email != undefined && password != undefined) {
-      this.userService
-        .register({
-          username,
-          email,
-          password,
-        })
-        .subscribe({
-          next: (res) => {
-            this.cookieService.set('auth', res.token, 7);
-            localStorage.setItem(
-              'user',
-              JSON.stringify({ username: res.username, _id: res._id })
-            );
-            this.router.navigate(['/home']);
-            this.errorMessage = null;
-          },
-          error: (e) => (this.errorMessage = e.error.message),
-          complete: () => console.info('complete'),
-        });
-    }
+    this.isButtonDisabled = true;
+
+    this.userService
+      .register({
+        username,
+        email,
+        password,
+      })
+      .subscribe({
+        next: (res) => this.userService.setCookieAndStorage(res),
+        error: (e) => {
+          this.errorMessage = e.error.message;
+          this.isButtonDisabled = false;
+        },
+        complete: () => this.router.navigate(['/home']),
+      });
   }
 
   validationErrorHandler(): string {
