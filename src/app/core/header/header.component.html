@@ -25,8 +25,20 @@
   </div>
 </nav>
 <div id="menu-items" (click)="hideMenu()" *ngIf="isMenuOpen">
-  <a routerLink="/login"><i class="fa-solid fa-right-to-bracket"></i>Login</a>
-  <a routerLink="/register"><i class="fa-solid fa-user-plus"></i>Register</a>
-  <a><i class="fa-solid fa-user"></i>Profile</a>
-  <a (click)="logout()"><i class="fa-solid fa-right-from-bracket"></i>Logout</a>
+  <a *ngIf="!isLogged" routerLink="/login">
+    <i class="fa-solid fa-right-to-bracket"></i>
+    Login
+  </a>
+  <a *ngIf="!isLogged" routerLink="/register">
+    <i class="fa-solid fa-user-plus"></i>
+    Register
+  </a>
+  <a *ngIf="isLogged">
+    <i class="fa-solid fa-user"></i>
+    Profile
+  </a>
+  <a *ngIf="isLogged" (click)="logout()">
+    <i class="fa-solid fa-right-from-bracket"></i>
+    Logout
+  </a>
 </div>
