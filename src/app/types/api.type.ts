@@ -5,3 +5,8 @@ export type AuthResponse = {
   username: string;
   _id: string;
 };
+
+export type LogoutResponse = {
+  message: string;
+  ok: boolean;
+};
