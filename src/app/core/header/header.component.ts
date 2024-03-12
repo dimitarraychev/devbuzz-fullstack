@@ -26,4 +26,8 @@ export class HeaderComponent {
   hideMenu(): void {
     this.isMenuOpen = false;
   }
+
+  logout(): void {
+    this.userService.logout();
+  }
 }
