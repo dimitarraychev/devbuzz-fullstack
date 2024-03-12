@@ -1,4 +1,8 @@
-<button [ngStyle]="buttonStyles">
+<button
+  [ngStyle]="buttonStyles"
+  [disabled]="isDisabled"
+  [class.is-disabled]="isDisabled"
+>
   {{ buttonText }}
   <i *ngIf="buttonIcon === 'like'" class="fa-regular fa-heart interactable"></i>
   <i *ngIf="buttonIcon === 'create'" class="fa-regular fa-pen-to-square"></i>

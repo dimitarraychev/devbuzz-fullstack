@@ -28,3 +28,9 @@ button {
     filter: brightness(0.8);
   }
 }
+
+.is-disabled {
+  background: gray;
+  filter: brightness(0.6);
+  cursor: not-allowed;
+}

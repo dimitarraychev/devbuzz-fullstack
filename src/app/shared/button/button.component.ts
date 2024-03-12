@@ -9,6 +9,7 @@ export class ButtonComponent {
   @Input() buttonText: string = '';
   @Input() buttonSize: string = 'default';
   @Input() buttonIcon: 'like' | 'create' | null = null;
+  @Input() isDisabled: boolean = false;
 
   get buttonStyles(): { [key: string]: string } {
     return {
