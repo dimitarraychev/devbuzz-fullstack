@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { PostService } from '../post.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-post-create',
@@ -7,9 +9,13 @@ import { FormBuilder, Validators } from '@angular/forms';
   styleUrls: ['./post-create.component.scss'],
 })
 export class PostCreateComponent {
-  constructor(private fb: FormBuilder) {}
+  constructor(
+    private fb: FormBuilder,
+    private postService: PostService,
+    private router: Router
+  ) {}
 
-  createForm = this.fb.group({
+  createForm = this.fb.nonNullable.group({
     title: [
       '',
       [
@@ -50,6 +56,11 @@ export class PostCreateComponent {
       this.errorMessage = this.errorHandler();
       return;
     }
+
+    this.postService.createPost(this.createForm.getRawValue()).subscribe({
+      next: (postId) => console.log(postId),
+      error: (e) => console.log(e),
+    });
 
     this.errorMessage = null;
   }
