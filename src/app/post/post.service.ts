@@ -16,6 +16,10 @@ export class PostService {
     return this.http.get<Post[]>(this.apiUrl + '/posts');
   }
 
+  getPost(postId: string): Observable<Post> {
+    return this.http.get<Post>(this.apiUrl + '/posts/' + postId);
+  }
+
   createPost(postData: NewPost): Observable<string> {
     return this.http.post<string>(this.apiUrl + '/posts', postData);
   }
