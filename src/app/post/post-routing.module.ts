@@ -10,12 +10,12 @@ const routes: Routes = [
     component: FeedComponent,
   },
   {
-    path: 'details',
-    component: PostDetailsComponent,
+    path: 'post/create',
+    component: PostCreateComponent,
   },
   {
-    path: 'create',
-    component: PostCreateComponent,
+    path: 'post/:id',
+    component: PostDetailsComponent,
   },
 ];
 
