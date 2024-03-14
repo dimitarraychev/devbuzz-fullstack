@@ -4,13 +4,15 @@ import {
   HttpHandler,
   HttpEvent,
   HttpInterceptor,
+  HttpErrorResponse,
 } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, catchError } from 'rxjs';
 import { CookieService } from 'ngx-cookie-service';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class RequestInterceptor implements HttpInterceptor {
-  constructor(private cookieService: CookieService) {}
+  constructor(private cookieService: CookieService, private router: Router) {}
 
   intercept(
     request: HttpRequest<unknown>,
@@ -18,12 +20,24 @@ export class RequestInterceptor implements HttpInterceptor {
   ): Observable<HttpEvent<unknown>> {
     const jwt = this.cookieService.get('auth');
 
+    if (!jwt) {
+      return next.handle(request);
+    }
+
     const clonedRequest = request.clone({
       setHeaders: {
-        Authorization: 'JWT ' + jwt,
+        Authorization: 'Bearer ' + jwt,
       },
     });
 
-    return next.handle(clonedRequest);
+    return next.handle(clonedRequest).pipe(
+      catchError((error: HttpErrorResponse) => {
+        if (error.status === 401) {
+          this.cookieService.delete('auth');
+          this.router.navigate(['/login']);
+        }
+        throw error;
+      })
+    );
   }
 }
