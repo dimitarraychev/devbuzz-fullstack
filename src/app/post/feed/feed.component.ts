@@ -18,9 +18,8 @@ export class FeedComponent implements OnInit {
 
   getPosts(): void {
     this.postService.getPosts().subscribe({
-      next: (posts) => console.log(posts),
+      next: (posts) => (this.posts = posts),
       error: (e) => console.log(e),
-      complete: () => console.info('complete'),
     });
   }
 }
