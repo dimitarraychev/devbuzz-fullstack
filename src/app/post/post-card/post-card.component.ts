@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { Post } from 'src/app/types/post.type';
 
 @Component({
   selector: 'app-post-card',
@@ -6,6 +7,5 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./post-card.component.scss'],
 })
 export class PostCardComponent {
-  @Input() title: string = 'Post Title Post Title';
-  @Input() image: string = './assets/images/blockchain.jpg';
+  @Input() post = {} as Post;
 }

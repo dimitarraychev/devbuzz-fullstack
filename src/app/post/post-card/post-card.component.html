@@ -1,15 +1,15 @@
 <div class="post border-glow">
   <img
-    src="{{ image }}"
-    onerror="this.src='./images/image-missing.jpg'"
+    src="{{ post.image }}"
+    onerror="this.src='assets/images/image-missing.jpg'"
     alt="Post Image"
   />
   <div class="post-content">
-    <div class="post-title">{{ title }}</div>
+    <div class="post-title">{{ post.title }}</div>
     <app-button
       buttonText="Read More"
       buttonSize="small"
-      routerLink="/details"
+      [routerLink]="['/post', post._id]"
     />
   </div>
 </div>
