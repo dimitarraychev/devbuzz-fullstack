@@ -10,18 +10,31 @@ import { Post } from 'src/app/types/post.type';
 export class FeedComponent implements OnInit {
   constructor(private postService: PostService) {}
 
-  posts: Post[] = [];
-  isLoading: boolean = true;
+  latestPosts: Post[] = [];
+  hottestPosts: Post[] = [];
+  isLoadingLatest: boolean = true;
+  isLoadingHottest: boolean = true;
 
   ngOnInit(): void {
-    this.getPosts();
+    this.getLatestPosts();
+    this.getHottestPosts();
   }
 
-  getPosts(): void {
-    this.postService.getPosts().subscribe({
+  getLatestPosts(): void {
+    this.postService.getLatestPosts().subscribe({
       next: (posts) => {
-        this.posts = posts;
-        this.isLoading = false;
+        this.latestPosts = posts;
+        this.isLoadingLatest = false;
+      },
+      error: (e) => console.log(e), // TODO handle error?,
+    });
+  }
+
+  getHottestPosts(): void {
+    this.postService.getHottestPosts().subscribe({
+      next: (posts) => {
+        this.hottestPosts = posts;
+        this.isLoadingHottest = false;
       },
       error: (e) => console.log(e), // TODO handle error?,
     });

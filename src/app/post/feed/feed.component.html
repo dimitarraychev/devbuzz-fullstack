@@ -23,24 +23,28 @@
   <section id="hottest" class="section border-glow">
     <h3>🔥Hottest</h3>
 
-    <div id="hottestPostsContainer">
-      <app-post-card />
-      <app-post-card />
-      <app-post-card />
+    <app-loader *ngIf="isLoadingHottest" />
+
+    <div class="no-posts" *ngIf="!isLoadingHottest && hottestPosts.length < 1">
+      Sorry, no liked posts yet. Quick, be the first!
+    </div>
+
+    <div id="hottestPostsContainer" *ngIf="!isLoadingHottest">
+      <app-post-card *ngFor="let post of hottestPosts" [post]="post" />
     </div>
   </section>
 
   <section id="latest" class="section border-glow">
     <h3>🚀Latest</h3>
 
-    <app-loader *ngIf="isLoading" />
+    <app-loader *ngIf="isLoadingLatest" />
 
-    <div class="no-posts" *ngIf="!isLoading && posts.length < 1">
+    <div class="no-posts" *ngIf="!isLoadingLatest && latestPosts.length < 1">
       Sorry, no posts yet. Quick, be the first!
     </div>
 
-    <div id="latestPostsContainer" *ngIf="!isLoading">
-      <app-post-card *ngFor="let post of posts" [post]="post" />
+    <div id="latestPostsContainer" *ngIf="!isLoadingLatest">
+      <app-post-card *ngFor="let post of latestPosts" [post]="post" />
     </div>
   </section>
 </div>
