@@ -33,11 +33,13 @@
   <section id="latest" class="section border-glow">
     <h3>🚀Latest</h3>
 
-    <div class="no-posts" *ngIf="posts.length < 1">
+    <app-loader *ngIf="isLoading" />
+
+    <div class="no-posts" *ngIf="!isLoading && posts.length < 1">
       Sorry, no posts yet. Quick, be the first!
     </div>
 
-    <div id="latestPostsContainer">
+    <div id="latestPostsContainer" *ngIf="!isLoading">
       <app-post-card *ngFor="let post of posts" [post]="post" />
     </div>
   </section>

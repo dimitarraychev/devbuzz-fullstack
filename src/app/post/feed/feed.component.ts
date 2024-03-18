@@ -11,6 +11,7 @@ export class FeedComponent implements OnInit {
   constructor(private postService: PostService) {}
 
   posts: Post[] = [];
+  isLoading: boolean = true;
 
   ngOnInit(): void {
     this.getPosts();
@@ -18,8 +19,11 @@ export class FeedComponent implements OnInit {
 
   getPosts(): void {
     this.postService.getPosts().subscribe({
-      next: (posts) => (this.posts = posts),
-      error: (e) => console.log(e),
+      next: (posts) => {
+        this.posts = posts;
+        this.isLoading = false;
+      },
+      error: (e) => console.log(e), // TODO handle error?,
     });
   }
 }

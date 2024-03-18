@@ -55,6 +55,9 @@ select {
   width: 70%;
   margin: auto;
   background-color: $dark-bg;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
 
   h3 {
     font-size: 30px;
@@ -90,6 +93,11 @@ select {
   font-size: 22px;
   margin: auto;
   text-align: center;
+  padding-bottom: 2em;
+}
+
+app-loader {
+  margin: 2em auto;
   padding-bottom: 2em;
 }
 

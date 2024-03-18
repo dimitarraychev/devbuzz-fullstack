@@ -1,33 +1,41 @@
 <div id="details-page-wrapper">
   <div id="details-container" class="border-glow">
-    <div class="details-info">
-      <div class="details-info-top">
-        <p class="details-category">{{ post.category }}</p>
-        <p class="post-time">{{ post.createdAt }}</p>
+    <app-loader *ngIf="isLoading" />
+
+    <ng-container *ngIf="!isLoading">
+      <div class="details-info">
+        <div class="details-info-top">
+          <p class="details-category">{{ post.category }}</p>
+          <p class="post-time">{{ post.createdAt }}</p>
+        </div>
+
+        <h1 class="details-title">{{ post.title }}</h1>
+
+        <div class="details-info-bottom">
+          <div class="details-owner">
+            <p class="owner-name">{{ post.owner.username }}</p>
+            <app-button buttonSize="small" buttonText="Edit" />
+            <app-button buttonSize="small" buttonText="Delete" />
+          </div>
+          <div class="like">
+            <p>Likes: {{ post.likes.length }}</p>
+            <app-button
+              buttonIcon="like"
+              buttonText="Like"
+              buttonSize="small"
+            />
+          </div>
+        </div>
       </div>
 
-      <h1 class="details-title">{{ post.title }}</h1>
+      <img
+        [src]="post.image"
+        onerror="this.src='assets/images/image-missing.jpg'"
+        alt="Post Image"
+        class="details-img"
+      />
 
-      <div class="details-info-bottom">
-        <div class="details-owner">
-          <p class="owner-name">{{ post.owner.username }}</p>
-          <app-button buttonSize="small" buttonText="Edit" />
-          <app-button buttonSize="small" buttonText="Delete" />
-        </div>
-        <div class="like">
-          <p>Likes: {{ post.likes.length }}</p>
-          <app-button buttonIcon="like" buttonText="Like" buttonSize="small" />
-        </div>
-      </div>
-    </div>
-
-    <img
-      [src]="post.image"
-      onerror="this.src='./images/image-missing.jpg'"
-      alt="Post Image"
-      class="details-img"
-    />
-
-    <p class="details-description">{{ post.description }}</p>
+      <p class="details-description">{{ post.description }}</p>
+    </ng-container>
   </div>
 </div>
