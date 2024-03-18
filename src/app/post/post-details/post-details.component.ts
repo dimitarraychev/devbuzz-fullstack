@@ -16,6 +16,7 @@ export class PostDetailsComponent implements OnInit {
 
   post = {} as Post;
   postId: string = '';
+  isLoading: boolean = true;
 
   ngOnInit(): void {
     this.getPost();
@@ -25,8 +26,11 @@ export class PostDetailsComponent implements OnInit {
     this.postId = this.activatedRoute.snapshot.params['id'];
 
     this.postService.getPost(this.postId).subscribe({
-      next: (post) => (this.post = post),
-      error: (e) => console.log(e),
+      next: (post) => {
+        this.post = post;
+        this.isLoading = false;
+      },
+      error: (e) => console.log(e), // TODO redirect to 404,
     });
   }
 }
