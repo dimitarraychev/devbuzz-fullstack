@@ -3,6 +3,8 @@ import { PostService } from '../post.service';
 import { Post } from 'src/app/types/post.type';
 import { ActivatedRoute } from '@angular/router';
 
+import * as moment from 'moment';
+
 @Component({
   selector: 'app-post-details',
   templateUrl: './post-details.component.html',
@@ -28,6 +30,7 @@ export class PostDetailsComponent implements OnInit {
     this.postService.getPost(this.postId).subscribe({
       next: (post) => {
         this.post = post;
+        this.post.createdAt = moment(post.createdAt).format('lll');
         this.isLoading = false;
       },
       error: (e) => console.log(e), // TODO redirect to 404,
