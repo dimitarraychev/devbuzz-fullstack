@@ -8,6 +8,7 @@ import { FeedComponent } from './feed/feed.component';
 import { PostCardComponent } from './post-card/post-card.component';
 import { PostDetailsComponent } from './post-details/post-details.component';
 import { PostCreateComponent } from './post-create/post-create.component';
+import { PostEditComponent } from './post-edit/post-edit.component';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { PostCreateComponent } from './post-create/post-create.component';
     PostCardComponent,
     PostDetailsComponent,
     PostCreateComponent,
+    PostEditComponent,
   ],
   imports: [CommonModule, ReactiveFormsModule, PostRoutingModule, SharedModule],
 })
