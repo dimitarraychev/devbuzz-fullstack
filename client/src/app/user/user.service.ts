@@ -27,11 +27,11 @@ export class UserService {
     return JSON.parse(info);
   }
 
-  login(userData: User): Observable<AuthResponse> {
+  login$(userData: User): Observable<AuthResponse> {
     return this.http.post<AuthResponse>(this.apiUrl + '/users/login', userData);
   }
 
-  register(userData: User): Observable<AuthResponse> {
+  register$(userData: User): Observable<AuthResponse> {
     return this.http.post<AuthResponse>(
       this.apiUrl + '/users/register',
       userData
