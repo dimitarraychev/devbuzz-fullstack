@@ -1,12 +1,18 @@
 export type AuthResponse = {
-  message: string;
   ok: boolean;
+  message: string;
   token: string;
   username: string;
   _id: string;
 };
 
 export type LogoutResponse = {
-  message: string;
   ok: boolean;
+  message: string;
+};
+
+export type ApiResponse = {
+  ok: boolean;
+  message: string;
+  postId?: string;
 };
