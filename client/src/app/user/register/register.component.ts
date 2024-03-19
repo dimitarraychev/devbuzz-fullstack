@@ -54,7 +54,7 @@ export class RegisterComponent {
     this.isButtonDisabled = true;
 
     this.userService
-      .register({
+      .register$({
         username,
         email,
         password,

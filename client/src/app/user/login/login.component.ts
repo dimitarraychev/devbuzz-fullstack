@@ -46,7 +46,7 @@ export class LoginComponent {
     this.isButtonDisabled = true;
 
     this.userService
-      .login({
+      .login$({
         email,
         password,
       })
