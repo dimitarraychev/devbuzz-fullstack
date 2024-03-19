@@ -8,7 +8,8 @@ import { Component, Input } from '@angular/core';
 export class ButtonComponent {
   @Input() buttonText: string = '';
   @Input() buttonSize: string = 'default';
-  @Input() buttonIcon: 'like' | 'create' | null = null;
+  @Input() buttonIcon: 'like' | 'create' | 'edit' | 'delete' | undefined =
+    undefined;
   @Input() isDisabled: boolean = false;
 
   get buttonStyles(): { [key: string]: string } {
