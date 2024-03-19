@@ -57,7 +57,7 @@ export class PostCreateComponent {
       return;
     }
 
-    this.postService.createPost(this.createForm.getRawValue()).subscribe({
+    this.postService.createPost$(this.createForm.getRawValue()).subscribe({
       next: (postId) => console.log(postId),
       error: (e) => console.log(e),
     });
