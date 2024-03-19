@@ -28,12 +28,12 @@ export class UserService {
   }
 
   login$(userData: User): Observable<AuthResponse> {
-    return this.http.post<AuthResponse>(this.apiUrl + '/users/login', userData);
+    return this.http.post<AuthResponse>(this.apiUrl + '/auth/login', userData);
   }
 
   register$(userData: User): Observable<AuthResponse> {
     return this.http.post<AuthResponse>(
-      this.apiUrl + '/users/register',
+      this.apiUrl + '/auth/register',
       userData
     );
   }
@@ -47,7 +47,7 @@ export class UserService {
   }
 
   logout(): void {
-    this.http.get<LogoutResponse>(this.apiUrl + '/users/logout').subscribe({
+    this.http.get<LogoutResponse>(this.apiUrl + '/auth/logout').subscribe({
       next: (res) => {
         this.cookieService.delete('auth');
         localStorage.removeItem('user');

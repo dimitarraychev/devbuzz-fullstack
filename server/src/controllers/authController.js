@@ -1,11 +1,11 @@
 const router = require("express").Router();
-const userService = require("../services/userService");
+const authService = require("../services/authService");
 
 router.post("/register", async (req, res) => {
 	try {
 		const { username, email, password } = req.body;
 
-		const { token, _id } = await userService.register(
+		const { token, _id } = await authService.register(
 			username,
 			email,
 			password
@@ -30,7 +30,7 @@ router.post("/login", async (req, res) => {
 	try {
 		const { email, password } = req.body;
 
-		const { token, _id, username } = await userService.login(
+		const { token, _id, username } = await authService.login(
 			email,
 			password
 		);

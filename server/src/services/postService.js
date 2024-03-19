@@ -2,8 +2,6 @@ const Post = require("../models/Post");
 
 exports.create = (postData) => Post.create(postData);
 
-// exports.getAll = () => Post.find();
-
 exports.getOne = (postId) => Post.findById(postId);
 
 exports.getLatest = () => Post.find().sort({ createdAt: -1 }).limit(6);
