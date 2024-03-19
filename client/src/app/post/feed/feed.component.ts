@@ -21,7 +21,7 @@ export class FeedComponent implements OnInit {
   }
 
   getLatestPosts(): void {
-    this.postService.getLatestPosts().subscribe({
+    this.postService.getLatestPosts$().subscribe({
       next: (posts) => {
         this.latestPosts = posts;
         this.isLoadingLatest = false;
@@ -31,7 +31,7 @@ export class FeedComponent implements OnInit {
   }
 
   getHottestPosts(): void {
-    this.postService.getHottestPosts().subscribe({
+    this.postService.getHottestPosts$().subscribe({
       next: (posts) => {
         this.hottestPosts = posts;
         this.isLoadingHottest = false;
