@@ -1,0 +1,56 @@
+<div id="edit-page-wrapper">
+  <section id="edit-form-wrapper" class="border-glow">
+    <h2>Edit Post</h2>
+
+    <app-loader *ngIf="isLoading" />
+
+    <ng-container *ngIf="!isLoading">
+      <form id="edit-form" [formGroup]="editForm" (ngSubmit)="onSubmit()">
+        <input
+          type="text"
+          id="title"
+          placeholder="Title"
+          formControlName="title"
+          [class.invalid]="isValid('title')"
+        />
+        <select
+          id="category"
+          formControlName="category"
+          [class.invalid]="isValid('category')"
+        >
+          <option value="" disabled selected hidden id="default-option">
+            Select Category...
+          </option>
+          <option value="development">Development</option>
+          <option value="blockchain">Blockchain</option>
+          <option value="artificial-intelligence">
+            Artificial Intelligence
+          </option>
+          <option value="other">Other</option>
+        </select>
+        <input
+          type="url"
+          id="image"
+          placeholder="Image URL"
+          formControlName="image"
+          [class.invalid]="isValid('image')"
+        />
+        <textarea
+          type="description"
+          id="description"
+          placeholder="Description"
+          formControlName="description"
+          [class.invalid]="isValid('description')"
+        ></textarea>
+        <p id="error-msg" *ngIf="errorMessage">{{ errorMessage }}</p>
+
+        <app-button
+          buttonSize="large"
+          buttonText="Edit"
+          id="edit-button"
+          buttonIcon="edit"
+        />
+      </form>
+    </ng-container>
+  </section>
+</div>
