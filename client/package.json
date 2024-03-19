@@ -20,7 +20,6 @@
     "@angular/platform-browser-dynamic": "^16.2.0",
     "@angular/router": "^16.2.0",
     "@bentogrid/core": "^1.1.1",
-    "moment": "^2.30.1",
     "ngx-cookie-service": "^16.1.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
