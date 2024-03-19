@@ -18,4 +18,4 @@ exports.update = (postId, postData) =>
 
 exports.delete = (postId) => Post.findByIdAndDelete(postId);
 
-exports.search = (name) => Post.find({ name: new RegExp(name, "i") });
+// exports.search = (name) => Post.find({ name: new RegExp(name, "i") });
