@@ -3,8 +3,6 @@ import { PostService } from '../post.service';
 import { Post } from 'src/app/types/post.type';
 import { ActivatedRoute } from '@angular/router';
 
-import * as moment from 'moment';
-
 @Component({
   selector: 'app-post-details',
   templateUrl: './post-details.component.html',
@@ -27,13 +25,28 @@ export class PostDetailsComponent implements OnInit {
   getPost(): void {
     this.postId = this.activatedRoute.snapshot.params['id'];
 
-    this.postService.getPost(this.postId).subscribe({
+    this.postService.getPost$(this.postId).subscribe({
       next: (post) => {
         this.post = post;
-        this.post.createdAt = moment(post.createdAt).format('lll');
         this.isLoading = false;
       },
-      error: (e) => console.log(e), // TODO redirect to 404,
+      error: (e) => console.log(e), // TODO redirect to 404
+    });
+  }
+
+  deletePost(): void {
+    this.postService.deletePost$(this.postId).subscribe({
+      next: console.log,
+      error: console.log,
+      complete: () => console.log('complete'), // TODO redirect to feed
+    });
+  }
+
+  likePost(): void {
+    this.postService.likePost$(this.postId).subscribe({
+      next: console.log,
+      error: console.log,
+      complete: () => console.log('complete'),
     });
   }
 }

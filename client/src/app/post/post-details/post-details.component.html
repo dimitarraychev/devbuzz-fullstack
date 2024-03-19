@@ -6,7 +6,7 @@
       <div class="details-info">
         <div class="details-info-top">
           <p class="details-category">{{ post.category }}</p>
-          <p class="post-time">{{ post.createdAt }}</p>
+          <p class="post-time">{{ post.createdAt | date }}</p>
         </div>
 
         <h1 class="details-title">{{ post.title }}</h1>
@@ -14,8 +14,18 @@
         <div class="details-info-bottom">
           <div class="details-owner">
             <p class="owner-name">{{ post.owner.username }}</p>
-            <app-button buttonSize="small" buttonText="Edit" />
-            <app-button buttonSize="small" buttonText="Delete" />
+            <app-button
+              buttonSize="small"
+              buttonText="Edit"
+              buttonIcon="edit"
+              [routerLink]="['/post', post._id, 'edit']"
+            />
+            <app-button
+              buttonSize="small"
+              buttonText="Delete"
+              buttonIcon="delete"
+              (click)="deletePost()"
+            />
           </div>
           <div class="like">
             <p>Likes: {{ post.likes.length }}</p>
@@ -23,6 +33,7 @@
               buttonIcon="like"
               buttonText="Like"
               buttonSize="small"
+              (click)="likePost()"
             />
           </div>
         </div>
