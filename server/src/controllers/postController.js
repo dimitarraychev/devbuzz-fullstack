@@ -2,6 +2,8 @@ const router = require("express").Router();
 const { isAuth } = require("../middlewares/auth");
 const postService = require("../services/postService");
 
+const validationRegex = new RegExp(/:\s([A-Z][\w\s]+!)/);
+
 router.get("/", async (req, res) => {
 	try {
 		const posts = await postService.getLatest();
@@ -10,7 +12,7 @@ router.get("/", async (req, res) => {
 	} catch (error) {
 		res.status(500).json({
 			ok: false,
-			message: error?.message,
+			message: error.message,
 		});
 	}
 });
@@ -31,15 +33,18 @@ router.post("/", isAuth, async (req, res) => {
 
 		const post = await postService.create(postData);
 
-		res.status(200).json({
+		res.status(201).json({
 			ok: true,
-			message: "Successfully created",
-			postId: post._id,
+			message: "Post successfully created.",
+			_id: post._id,
 		});
 	} catch (error) {
-		res.status(500).json({
+		error.message =
+			error.message.match(validationRegex)?.[1] ?? error.message;
+
+		res.status(400).json({
 			ok: false,
-			message: error?.message,
+			message: error.message,
 		});
 	}
 });
@@ -52,7 +57,7 @@ router.get("/hottest", async (req, res) => {
 	} catch (error) {
 		res.status(500).json({
 			ok: false,
-			message: error?.message,
+			message: error.message,
 		});
 	}
 });
@@ -66,7 +71,7 @@ router.get("/:postId", async (req, res) => {
 	} catch (error) {
 		res.status(500).json({
 			ok: false,
-			message: error?.message,
+			message: error.message,
 		});
 	}
 });
@@ -76,19 +81,24 @@ router.patch("/:postId", isAuth, async (req, res) => {
 		const postId = req.params.postId;
 		const postData = req.body;
 
-		// TODO check if owner
+		const post = await postService.getOne(postId);
+		if (post.owner._id != req.user._id)
+			throw new Error("Owner verification failed!");
 
 		await postService.update(postId, postData);
 
 		res.status(200).json({
 			ok: true,
 			message: "Post successfully edited",
-			postId,
+			_id: postId,
 		});
 	} catch (error) {
-		res.status(500).json({
+		error.message =
+			error.message.match(validationRegex)?.[1] ?? error.message;
+
+		res.status(400).json({
 			ok: false,
-			message: error?.message,
+			message: error.message,
 		});
 	}
 });
@@ -97,7 +107,9 @@ router.delete("/:postId", isAuth, async (req, res) => {
 	try {
 		const postId = req.params.postId;
 
-		// TODO check if owner
+		const post = await postService.getOne(postId);
+		if (post.owner._id != req.user._id)
+			throw new Error("Owner verification failed!");
 
 		await postService.delete(postId);
 
@@ -106,9 +118,9 @@ router.delete("/:postId", isAuth, async (req, res) => {
 			message: "Post successfully deleted",
 		});
 	} catch (error) {
-		res.status(500).json({
+		res.status(400).json({
 			ok: false,
-			message: error?.message,
+			message: error.message,
 		});
 	}
 });
@@ -118,7 +130,9 @@ router.post("/:postId/like", isAuth, async (req, res) => {
 		const postId = req.params.postId;
 		const userId = req.user._id;
 
-		// TODO check if owner
+		const postBeforeUpdate = await postService.getOne(postId);
+		if (postBeforeUpdate.owner._id == req.user._id)
+			throw new Error("Cannot like own post!");
 
 		const post = await postService.like(postId, userId);
 
@@ -130,7 +144,7 @@ router.post("/:postId/like", isAuth, async (req, res) => {
 	} catch (error) {
 		res.status(500).json({
 			ok: false,
-			message: error?.message,
+			message: error.message,
 		});
 	}
 });
