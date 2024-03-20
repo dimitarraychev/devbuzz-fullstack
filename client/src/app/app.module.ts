@@ -12,7 +12,7 @@ import { PostModule } from './post/post.module';
 import { environment } from 'src/environments/environment';
 import { UserModule } from './user/user.module';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { RequestInterceptor } from './services/request.interceptor';
+import { RequestInterceptor } from './interceptors/request.interceptor';
 
 @NgModule({
   declarations: [AppComponent, HomeComponent],
