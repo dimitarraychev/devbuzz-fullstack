@@ -16,6 +16,10 @@ const postSchema = new mongoose.Schema(
 		},
 		image: {
 			required: [true, "Image is required"],
+			match: [
+				/^https?:\/\//,
+				"Image should start with http:// or https://",
+			],
 			type: String,
 		},
 		owner: {
