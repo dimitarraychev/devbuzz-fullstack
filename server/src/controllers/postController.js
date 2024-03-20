@@ -78,12 +78,12 @@ router.patch("/:postId", isAuth, async (req, res) => {
 
 		// TODO check if owner
 
-		const post = await postService.update(postId, postData);
+		await postService.update(postId, postData);
 
 		res.status(200).json({
 			ok: true,
 			message: "Post successfully edited",
-			postId: post._id,
+			postId,
 		});
 	} catch (error) {
 		res.status(500).json({
@@ -120,11 +120,12 @@ router.post("/:postId/like", isAuth, async (req, res) => {
 
 		// TODO check if owner
 
-		await postService.like(postId, userId);
+		const post = await postService.like(postId, userId);
 
 		res.status(200).json({
 			ok: true,
 			message: "Post successfully liked",
+			likes: post.likes.length,
 		});
 	} catch (error) {
 		res.status(500).json({
