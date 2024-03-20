@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { PostService } from '../post.service';
+import { PostService } from '../services/post.service';
 import { Router } from '@angular/router';
+import { PostErrorService } from '../services/post-error.service';
 
 @Component({
   selector: 'app-post-create',
@@ -12,6 +13,7 @@ export class PostCreateComponent {
   constructor(
     private fb: FormBuilder,
     private postService: PostService,
+    private postErrorService: PostErrorService,
     private router: Router
   ) {}
 
@@ -38,6 +40,7 @@ export class PostCreateComponent {
 
   errorMessage: string | null = null;
   isSubmitted: boolean = false;
+  isButtonDisabled: boolean = false;
 
   isValid(element: string): boolean | undefined {
     return (
@@ -49,42 +52,23 @@ export class PostCreateComponent {
   }
 
   onSubmit(): void {
-    console.log(this.createForm.value, this.createForm.invalid);
     this.isSubmitted = true;
 
     if (this.createForm.invalid) {
-      this.errorMessage = this.errorHandler();
+      this.errorMessage = this.postErrorService.formErrorHandler(
+        this.createForm
+      );
       return;
     }
 
+    this.isButtonDisabled = true;
+
     this.postService.createPost$(this.createForm.getRawValue()).subscribe({
-      next: (postId) => console.log(postId),
-      error: (e) => console.log(e),
+      next: (res) => this.router.navigate(['/post', res._id]),
+      error: (e) => {
+        this.errorMessage = e.error.message;
+        this.isButtonDisabled = false;
+      },
     });
-
-    this.errorMessage = null;
-  }
-
-  errorHandler(): string {
-    if (
-      this.createForm.get('title')?.hasError('required') ||
-      this.createForm.get('category')?.hasError('required') ||
-      this.createForm.get('image')?.hasError('required') ||
-      this.createForm.get('description')?.hasError('required')
-    )
-      return 'Uh-oh! All fields are required.';
-    if (
-      this.createForm.get('title')?.hasError('minlength') ||
-      this.createForm.get('title')?.hasError('maxlength')
-    )
-      return 'Oops, title should be between 10 and 100 characters.';
-    if (this.createForm.get('image')?.hasError('pattern'))
-      return 'Sorry, image should start with http:// or https://.';
-    if (
-      this.createForm.get('description')?.hasError('minlength') ||
-      this.createForm.get('description')?.hasError('maxlength')
-    )
-      return 'Oops, description should be between 50 and 3000 characters.';
-    return 'A wild error occurred! Try again.';
   }
 }

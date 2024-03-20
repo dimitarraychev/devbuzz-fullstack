@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { PostService } from '../post.service';
+import { PostService } from '../services/post.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Post } from 'src/app/types/post.type';
+import { PostErrorService } from '../services/post-error.service';
 
 @Component({
   selector: 'app-post-edit',
@@ -13,6 +14,7 @@ export class PostEditComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private postService: PostService,
+    private postErrorService: PostErrorService,
     private router: Router,
     private activatedRoute: ActivatedRoute
   ) {}
@@ -43,6 +45,7 @@ export class PostEditComponent implements OnInit {
   post = {} as Post;
   postId: string = '';
   isLoading: boolean = true;
+  isButtonDisabled: boolean = false;
 
   ngOnInit(): void {
     this.getPost();
@@ -80,44 +83,23 @@ export class PostEditComponent implements OnInit {
   }
 
   onSubmit(): void {
-    // console.log(this.editForm.value, this.editForm.invalid);
     this.isSubmitted = true;
 
     if (this.editForm.invalid) {
-      this.errorMessage = this.errorHandler();
+      this.errorMessage = this.postErrorService.formErrorHandler(this.editForm);
       return;
     }
+
+    this.isButtonDisabled = true;
 
     this.postService
       .editPost$(this.postId, this.editForm.getRawValue())
       .subscribe({
-        next: (postId) => console.log(postId),
-        error: (e) => console.log(e),
+        next: (res) => this.router.navigate(['/post', res._id]),
+        error: (e) => {
+          this.errorMessage = e.error.message;
+          this.isButtonDisabled = false;
+        },
       });
-
-    this.errorMessage = null;
-  }
-
-  errorHandler(): string {
-    if (
-      this.editForm.get('title')?.hasError('required') ||
-      this.editForm.get('category')?.hasError('required') ||
-      this.editForm.get('image')?.hasError('required') ||
-      this.editForm.get('description')?.hasError('required')
-    )
-      return 'Uh-oh! All fields are required.';
-    if (
-      this.editForm.get('title')?.hasError('minlength') ||
-      this.editForm.get('title')?.hasError('maxlength')
-    )
-      return 'Oops, title should be between 10 and 100 characters.';
-    if (this.editForm.get('image')?.hasError('pattern'))
-      return 'Sorry, image should start with http:// or https://.';
-    if (
-      this.editForm.get('description')?.hasError('minlength') ||
-      this.editForm.get('description')?.hasError('maxlength')
-    )
-      return 'Oops, description should be between 50 and 3000 characters.';
-    return 'A wild error occurred! Try again.';
   }
 }
