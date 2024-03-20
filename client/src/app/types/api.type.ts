@@ -15,4 +15,5 @@ export type ApiResponse = {
   ok: boolean;
   message: string;
   postId?: string;
+  likes?: number;
 };
