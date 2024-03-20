@@ -14,6 +14,6 @@ export type LogoutResponse = {
 export type ApiResponse = {
   ok: boolean;
   message: string;
-  postId?: string;
+  _id?: string;
   likes?: number;
 };
