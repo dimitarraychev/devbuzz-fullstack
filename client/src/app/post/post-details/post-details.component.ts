@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PostService } from '../post.service';
 import { Post } from 'src/app/types/post.type';
 import { ActivatedRoute } from '@angular/router';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-post-details',
@@ -18,6 +19,8 @@ export class PostDetailsComponent implements OnInit {
   postId: string = '';
   isLoading: boolean = true;
 
+  likesCount$ = new BehaviorSubject<number>(0);
+
   ngOnInit(): void {
     this.getPost();
   }
@@ -28,6 +31,7 @@ export class PostDetailsComponent implements OnInit {
     this.postService.getPost$(this.postId).subscribe({
       next: (post) => {
         this.post = post;
+        this.likesCount$.next(post.likes.length);
         this.isLoading = false;
       },
       error: (e) => console.log(e), // TODO redirect to 404
@@ -44,7 +48,9 @@ export class PostDetailsComponent implements OnInit {
 
   likePost(): void {
     this.postService.likePost$(this.postId).subscribe({
-      next: console.log,
+      next: (res) => {
+        if (res.likes) this.likesCount$.next(res.likes);
+      },
       error: console.log,
       complete: () => console.log('complete'),
     });
