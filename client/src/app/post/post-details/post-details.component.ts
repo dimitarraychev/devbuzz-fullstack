@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { PostService } from '../post.service';
+import { PostService } from '../services/post.service';
 import { Post } from 'src/app/types/post.type';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 
 @Component({
@@ -12,7 +12,8 @@ import { BehaviorSubject } from 'rxjs';
 export class PostDetailsComponent implements OnInit {
   constructor(
     private postService: PostService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private router: Router
   ) {}
 
   post = {} as Post;
@@ -40,9 +41,8 @@ export class PostDetailsComponent implements OnInit {
 
   deletePost(): void {
     this.postService.deletePost$(this.postId).subscribe({
-      next: console.log,
       error: console.log,
-      complete: () => console.log('complete'), // TODO redirect to feed
+      complete: () => this.router.navigate(['/feed']),
     });
   }
 
@@ -52,7 +52,6 @@ export class PostDetailsComponent implements OnInit {
         if (res.likes) this.likesCount$.next(res.likes);
       },
       error: console.log,
-      complete: () => console.log('complete'),
     });
   }
 }
