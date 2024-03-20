@@ -18,22 +18,21 @@ export class RequestInterceptor implements HttpInterceptor {
     request: HttpRequest<unknown>,
     next: HttpHandler
   ): Observable<HttpEvent<unknown>> {
+    let clonedRequest = request.clone();
+
     const jwt = this.cookieService.get('auth');
 
-    if (!jwt) {
-      return next.handle(request);
+    if (jwt) {
+      clonedRequest = request.clone({
+        setHeaders: { Authorization: 'Bearer ' + jwt },
+      });
     }
-
-    const clonedRequest = request.clone({
-      setHeaders: {
-        Authorization: 'Bearer ' + jwt,
-      },
-    });
 
     return next.handle(clonedRequest).pipe(
       catchError((error: HttpErrorResponse) => {
         if (error.status === 401) {
           this.cookieService.delete('auth');
+          localStorage.removeItem('user');
           this.router.navigate(['/login']);
         }
         throw error;
