@@ -16,9 +16,20 @@ export class RegisterComponent {
   ) {}
 
   registerForm = this.fb.nonNullable.group({
-    username: ['', [Validators.required]],
-    email: ['', [Validators.required]],
-    password: ['', [Validators.required]],
+    username: [
+      '',
+      [Validators.required, Validators.minLength(3), Validators.maxLength(20)],
+    ],
+    email: [
+      '',
+      [
+        Validators.required,
+        Validators.email,
+        Validators.minLength(9),
+        Validators.maxLength(30),
+      ],
+    ],
+    password: ['', [Validators.required, Validators.minLength(6)]],
     rePassword: ['', [Validators.required]],
   });
 
@@ -77,6 +88,20 @@ export class RegisterComponent {
       this.registerForm.get('rePassword')?.hasError('required')
     )
       return 'Uh-oh! All fields are required.';
+    if (
+      this.registerForm.get('username')?.hasError('minlength') ||
+      this.registerForm.get('username')?.hasError('maxlength')
+    )
+      return 'Sorry, username should be between 3 and 20 characters.';
+    if (
+      this.registerForm.get('email')?.hasError('minlength') ||
+      this.registerForm.get('email')?.hasError('maxlength')
+    )
+      return 'Sorry, email should be between 9 and 30 characters.';
+    if (this.registerForm.get('email')?.hasError('email'))
+      return 'Oops, a valid email email address is required';
+    if (this.registerForm.get('password')?.hasError('minlength'))
+      return 'Sorry, password should be at least 6 characters.';
     return 'A wild error occurred! Try again.';
   }
 }
