@@ -16,12 +16,12 @@ router.post("/", isAuth, async (req, res) => {
 			},
 		};
 
-		const comment = await commentService.add(commentData);
+		const comments = await commentService.add(commentData);
 
 		res.status(201).json({
 			ok: true,
 			message: "Comment successfully added.",
-			_id: comment._id,
+			comments,
 		});
 	} catch (error) {
 		error.message =

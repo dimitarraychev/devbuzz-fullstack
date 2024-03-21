@@ -7,10 +7,22 @@ exports.add = async (commentData) => {
 		throw new Error("Post with this _postId does not exist!");
 
 	const comment = await Comment.create(commentData);
-	await Post.findByIdAndUpdate(comment._postId, {
-		$addToSet: { comments: comment._id },
-	});
-	return comment;
+	const post = await Post.findByIdAndUpdate(
+		comment._postId,
+		{
+			$addToSet: { comments: comment._id },
+		},
+		{
+			new: true,
+		}
+	)
+		.populate({
+			path: "comments",
+			options: { sort: { createdAt: -1 } },
+		})
+		.lean();
+
+	return post.comments;
 };
 
 // exports.update = (postId, postData) =>
