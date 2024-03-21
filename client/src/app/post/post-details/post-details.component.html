@@ -8,7 +8,10 @@
   />
 
   <section id="comments-container">
-    <app-add-comment [username]="userInfo?.username" (add)="addComment()" />
+    <app-add-comment
+      [username]="userInfo?.username"
+      (add)="addComment($event)"
+    />
 
     <div
       id="no-comments-wrapper"

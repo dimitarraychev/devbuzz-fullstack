@@ -62,7 +62,10 @@ export class PostDetailsComponent implements OnInit {
     });
   }
 
-  addComment(): void {
-    // this.commentService.addComment$();
+  addComment(message: string): void {
+    this.commentService.addComment$({ message }).subscribe({
+      next: console.log,
+      error: console.log,
+    });
   }
 }
