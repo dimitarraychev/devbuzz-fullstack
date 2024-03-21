@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { PostComment } from 'src/app/types/post.type';
 
 @Component({
@@ -8,4 +8,10 @@ import { PostComment } from 'src/app/types/post.type';
 })
 export class CommentComponent {
   @Input() comment = {} as PostComment;
+
+  @Output() delete = new EventEmitter<string>();
+
+  onDelete(): void {
+    this.delete.emit(this.comment._id);
+  }
 }

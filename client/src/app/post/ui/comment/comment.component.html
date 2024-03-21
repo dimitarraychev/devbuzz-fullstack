@@ -5,8 +5,10 @@
       <p class="comment-username">{{ comment.owner.username }}</p>
     </div>
     <div class="comment-top-right">
-      <p class="comment-time">{{ comment.createdAt | date }}</p>
-      <app-button buttonSize="small" buttonText="Delete" />
+      <p class="comment-time">
+        {{ comment.createdAt | date : "H:mm, MMM d, yy" }}
+      </p>
+      <app-button buttonSize="small" buttonText="Delete" (click)="onDelete()" />
     </div>
   </div>
   <p class="comment-text">{{ comment.message }}</p>
