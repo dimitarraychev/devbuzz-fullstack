@@ -71,4 +71,13 @@ export class PostDetailsComponent implements OnInit {
         error: console.log,
       });
   }
+
+  deleteComment(commentId: string): void {
+    this.commentService.deleteComent$(commentId).subscribe({
+      next: (res) => {
+        if (res.comments) this.post.comments = res.comments;
+      },
+      error: console.log,
+    });
+  }
 }

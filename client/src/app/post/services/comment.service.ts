@@ -17,14 +17,9 @@ export class CommentService {
     return this.http.post<ApiResponse>(this.apiUrl + '/comments', commentData);
   }
 
-  // editPost$(postId: string, postData: NewPost): Observable<ApiResponse> {
-  //   return this.http.patch<ApiResponse>(
-  //     this.apiUrl + '/posts/' + postId,
-  //     postData
-  //   );
-  // }
-
-  // deletePost$(postId: string): Observable<ApiResponse> {
-  //   return this.http.delete<ApiResponse>(this.apiUrl + '/posts/' + postId);
-  // }
+  deleteComent$(commentId: string): Observable<ApiResponse> {
+    return this.http.delete<ApiResponse>(
+      this.apiUrl + '/comments/' + commentId
+    );
+  }
 }
