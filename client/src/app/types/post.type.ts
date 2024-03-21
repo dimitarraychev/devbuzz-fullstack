@@ -6,7 +6,7 @@ export type Post = {
   image: string;
   owner: Owner;
   likes: string[];
-  comments: Comment[];
+  comments: PostComment[];
   createdAt: string;
   updatedAt: string;
 };
