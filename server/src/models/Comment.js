@@ -2,8 +2,14 @@ const mongoose = require("mongoose");
 
 const commentSchema = new mongoose.Schema(
 	{
-		comment: {
+		message: {
 			required: [true, "Comment is required"],
+			minLength: [5, "Comment should be between 5 and 300 characters!"],
+			maxLength: [300, "Comment should be between 5 and 300 characters!"],
+			type: String,
+		},
+		_postId: {
+			required: [true, "_postId is required"],
 			type: String,
 		},
 		owner: {
