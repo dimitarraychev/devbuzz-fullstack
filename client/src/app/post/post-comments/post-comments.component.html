@@ -1,28 +1,9 @@
 <section id="comments-container">
-  <div class="comment border-glow">
-    <div class="comment-top-container">
-      <div class="comment-top-left">
-        <i class="fa-regular fa-user"></i>
-        <p class="comment-username">Username</p>
-      </div>
-      <div class="comment-top-right">
-        <p class="comment-time">Comment Date</p>
-        <!-- If owner of comment -->
-        <!-- id="keepIdforDelete function" -->
-        <app-button buttonSize="small" buttonText="Delete" />
-      </div>
-    </div>
-    <p class="comment-text">Comment body</p>
-  </div>
-
-  <!-- No comments yet -->
-  <!-- <p id="noComments">No comments yet. Be the first!</p> -->
-
   <div id="add-comment" class="comment border-glow">
     <div class="comment-top-container">
       <div class="comment-top-left">
         <i class="fa-regular fa-user"></i>
-        <p class="comment-username">Username or Guest</p>
+        <p class="comment-username">{{ userInfo?.username || "Guest" }}</p>
       </div>
     </div>
     <textarea
@@ -31,6 +12,32 @@
       id="add-comment-text"
       placeholder="Add a comment..."
     ></textarea>
-    <app-button buttonSize="small" buttonText="Comment" />
+    <app-button
+      buttonSize="small"
+      buttonText="Comment"
+      (click)="addComment()"
+    />
+  </div>
+
+  <div class="comment border-glow" *ngFor="let comment of comments">
+    <div class="comment-top-container">
+      <div class="comment-top-left">
+        <i class="fa-regular fa-user"></i>
+        <p class="comment-username">{{ comment.owner.username }}</p>
+      </div>
+      <div class="comment-top-right">
+        <p class="comment-time">{{ comment.createdAt | date }}</p>
+        <!-- If owner of comment -->
+        <!-- id="keepIdforDelete function" -->
+        <app-button buttonSize="small" buttonText="Delete" />
+      </div>
+    </div>
+    <p class="comment-text">{{ comment.message }}</p>
+  </div>
+
+  <div id="no-comments-wrapper" class="border-glow">
+    <p id="noComments" *ngIf="comments.length < 1">
+      No comments yet. Be the first!
+    </p>
   </div>
 </section>

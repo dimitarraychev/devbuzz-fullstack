@@ -34,6 +34,8 @@ $border-radius: 5px;
 
   .comment-top-left {
     display: flex;
+    align-items: center;
+    justify-items: center;
     color: gray;
     gap: 5px;
   }
@@ -61,6 +63,14 @@ $border-radius: 5px;
 
 #noComments {
   margin: auto;
+}
+
+#no-comments-wrapper {
+  width: 30%;
+  margin: auto;
+  padding: 1em;
+  background-color: $dark-bg;
+  text-align: center;
 }
 
 app-button {
