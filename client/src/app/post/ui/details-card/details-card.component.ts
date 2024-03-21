@@ -9,6 +9,8 @@ import { Post } from 'src/app/types/post.type';
 export class DetailsCardComponent {
   @Input() post = {} as Post;
   @Input() isLoading: boolean = true;
+  @Input() likesCount: number | null = 0;
+
   @Output() delete = new EventEmitter<void>();
   @Output() like = new EventEmitter<void>();
 
