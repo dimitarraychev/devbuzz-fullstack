@@ -9,7 +9,11 @@ exports.create = async (postData) => {
 	return post;
 };
 
-exports.getOne = (postId) => Post.findById(postId);
+exports.getOne = (postId) =>
+	Post.findById(postId).populate({
+		path: "comments",
+		options: { sort: { createdAt: -1 } },
+	});
 
 exports.getLatest = () => Post.find().sort({ createdAt: -1 }).limit(6);
 
