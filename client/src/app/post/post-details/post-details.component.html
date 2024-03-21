@@ -1,54 +1,10 @@
 <div id="details-page-wrapper">
-  <div id="details-container" class="border-glow">
-    <app-loader *ngIf="isLoading" />
-
-    <ng-container *ngIf="!isLoading">
-      <div class="details-info">
-        <div class="details-info-top">
-          <p class="details-category">{{ post.category }}</p>
-          <p class="post-time">{{ post.createdAt | date }}</p>
-        </div>
-
-        <h1 class="details-title">{{ post.title }}</h1>
-
-        <div class="details-info-bottom">
-          <div class="details-owner">
-            <p class="owner-name">{{ post.owner.username }}</p>
-            <app-button
-              buttonSize="small"
-              buttonText="Edit"
-              buttonIcon="edit"
-              [routerLink]="['/posts', post._id, 'edit']"
-            />
-            <app-button
-              buttonSize="small"
-              buttonText="Delete"
-              buttonIcon="delete"
-              (click)="deletePost()"
-            />
-          </div>
-          <div class="like">
-            <p>Likes: {{ likesCount$ | async }}</p>
-            <app-button
-              buttonIcon="like"
-              buttonText="Like"
-              buttonSize="small"
-              (click)="likePost()"
-            />
-          </div>
-        </div>
-      </div>
-
-      <img
-        [src]="post.image"
-        onerror="this.src='assets/images/image-missing.jpg'"
-        alt="Post Image"
-        class="details-img"
-      />
-
-      <p class="details-description">{{ post.description }}</p>
-    </ng-container>
-  </div>
+  <app-details-card
+    [post]="post"
+    [isLoading]="isLoading"
+    (delete)="deletePost()"
+    (like)="likePost()"
+  />
 
   <app-post-comments />
 </div>

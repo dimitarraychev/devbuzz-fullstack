@@ -1,0 +1,47 @@
+<div id="details-container" class="border-glow">
+  <app-loader *ngIf="isLoading" />
+  <div class="details-info" *ngIf="!isLoading">
+    <div class="details-info-top">
+      <p class="details-category">{{ post.category }}</p>
+      <p class="post-time">{{ post.createdAt | date }}</p>
+    </div>
+
+    <h1 class="details-title">{{ post.title }}</h1>
+
+    <div class="details-info-bottom">
+      <div class="details-owner">
+        <p class="owner-name">{{ post.owner.username }}</p>
+        <app-button
+          buttonSize="small"
+          buttonText="Edit"
+          buttonIcon="edit"
+          [routerLink]="['/posts', post._id, 'edit']"
+        />
+        <app-button
+          buttonSize="small"
+          buttonText="Delete"
+          buttonIcon="delete"
+          (click)="onDelete()"
+        />
+      </div>
+      <div class="like">
+        <p>Likes: {{ post.likes.length }}</p>
+        <app-button
+          buttonIcon="like"
+          buttonText="Like"
+          buttonSize="small"
+          (click)="onLike()"
+        />
+      </div>
+    </div>
+  </div>
+
+  <img
+    [src]="post.image"
+    onerror="this.src='assets/images/image-missing.jpg'"
+    alt="Post Image"
+    class="details-img"
+  />
+
+  <p class="details-description">{{ post.description }}</p>
+</div>

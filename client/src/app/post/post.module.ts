@@ -10,6 +10,7 @@ import { PostDetailsComponent } from './post-details/post-details.component';
 import { PostCreateComponent } from './post-create/post-create.component';
 import { PostEditComponent } from './post-edit/post-edit.component';
 import { PostCommentsComponent } from './post-comments/post-comments.component';
+import { DetailsCardComponent } from './ui/details-card/details-card.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { PostCommentsComponent } from './post-comments/post-comments.component';
     PostCreateComponent,
     PostEditComponent,
     PostCommentsComponent,
+    DetailsCardComponent,
   ],
   imports: [CommonModule, ReactiveFormsModule, SharedModule, PostRoutingModule],
 })
