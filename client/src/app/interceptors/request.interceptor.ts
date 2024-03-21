@@ -33,7 +33,7 @@ export class RequestInterceptor implements HttpInterceptor {
         if (error.status === 401) {
           this.cookieService.delete('auth');
           localStorage.removeItem('user');
-          this.router.navigate(['/login']);
+          this.router.navigate(['/user/login']);
         }
         throw error;
       })

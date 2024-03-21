@@ -8,9 +8,9 @@
       buttonText="Create"
       buttonSize="large"
       buttonIcon="create"
-      routerLink="/post/create"
+      routerLink="/posts/create"
     />
-    <a id="feedLink" routerLink="/feed">Feed</a>
+    <a id="feedLink" routerLink="/posts/feed">Feed</a>
     <p id="username" [class.menu-opened]="isMenuOpen" (click)="toggleMenu()">
       {{ userInfo?.username || "Guest" }}
     </p>
@@ -25,11 +25,11 @@
   </div>
 </nav>
 <div id="menu-items" (click)="hideMenu()" *ngIf="isMenuOpen">
-  <a *ngIf="!isLogged" routerLink="/login">
+  <a *ngIf="!isLogged" routerLink="/user/login">
     <i class="fa-solid fa-right-to-bracket"></i>
     Login
   </a>
-  <a *ngIf="!isLogged" routerLink="/register">
+  <a *ngIf="!isLogged" routerLink="/user/register">
     <i class="fa-solid fa-user-plus"></i>
     Register
   </a>

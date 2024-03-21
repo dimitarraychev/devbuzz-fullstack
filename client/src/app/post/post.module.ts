@@ -18,6 +18,6 @@ import { PostEditComponent } from './post-edit/post-edit.component';
     PostCreateComponent,
     PostEditComponent,
   ],
-  imports: [CommonModule, ReactiveFormsModule, PostRoutingModule, SharedModule],
+  imports: [CommonModule, ReactiveFormsModule, SharedModule, PostRoutingModule],
 })
 export class PostModule {}

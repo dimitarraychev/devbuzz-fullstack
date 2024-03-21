@@ -42,7 +42,7 @@ export class PostDetailsComponent implements OnInit {
   deletePost(): void {
     this.postService.deletePost$(this.postId).subscribe({
       error: console.log,
-      complete: () => this.router.navigate(['/feed']),
+      complete: () => this.router.navigate(['posts/feed']),
     });
   }
 

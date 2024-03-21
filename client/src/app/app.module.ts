@@ -8,21 +8,18 @@ import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
 import { HomeComponent } from './home/home.component';
-import { PostModule } from './post/post.module';
+import { NotFoundComponent } from './not-found/not-found.component';
 import { environment } from 'src/environments/environment';
-import { UserModule } from './user/user.module';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { RequestInterceptor } from './interceptors/request.interceptor';
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent],
+  declarations: [AppComponent, HomeComponent, NotFoundComponent],
   imports: [
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     BrowserModule,
     CoreModule,
     SharedModule,
-    PostModule,
-    UserModule,
     HttpClientModule,
     AppRoutingModule,
   ],

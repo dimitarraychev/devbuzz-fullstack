@@ -95,7 +95,7 @@ export class PostEditComponent implements OnInit {
     this.postService
       .editPost$(this.postId, this.editForm.getRawValue())
       .subscribe({
-        next: (res) => this.router.navigate(['/post', res._id]),
+        next: (res) => this.router.navigate(['/posts', res._id]),
         error: (e) => {
           this.errorMessage = e.error.message;
           this.isButtonDisabled = false;

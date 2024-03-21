@@ -64,7 +64,7 @@ export class PostCreateComponent {
     this.isButtonDisabled = true;
 
     this.postService.createPost$(this.createForm.getRawValue()).subscribe({
-      next: (res) => this.router.navigate(['/post', res._id]),
+      next: (res) => this.router.navigate(['/posts', res._id]),
       error: (e) => {
         this.errorMessage = e.error.message;
         this.isButtonDisabled = false;

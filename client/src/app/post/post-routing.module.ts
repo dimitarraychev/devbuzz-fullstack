@@ -7,19 +7,24 @@ import { PostEditComponent } from './post-edit/post-edit.component';
 
 const routes: Routes = [
   {
+    path: '',
+    pathMatch: 'full',
+    redirectTo: '/feed',
+  },
+  {
     path: 'feed',
     component: FeedComponent,
   },
   {
-    path: 'post/create',
+    path: 'create',
     component: PostCreateComponent,
   },
   {
-    path: 'post/:id',
+    path: ':id',
     component: PostDetailsComponent,
   },
   {
-    path: 'post/:id/edit',
+    path: ':id/edit',
     component: PostEditComponent,
   },
 ];
