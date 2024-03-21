@@ -1,0 +1,13 @@
+<div class="comment border-glow">
+  <div class="comment-top-container">
+    <div class="comment-top-left">
+      <i class="fa-regular fa-user"></i>
+      <p class="comment-username">{{ comment.owner.username }}</p>
+    </div>
+    <div class="comment-top-right">
+      <p class="comment-time">{{ comment.createdAt | date }}</p>
+      <app-button buttonSize="small" buttonText="Delete" />
+    </div>
+  </div>
+  <p class="comment-text">{{ comment.message }}</p>
+</div>
