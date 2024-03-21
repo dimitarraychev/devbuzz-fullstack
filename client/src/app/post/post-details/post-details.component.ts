@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PostService } from '../services/post.service';
-import { Post } from 'src/app/types/post.type';
+import { Post, PostComment } from 'src/app/types/post.type';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { UserService } from 'src/app/user/user.service';
@@ -21,7 +21,6 @@ export class PostDetailsComponent implements OnInit {
   ) {}
 
   post = {} as Post;
-  postId: string = '';
   isLoading: boolean = true;
   likesCount$ = new BehaviorSubject<number>(0);
 
@@ -34,15 +33,15 @@ export class PostDetailsComponent implements OnInit {
   }
 
   getPost(): void {
-    this.postId = this.activatedRoute.snapshot.params['id'];
+    const postId = this.activatedRoute.snapshot.params['id'];
 
-    this.postService.getPost$(this.postId).subscribe({
+    this.postService.getPost$(postId).subscribe({
       next: (post) => {
         this.post = post;
         this.likesCount$.next(post.likes.length);
         this.isLoading = false;
       },
-      error: (e) => console.log(e), // TODO redirect to 404
+      error: (e) => this.router.navigate(['404']),
     });
   }
 
@@ -63,9 +62,13 @@ export class PostDetailsComponent implements OnInit {
   }
 
   addComment(message: string): void {
-    this.commentService.addComment$({ message }).subscribe({
-      next: console.log,
-      error: console.log,
-    });
+    this.commentService
+      .addComment$({ message, _postId: this.post._id })
+      .subscribe({
+        next: (res) => {
+          if (res.comments) this.post.comments = res.comments;
+        },
+        error: console.log,
+      });
   }
 }
