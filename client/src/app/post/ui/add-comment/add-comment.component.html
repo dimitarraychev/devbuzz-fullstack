@@ -1,0 +1,15 @@
+<div id="add-comment" class="comment border-glow">
+  <div class="comment-top-container">
+    <div class="comment-top-left">
+      <i class="fa-regular fa-user"></i>
+      <p class="comment-username">{{ username || "Guest" }}</p>
+    </div>
+  </div>
+  <textarea
+    type="comment"
+    name="comment"
+    id="add-comment-text"
+    placeholder="Add a comment..."
+  ></textarea>
+  <app-button buttonSize="small" buttonText="Comment" (click)="onAdd()" />
+</div>
