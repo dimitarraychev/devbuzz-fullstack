@@ -11,11 +11,6 @@ export type Post = {
   updatedAt: string;
 };
 
-type Owner = {
-  _id: string;
-  username: string;
-};
-
 export type NewPost = {
   title: string;
   category: string;
@@ -34,4 +29,10 @@ export type PostComment = {
 
 export type NewComment = {
   message: string;
+  _postId: string;
+};
+
+type Owner = {
+  _id: string;
+  username: string;
 };

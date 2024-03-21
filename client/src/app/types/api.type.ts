@@ -1,3 +1,5 @@
+import { PostComment } from './post.type';
+
 export type AuthResponse = {
   ok: boolean;
   message: string;
@@ -16,4 +18,5 @@ export type ApiResponse = {
   message: string;
   _id?: string;
   likes?: number;
+  comments?: PostComment[];
 };
