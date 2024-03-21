@@ -7,28 +7,14 @@ exports.add = async (commentData) => {
 		throw new Error("Post with this _postId does not exist!");
 
 	const comment = await Comment.create(commentData);
-	const post = await Post.findByIdAndUpdate(
-		comment._postId,
-		{
-			$addToSet: { comments: comment._id },
-		},
-		{
-			new: true,
-		}
-	)
-		.populate({
-			path: "comments",
-			options: { sort: { createdAt: -1 } },
-		})
-		.lean();
 
-	return post.comments;
+	await Post.findByIdAndUpdate(comment._postId, {
+		$addToSet: { comments: comment._id },
+	});
+
+	return comment._id;
 };
 
-// exports.update = (postId, postData) =>
-// 	Post.findByIdAndUpdate(postId, postData, {
-// 		runValidators: true,
-// 		new: true,
-// 	});
+exports.getOne = (commentId) => Comment.findById(commentId);
 
-// exports.delete = (postId) => Post.findByIdAndDelete(postId);
+exports.delete = (commentId) => Comment.findByIdAndDelete(commentId);
