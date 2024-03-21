@@ -23,20 +23,13 @@ export class AddCommentComponent {
 
   commentTextControl = new FormControl('', {
     nonNullable: true,
-    validators: [
-      Validators.required,
-      Validators.minLength(5),
-      Validators.maxLength(300),
-    ],
+    validators: [Validators.minLength(5), Validators.maxLength(300)],
   });
 
   onAdd(): void {
     const message: string = this.commentTextControl.value;
 
-    if (this.commentTextControl.invalid) {
-      this.errorMessage = this.formErrorHandler();
-      return;
-    }
+    if (this.commentTextControl.invalid) return;
 
     this.add.emit(message);
     this.commentTextControl.reset();
@@ -44,7 +37,6 @@ export class AddCommentComponent {
 
   formErrorHandler(): string {
     if (
-      this.commentTextControl.hasError('required') ||
       this.commentTextControl.hasError('minlength') ||
       this.commentTextControl.hasError('maxlength')
     )
