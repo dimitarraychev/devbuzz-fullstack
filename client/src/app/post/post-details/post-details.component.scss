@@ -1,3 +1,29 @@
+$font-color: white;
+$dark-bg: rgba(18, 18, 18, 1);
+
 #details-page-wrapper {
   padding-top: 5em;
+}
+
+#comments-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  margin: auto;
+  padding-top: 1em;
+  gap: 1em;
+  color: $font-color;
+}
+
+#noComments {
+  margin: auto;
+}
+
+#no-comments-wrapper {
+  width: 30%;
+  margin: auto;
+  padding: 1em;
+  background-color: $dark-bg;
+  text-align: center;
 }

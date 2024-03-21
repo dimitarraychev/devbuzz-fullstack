@@ -3,6 +3,8 @@ import { PostService } from '../services/post.service';
 import { Post } from 'src/app/types/post.type';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
+import { UserService } from 'src/app/user/user.service';
+import { CommentService } from '../services/comment.service';
 
 @Component({
   selector: 'app-post-details',
@@ -12,6 +14,8 @@ import { BehaviorSubject } from 'rxjs';
 export class PostDetailsComponent implements OnInit {
   constructor(
     private postService: PostService,
+    private userService: UserService,
+    private commentService: CommentService,
     private activatedRoute: ActivatedRoute,
     private router: Router
   ) {}
@@ -20,6 +24,10 @@ export class PostDetailsComponent implements OnInit {
   postId: string = '';
   isLoading: boolean = true;
   likesCount$ = new BehaviorSubject<number>(0);
+
+  get userInfo() {
+    return this.userService.userInfo;
+  }
 
   ngOnInit(): void {
     this.getPost();
@@ -52,5 +60,9 @@ export class PostDetailsComponent implements OnInit {
       },
       error: console.log,
     });
+  }
+
+  addComment(): void {
+    // this.commentService.addComment$();
   }
 }
