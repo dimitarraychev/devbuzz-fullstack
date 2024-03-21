@@ -13,7 +13,7 @@ export class CommentService {
 
   constructor(private http: HttpClient) {}
 
-  createComment$(commentData: NewComment): Observable<ApiResponse> {
+  addComment$(commentData: NewComment): Observable<ApiResponse> {
     return this.http.post<ApiResponse>(this.apiUrl + '/comments', commentData);
   }
 
