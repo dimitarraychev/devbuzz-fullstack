@@ -40,3 +40,14 @@ $border-radius: 5px;
 app-button {
   margin: auto;
 }
+
+#error-msg {
+  color: red;
+  font-size: 12px;
+  text-align: center;
+}
+
+.invalid {
+  border: 1px solid red;
+  box-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
+}
