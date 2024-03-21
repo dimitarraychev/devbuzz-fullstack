@@ -1,0 +1,27 @@
+$font-color: white;
+$dark-bg: rgba(18, 18, 18, 1);
+
+#not-found-page-wrapper {
+  padding-top: 5em;
+}
+
+#not-found-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 60%;
+  margin: auto;
+  align-items: center;
+  justify-items: center;
+  background-color: $dark-bg;
+  color: $font-color;
+
+  img {
+    width: 35em;
+    height: 30em;
+  }
+
+  app-button {
+    margin-bottom: 2em;
+  }
+}
