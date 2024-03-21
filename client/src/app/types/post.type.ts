@@ -6,7 +6,7 @@ export type Post = {
   image: string;
   owner: Owner;
   likes: string[];
-  comments: string[];
+  comments: Comment[];
   createdAt: string;
   updatedAt: string;
 };
@@ -21,4 +21,17 @@ export type NewPost = {
   category: string;
   description: string;
   image: string;
+};
+
+export type PostComment = {
+  _id: string;
+  message: string;
+  _postId: string;
+  owner: Owner;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type NewComment = {
+  message: string;
 };
