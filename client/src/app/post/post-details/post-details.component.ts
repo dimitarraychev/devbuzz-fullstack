@@ -19,7 +19,6 @@ export class PostDetailsComponent implements OnInit {
   post = {} as Post;
   postId: string = '';
   isLoading: boolean = true;
-
   likesCount$ = new BehaviorSubject<number>(0);
 
   ngOnInit(): void {
@@ -40,14 +39,14 @@ export class PostDetailsComponent implements OnInit {
   }
 
   deletePost(): void {
-    this.postService.deletePost$(this.postId).subscribe({
+    this.postService.deletePost$(this.post._id).subscribe({
       error: console.log,
       complete: () => this.router.navigate(['posts/feed']),
     });
   }
 
   likePost(): void {
-    this.postService.likePost$(this.postId).subscribe({
+    this.postService.likePost$(this.post._id).subscribe({
       next: (res) => {
         if (res.likes) this.likesCount$.next(res.likes);
       },
