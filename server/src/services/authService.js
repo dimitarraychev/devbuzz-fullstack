@@ -15,15 +15,15 @@ exports.register = async function (username, email, rawPassword) {
 	if (existingUser)
 		throw new Error("User with this email address already exists!");
 
-	const user = await User.create({ username, email, password });
+	const user = await User.create({ username, email, password }).lean();
 
 	const token = await signToken(user._id, user.username, user.email);
 
-	return { token, _id: user._id, username: user.username };
+	return { token, user };
 };
 
 exports.login = async function (email, password) {
-	const user = await User.findOne({ email });
+	const user = await User.findOne({ email }).lean();
 	if (!user) throw new Error("Invalid email or password!");
 
 	const isValid = await bcrypt.compare(password, user.password);
@@ -31,8 +31,11 @@ exports.login = async function (email, password) {
 
 	const token = await signToken(user._id, user.username, user.email);
 
-	return { token, _id: user._id, username: user.username };
+	return { token, user };
 };
+
+exports.authenticate = (userId) =>
+	User.findOne({ _id: userId }, { password: 0, __v: 0 }).lean();
 
 function signToken(_id, username, email) {
 	const payload = {
