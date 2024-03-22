@@ -12,9 +12,10 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { environment } from 'src/environments/environment';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { RequestInterceptor } from './interceptors/request.interceptor';
+import { AuthenticationComponent } from './authentication/authentication.component';
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, NotFoundComponent],
+  declarations: [AppComponent, HomeComponent, NotFoundComponent, AuthenticationComponent],
   imports: [
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     BrowserModule,
