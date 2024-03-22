@@ -10,12 +10,17 @@ import { SharedModule } from './shared/shared.module';
 import { HomeComponent } from './home/home.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { environment } from 'src/environments/environment';
-import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { RequestInterceptor } from './interceptors/request.interceptor';
+import { HttpClientModule } from '@angular/common/http';
+import { interceptorProvider } from './interceptors/request.interceptor';
 import { AuthenticationComponent } from './authentication/authentication.component';
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, NotFoundComponent, AuthenticationComponent],
+  declarations: [
+    AppComponent,
+    HomeComponent,
+    NotFoundComponent,
+    AuthenticationComponent,
+  ],
   imports: [
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     BrowserModule,
@@ -24,9 +29,7 @@ import { AuthenticationComponent } from './authentication/authentication.compone
     HttpClientModule,
     AppRoutingModule,
   ],
-  providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: RequestInterceptor, multi: true },
-  ],
+  providers: [interceptorProvider],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
