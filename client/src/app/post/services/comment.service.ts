@@ -13,11 +13,11 @@ export class CommentService {
 
   constructor(private http: HttpClient) {}
 
-  addComment$(commentData: NewComment): Observable<ApiResponse> {
+  addComment(commentData: NewComment): Observable<ApiResponse> {
     return this.http.post<ApiResponse>(this.apiUrl + '/comments', commentData);
   }
 
-  deleteComent$(commentId: string): Observable<ApiResponse> {
+  deleteComent(commentId: string): Observable<ApiResponse> {
     return this.http.delete<ApiResponse>(
       this.apiUrl + '/comments/' + commentId
     );

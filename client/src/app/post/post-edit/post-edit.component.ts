@@ -54,7 +54,7 @@ export class PostEditComponent implements OnInit {
   getPost(): void {
     this.postId = this.activatedRoute.snapshot.params['id'];
 
-    this.postService.getPost$(this.postId).subscribe({
+    this.postService.getPost(this.postId).subscribe({
       next: (post) => {
         this.post = post;
         this.setFormValues();
@@ -93,7 +93,7 @@ export class PostEditComponent implements OnInit {
     this.isButtonDisabled = true;
 
     this.postService
-      .editPost$(this.postId, this.editForm.getRawValue())
+      .editPost(this.postId, this.editForm.getRawValue())
       .subscribe({
         next: (res) => this.router.navigate(['/posts', res._id]),
         error: (e) => {

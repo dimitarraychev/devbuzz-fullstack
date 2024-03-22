@@ -16,7 +16,7 @@ exports.auth = async (req, res, next) => {
 	} catch (error) {
 		return res.status(401).json({
 			ok: false,
-			message: "Authentication failed. Invalid token.",
+			message: "Authentication failed: Invalid token.",
 		});
 	}
 };
@@ -25,7 +25,7 @@ exports.isAuth = (req, res, next) => {
 	if (!req.user) {
 		return res.status(401).json({
 			success: false,
-			message: "Authentication failed. User not authenticated.",
+			message: "Authentication failed: User not authenticated.",
 		});
 	}
 

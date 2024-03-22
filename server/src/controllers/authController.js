@@ -1,6 +1,5 @@
 const router = require("express").Router();
 const authService = require("../services/authService");
-const { isAuth } = require("../middlewares/auth");
 
 const validationRegex = new RegExp(/:\s([A-Z][\w\s]+!)/);
 const removePassword = (user) => {
@@ -59,7 +58,7 @@ router.post("/login", async (req, res) => {
 	}
 });
 
-router.get("/authenticate", isAuth, async (req, res) => {
+router.get("/authenticate", async (req, res) => {
 	try {
 		const _id = req.user._id;
 
@@ -75,7 +74,7 @@ router.get("/authenticate", isAuth, async (req, res) => {
 	} catch (error) {
 		res.status(401).json({
 			ok: false,
-			message: "Authentication failed." + error.message,
+			message: "Authentication failed: Not logged in. " + error.message,
 		});
 	}
 });

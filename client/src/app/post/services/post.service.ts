@@ -13,34 +13,34 @@ export class PostService {
 
   constructor(private http: HttpClient) {}
 
-  getLatestPosts$(): Observable<Post[]> {
+  getLatestPosts(): Observable<Post[]> {
     return this.http.get<Post[]>(this.apiUrl + '/posts');
   }
 
-  getHottestPosts$(): Observable<Post[]> {
+  getHottestPosts(): Observable<Post[]> {
     return this.http.get<Post[]>(this.apiUrl + '/posts/hottest');
   }
 
-  getPost$(postId: string): Observable<Post> {
+  getPost(postId: string): Observable<Post> {
     return this.http.get<Post>(this.apiUrl + '/posts/' + postId);
   }
 
-  createPost$(postData: NewPost): Observable<ApiResponse> {
+  createPost(postData: NewPost): Observable<ApiResponse> {
     return this.http.post<ApiResponse>(this.apiUrl + '/posts', postData);
   }
 
-  editPost$(postId: string, postData: NewPost): Observable<ApiResponse> {
+  editPost(postId: string, postData: NewPost): Observable<ApiResponse> {
     return this.http.patch<ApiResponse>(
       this.apiUrl + '/posts/' + postId,
       postData
     );
   }
 
-  deletePost$(postId: string): Observable<ApiResponse> {
+  deletePost(postId: string): Observable<ApiResponse> {
     return this.http.delete<ApiResponse>(this.apiUrl + '/posts/' + postId);
   }
 
-  likePost$(postId: string): Observable<ApiResponse> {
+  likePost(postId: string): Observable<ApiResponse> {
     return this.http.post<ApiResponse>(
       this.apiUrl + '/posts/' + postId + '/like',
       {}

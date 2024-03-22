@@ -24,19 +24,19 @@ export class UserService implements OnDestroy {
     });
   }
 
-  login$(userData: User): Observable<AuthResponse> {
+  login(userData: User): Observable<AuthResponse> {
     return this.http
       .post<AuthResponse>(this.apiUrl + '/auth/login', userData)
       .pipe(tap((res) => this.user$$.next(res.user)));
   }
 
-  register$(userData: User): Observable<AuthResponse> {
+  register(userData: User): Observable<AuthResponse> {
     return this.http
       .post<AuthResponse>(this.apiUrl + '/auth/register', userData)
       .pipe(tap((res) => this.user$$.next(res.user)));
   }
 
-  authenticate$() {
+  authenticate() {
     return this.http
       .get<AuthResponse>(this.apiUrl + '/auth/authenticate')
       .pipe(tap((res) => this.user$$.next(res.user)));
@@ -50,10 +50,9 @@ export class UserService implements OnDestroy {
     this.http.get<LogoutResponse>(this.apiUrl + '/auth/logout').subscribe({
       next: (res) => {
         this.cookieService.delete('auth');
-        localStorage.removeItem('user');
+        this.user$$.next(undefined);
       },
       error: (e) => console.log(e),
-      complete: () => console.info('complete'),
     });
   }
 
