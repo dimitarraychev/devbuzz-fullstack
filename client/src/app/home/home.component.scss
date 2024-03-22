@@ -35,22 +35,29 @@ $bee-yellow: #e9ab17;
   }
 }
 
-.bentogrid {
+#grid-wrapper {
   color: $font-color;
   width: 70%;
   margin: auto;
   margin-top: 2em;
-}
+  display: flex;
+  gap: 1em;
 
-.bentogrid div {
-  background-color: $dark-bg;
+  #contributors-wrapper {
+    height: 100%;
+    padding-bottom: 3em;
+  }
 
-  h3 {
-    font-size: 30px;
-    letter-spacing: 0.5px;
-    margin: auto;
-    text-align: center;
-    padding: 1em;
+  div {
+    background-color: $dark-bg;
+
+    h3 {
+      font-size: 30px;
+      letter-spacing: 0.5px;
+      margin: auto;
+      text-align: center;
+      padding: 1em;
+    }
   }
 }
 
