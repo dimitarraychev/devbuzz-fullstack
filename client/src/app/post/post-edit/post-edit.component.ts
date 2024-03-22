@@ -4,6 +4,7 @@ import { PostService } from '../services/post.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Post } from 'src/app/types/post.type';
 import { PostErrorService } from '../services/post-error.service';
+import { UserService } from 'src/app/user/user.service';
 
 @Component({
   selector: 'app-post-edit',
@@ -15,6 +16,7 @@ export class PostEditComponent implements OnInit {
     private fb: FormBuilder,
     private postService: PostService,
     private postErrorService: PostErrorService,
+    private userService: UserService,
     private router: Router,
     private activatedRoute: ActivatedRoute
   ) {}
@@ -56,11 +58,15 @@ export class PostEditComponent implements OnInit {
 
     this.postService.getPost(this.postId).subscribe({
       next: (post) => {
+        if (post.owner._id != this.userService.user?._id) {
+          this.router.navigate(['/home']);
+          return;
+        }
         this.post = post;
         this.setFormValues();
         this.isLoading = false;
       },
-      error: (e) => console.log(e), // TODO redirect to 404,
+      error: (e) => this.router.navigate(['/404']),
     });
   }
 
