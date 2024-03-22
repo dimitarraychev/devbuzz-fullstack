@@ -1,10 +1,11 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Provider } from '@angular/core';
 import {
   HttpRequest,
   HttpHandler,
   HttpEvent,
   HttpInterceptor,
   HttpErrorResponse,
+  HTTP_INTERCEPTORS,
 } from '@angular/common/http';
 import { Observable, catchError } from 'rxjs';
 import { CookieService } from 'ngx-cookie-service';
@@ -30,12 +31,22 @@ export class RequestInterceptor implements HttpInterceptor {
 
     return next.handle(clonedRequest).pipe(
       catchError((error: HttpErrorResponse) => {
-        // if (error.status === 401) {
-        //   this.cookieService.delete('auth');
-        //   this.router.navigate(['/user/login']);
-        // }
+        if (
+          error.status === 401 &&
+          !error.error.message.includes('Not logged in.')
+        ) {
+          this.cookieService.delete('auth');
+          this.router.navigate(['/user/login']);
+        }
+
         throw error;
       })
     );
   }
 }
+
+export const interceptorProvider: Provider = {
+  provide: HTTP_INTERCEPTORS,
+  useClass: RequestInterceptor,
+  multi: true,
+};
