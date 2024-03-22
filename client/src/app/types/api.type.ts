@@ -3,9 +3,14 @@ import { PostComment } from './post.type';
 export type AuthResponse = {
   ok: boolean;
   message: string;
-  token: string;
-  username: string;
+  token?: string;
+  user: AuthUser;
+};
+
+export type AuthUser = {
   _id: string;
+  username: string;
+  email: string;
 };
 
 export type LogoutResponse = {
