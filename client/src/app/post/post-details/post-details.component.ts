@@ -25,7 +25,7 @@ export class PostDetailsComponent implements OnInit {
   likesCount$ = new BehaviorSubject<number>(0);
 
   get userInfo() {
-    return this.userService.userInfo;
+    return this.userService.user;
   }
 
   ngOnInit(): void {

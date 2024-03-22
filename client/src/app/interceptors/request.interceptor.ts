@@ -30,11 +30,10 @@ export class RequestInterceptor implements HttpInterceptor {
 
     return next.handle(clonedRequest).pipe(
       catchError((error: HttpErrorResponse) => {
-        if (error.status === 401) {
-          this.cookieService.delete('auth');
-          localStorage.removeItem('user');
-          this.router.navigate(['/user/login']);
-        }
+        // if (error.status === 401) {
+        //   this.cookieService.delete('auth');
+        //   this.router.navigate(['/user/login']);
+        // }
         throw error;
       })
     );

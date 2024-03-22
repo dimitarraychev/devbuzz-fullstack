@@ -71,7 +71,7 @@ export class RegisterComponent {
         password,
       })
       .subscribe({
-        next: (res) => this.userService.setCookieAndStorage(res),
+        next: (res) => this.userService.setCookie(res),
         error: (e) => {
           this.errorMessage = e.error.message;
           this.isButtonDisabled = false;

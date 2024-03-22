@@ -1,49 +1,49 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, OnDestroy } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { User } from '../types/user.type';
-import { AuthResponse, LogoutResponse } from '../types/api.type';
+import { AuthResponse, AuthUser, LogoutResponse } from '../types/api.type';
 import { CookieService } from 'ngx-cookie-service';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable, Subscription, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
-export class UserService {
+export class UserService implements OnDestroy {
   apiUrl = environment.apiUrl;
 
-  constructor(private http: HttpClient, private cookieService: CookieService) {}
+  private user$$ = new BehaviorSubject<AuthUser | undefined>(undefined);
+  private user$ = this.user$$.asObservable();
 
-  get isLogged(): boolean {
-    return !!this.cookieService.get('auth');
-  }
+  user: AuthUser | undefined;
+  userSubscription: Subscription;
 
-  get userInfo(): { username: string; _id: string } | null {
-    if (!this.isLogged) return null;
-
-    const info = localStorage.getItem('user');
-    if (!info) return null;
-
-    return JSON.parse(info);
+  constructor(private http: HttpClient, private cookieService: CookieService) {
+    this.userSubscription = this.user$.subscribe((user) => {
+      this.user = user;
+    });
   }
 
   login$(userData: User): Observable<AuthResponse> {
-    return this.http.post<AuthResponse>(this.apiUrl + '/auth/login', userData);
+    return this.http
+      .post<AuthResponse>(this.apiUrl + '/auth/login', userData)
+      .pipe(tap((res) => this.user$$.next(res.user)));
   }
 
   register$(userData: User): Observable<AuthResponse> {
-    return this.http.post<AuthResponse>(
-      this.apiUrl + '/auth/register',
-      userData
-    );
+    return this.http
+      .post<AuthResponse>(this.apiUrl + '/auth/register', userData)
+      .pipe(tap((res) => this.user$$.next(res.user)));
   }
 
-  setCookieAndStorage(res: AuthResponse): void {
-    this.cookieService.set('auth', res.token, 7);
-    localStorage.setItem(
-      'user',
-      JSON.stringify({ username: res.username, _id: res._id })
-    );
+  authenticate$() {
+    return this.http
+      .get<AuthResponse>(this.apiUrl + '/auth/authenticate')
+      .pipe(tap((res) => this.user$$.next(res.user)));
+  }
+
+  setCookie(res: AuthResponse): void {
+    if (res.token) this.cookieService.set('auth', res.token, 7);
   }
 
   logout(): void {
@@ -55,5 +55,9 @@ export class UserService {
       error: (e) => console.log(e),
       complete: () => console.info('complete'),
     });
+  }
+
+  ngOnDestroy(): void {
+    this.userSubscription.unsubscribe();
   }
 }

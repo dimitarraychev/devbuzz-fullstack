@@ -12,11 +12,11 @@ export class HeaderComponent {
   isMenuOpen: boolean = false;
 
   get isLogged(): boolean {
-    return this.userService.isLogged;
+    return !!this.userService.user;
   }
 
-  get userInfo() {
-    return this.userService.userInfo;
+  get username() {
+    return this.userService.user?.username;
   }
 
   toggleMenu(): void {
