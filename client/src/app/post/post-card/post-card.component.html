@@ -5,7 +5,7 @@
     alt="Post Image"
   />
   <div class="post-content">
-    <div class="post-title">{{ post.title }}</div>
+    <div class="post-title">{{ post.title | truncateWithElipsis }}</div>
     <app-button
       buttonText="Read More"
       buttonSize="small"
