@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, OnDestroy } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { User } from '../types/user.type';
-import { AuthResponse, AuthUser, LogoutResponse } from '../types/api.type';
+import { User } from '../../types/user.type';
+import { AuthResponse, AuthUser, LogoutResponse } from '../../types/api.type';
 import { CookieService } from 'ngx-cookie-service';
 import { BehaviorSubject, Observable, Subscription, tap } from 'rxjs';
 
@@ -16,7 +16,7 @@ export class UserService implements OnDestroy {
   private user$ = this.user$$.asObservable();
 
   user: AuthUser | undefined;
-  userSubscription: Subscription;
+  private userSubscription: Subscription;
 
   constructor(private http: HttpClient, private cookieService: CookieService) {
     this.userSubscription = this.user$.subscribe((user) => {
