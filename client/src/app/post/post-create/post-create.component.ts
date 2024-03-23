@@ -1,21 +1,47 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { PostService } from '../services/post.service';
 import { Router } from '@angular/router';
 import { PostErrorService } from '../services/post-error.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-post-create',
   templateUrl: './post-create.component.html',
   styleUrls: ['./post-create.component.scss'],
 })
-export class PostCreateComponent {
+export class PostCreateComponent implements OnDestroy {
   constructor(
     private fb: FormBuilder,
     private postService: PostService,
     private postErrorService: PostErrorService,
     private router: Router
-  ) {}
+  ) {
+    this.formSubscription = this.createForm.valueChanges.subscribe((val) => {
+      if (this.createForm.valid) {
+        this.errorMessage = null;
+        return (this.isButtonDisabled = false);
+      }
+      if (
+        this.isFieldInvalid('title') ||
+        this.isFieldInvalid('category') ||
+        this.isFieldInvalid('image') ||
+        this.isFieldInvalid('description')
+      ) {
+        this.errorMessage = this.postErrorService.validationErrorHandler(
+          this.createForm
+        );
+        return (this.isButtonDisabled = true);
+      }
+      this.errorMessage = null;
+      return (this.isButtonDisabled = true);
+    });
+  }
+
+  errorMessage: string | null = null;
+  isSubmitted: boolean = false;
+  isButtonDisabled: boolean = true;
+  private formSubscription: Subscription;
 
   createForm = this.fb.nonNullable.group({
     title: [
@@ -38,16 +64,11 @@ export class PostCreateComponent {
     ],
   });
 
-  errorMessage: string | null = null;
-  isSubmitted: boolean = false;
-  isButtonDisabled: boolean = false;
-
-  isValid(element: string): boolean | undefined {
-    return (
-      this.createForm.get(element)?.invalid &&
-      (this.createForm.get(element)?.dirty ||
-        this.createForm.get(element)?.touched ||
-        this.isSubmitted)
+  isFieldInvalid(field: string): boolean | undefined {
+    return this.postErrorService.isFieldInvalid(
+      field,
+      this.createForm,
+      this.isSubmitted
     );
   }
 
@@ -55,7 +76,7 @@ export class PostCreateComponent {
     this.isSubmitted = true;
 
     if (this.createForm.invalid) {
-      this.errorMessage = this.postErrorService.formErrorHandler(
+      this.errorMessage = this.postErrorService.validationErrorHandler(
         this.createForm
       );
       return;
@@ -70,5 +91,9 @@ export class PostCreateComponent {
         this.isButtonDisabled = false;
       },
     });
+  }
+
+  ngOnDestroy(): void {
+    this.formSubscription.unsubscribe();
   }
 }

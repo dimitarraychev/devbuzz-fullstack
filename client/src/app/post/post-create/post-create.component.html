@@ -7,13 +7,13 @@
         id="title"
         placeholder="Title"
         formControlName="title"
-        [class.invalid]="isValid('title')"
+        [class.invalid]="isFieldInvalid('title')"
       />
 
       <select
         id="category"
         formControlName="category"
-        [class.invalid]="isValid('category')"
+        [class.invalid]="isFieldInvalid('category')"
       >
         <option value="" disabled selected hidden id="default-option">
           Select Category...
@@ -29,7 +29,7 @@
         id="image"
         placeholder="Image URL"
         formControlName="image"
-        [class.invalid]="isValid('image')"
+        [class.invalid]="isFieldInvalid('image')"
       />
 
       <textarea
@@ -37,7 +37,7 @@
         id="description"
         placeholder="Description"
         formControlName="description"
-        [class.invalid]="isValid('description')"
+        [class.invalid]="isFieldInvalid('description')"
       ></textarea>
       <p id="error-msg" *ngIf="errorMessage">{{ errorMessage }}</p>
 
@@ -46,6 +46,7 @@
         buttonText="Create"
         buttonIcon="create"
         id="create-button"
+        [isDisabled]="isButtonDisabled"
       />
     </form>
   </section>
