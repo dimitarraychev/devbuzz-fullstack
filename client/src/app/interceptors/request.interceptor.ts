@@ -7,7 +7,7 @@ import {
   HttpErrorResponse,
   HTTP_INTERCEPTORS,
 } from '@angular/common/http';
-import { Observable, catchError } from 'rxjs';
+import { EMPTY, Observable, catchError } from 'rxjs';
 import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
 
@@ -30,16 +30,17 @@ export class RequestInterceptor implements HttpInterceptor {
     }
 
     return next.handle(clonedRequest).pipe(
-      catchError((error: HttpErrorResponse) => {
+      catchError((errorRes: HttpErrorResponse) => {
         if (
-          error.status === 401 &&
-          !error.error.message.includes('Not logged in.')
+          errorRes.status === 401 &&
+          !errorRes.error.message.includes('Not logged in.')
         ) {
           this.cookieService.delete('auth');
           this.router.navigate(['/user/login']);
+          return EMPTY;
         }
 
-        throw error;
+        throw errorRes;
       })
     );
   }
