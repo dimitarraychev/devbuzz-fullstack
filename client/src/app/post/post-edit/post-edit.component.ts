@@ -4,7 +4,7 @@ import { PostService } from '../services/post.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Post } from 'src/app/types/post.type';
 import { PostErrorService } from '../services/post-error.service';
-import { UserService } from 'src/app/user/user.service';
+import { UserService } from 'src/app/user/services/user.service';
 
 @Component({
   selector: 'app-post-edit',
