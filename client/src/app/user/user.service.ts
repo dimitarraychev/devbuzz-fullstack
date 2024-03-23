@@ -43,7 +43,7 @@ export class UserService implements OnDestroy {
   }
 
   setCookie(res: AuthResponse): void {
-    if (res.token) this.cookieService.set('auth', res.token, 7);
+    if (res.token) this.cookieService.set('auth', res.token, 2);
   }
 
   logout(): void {
@@ -52,7 +52,10 @@ export class UserService implements OnDestroy {
         this.cookieService.delete('auth');
         this.user$$.next(undefined);
       },
-      error: (e) => console.log(e),
+      error: (e) => {
+        this.cookieService.delete('auth');
+        this.user$$.next(undefined);
+      },
     });
   }
 
