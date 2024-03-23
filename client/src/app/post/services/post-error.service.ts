@@ -5,28 +5,39 @@ import { FormGroup } from '@angular/forms';
   providedIn: 'root',
 })
 export class PostErrorService {
-  constructor() {}
+  private postFormFields: string[] = [
+    'title',
+    'category',
+    'image',
+    'description',
+  ];
 
-  formErrorHandler(form: FormGroup): string {
-    if (
-      form.get('title')?.hasError('required') ||
-      form.get('category')?.hasError('required') ||
-      form.get('image')?.hasError('required') ||
-      form.get('description')?.hasError('required')
-    )
-      return 'Uh-oh! All fields are required.';
-    if (
-      form.get('title')?.hasError('minlength') ||
-      form.get('title')?.hasError('maxlength')
-    )
-      return 'Oops, title should be between 10 and 100 characters.';
-    if (form.get('image')?.hasError('pattern'))
-      return 'Sorry, image should start with http:// or https://';
-    if (
-      form.get('description')?.hasError('minlength') ||
-      form.get('description')?.hasError('maxlength')
-    )
-      return 'Oops, description should be between 50 and 3000 characters.';
+  isFieldInvalid(
+    field: string,
+    form: FormGroup,
+    isSubmitted: boolean
+  ): boolean | undefined {
+    return (
+      form.get(field)?.invalid &&
+      (form.get(field)?.dirty || form.get(field)?.touched || isSubmitted)
+    );
+  }
+
+  validationErrorHandler(form: FormGroup): string {
+    for (const field of this.postFormFields) {
+      if (form.get(field)?.hasError('required'))
+        return `Uh-oh! ${field} is required.`;
+      if (form.get(field)?.hasError('minlength'))
+        return `Sorry, ${field} should be at least ${
+          form.get(field)?.errors?.['minlength'].requiredLength
+        } characters`;
+      if (form.get(field)?.hasError('maxlength'))
+        return `Sorry, ${field} should be no more than ${
+          form.get(field)?.errors?.['maxlength'].requiredLength
+        } characters`;
+      if (form.get(field)?.hasError('pattern'))
+        return 'Sorry, image should start with http:// or https://';
+    }
     return 'A wild error occurred! Try again.';
   }
 }
