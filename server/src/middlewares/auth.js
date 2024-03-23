@@ -11,9 +11,9 @@ exports.auth = async (req, res, next) => {
 	try {
 		const decodedToken = await jwt.verify(token, SECRET);
 
-		await authService.checkBlacklist(token);
+		const checkedToken = await authService.checkBlacklist(token);
 
-		req.token = token;
+		req.token = checkedToken;
 		req.user = decodedToken;
 
 		next();
