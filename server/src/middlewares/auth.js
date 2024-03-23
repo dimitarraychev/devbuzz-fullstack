@@ -1,4 +1,5 @@
 const jwt = require("../lib/jwt");
+const authService = require("../services/authService");
 
 const SECRET = process.env.SECRET;
 
@@ -10,13 +11,16 @@ exports.auth = async (req, res, next) => {
 	try {
 		const decodedToken = await jwt.verify(token, SECRET);
 
+		await authService.checkBlacklist(token);
+
+		req.token = token;
 		req.user = decodedToken;
 
 		next();
 	} catch (error) {
 		return res.status(401).json({
 			ok: false,
-			message: "Authentication failed: Invalid token.",
+			message: "Authentication failed: Invalid token. " + error.message,
 		});
 	}
 };

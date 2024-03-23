@@ -1,4 +1,5 @@
 const User = require("../models/User");
+const BlacklistedToken = require("../models/BlacklistedToken");
 
 const bcrypt = require("bcrypt");
 const jwt = require("../lib/jwt");
@@ -37,6 +38,14 @@ exports.login = async function (email, password) {
 exports.authenticate = (userId) =>
 	User.findOne({ _id: userId }, { password: 0, __v: 0 }).lean();
 
+exports.logout = (token) => BlacklistedToken.create({ token });
+
+exports.checkBlacklist = async (token) => {
+	const isBlacklisted = await BlacklistedToken.findOne({ token });
+	if (isBlacklisted) throw new Error("Blacklisted token.");
+	return token;
+};
+
 function signToken(_id, username, email) {
 	const payload = {
 		_id,
@@ -44,7 +53,7 @@ function signToken(_id, username, email) {
 		email,
 	};
 
-	const token = jwt.sign(payload, SECRET, { expiresIn: "6h" });
+	const token = jwt.sign(payload, SECRET, { expiresIn: "1d" });
 
 	return token;
 }

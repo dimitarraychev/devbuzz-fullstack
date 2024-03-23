@@ -72,6 +72,12 @@ router.get("/authenticate", async (req, res) => {
 			user,
 		});
 	} catch (error) {
+		if (error.message.includes("email address already exists!")) {
+			return res.status(409).json({
+				ok: false,
+				message: error.message,
+			});
+		}
 		res.status(401).json({
 			ok: false,
 			message: "Authentication failed: Not logged in. " + error.message,
@@ -79,16 +85,20 @@ router.get("/authenticate", async (req, res) => {
 	}
 });
 
-router.get("/logout", (req, res) => {
+router.get("/logout", async (req, res) => {
 	try {
-		res.status(200).json({
+		const token = req.token;
+
+		await authService.logout(token);
+
+		res.status(204).json({
 			ok: true,
 			message: "Logout successful.",
 		});
 	} catch (error) {
 		res.status(500).json({
 			ok: false,
-			message: "Logout failed." + error.message,
+			message: "Logout failed. " + error.message,
 		});
 	}
 });
