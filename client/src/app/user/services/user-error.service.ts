@@ -12,7 +12,7 @@ export class UserErrorService {
     'rePassword',
   ];
 
-  isValidField(
+  isFieldInvalid(
     field: string,
     form: FormGroup,
     isSubmitted: boolean

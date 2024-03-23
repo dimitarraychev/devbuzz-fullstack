@@ -23,10 +23,10 @@ export class RegisterComponent implements OnDestroy {
         return (this.isButtonDisabled = false);
       }
       if (
-        this.isValidField('username') ||
-        this.isValidField('email') ||
-        this.isValidField('password') ||
-        this.isValidField('rePassword')
+        this.isFieldInvalid('username') ||
+        this.isFieldInvalid('email') ||
+        this.isFieldInvalid('password') ||
+        this.isFieldInvalid('rePassword')
       ) {
         this.errorMessage = this.userErrorService.validationErrorHandler(
           this.registerForm
@@ -61,8 +61,8 @@ export class RegisterComponent implements OnDestroy {
     rePassword: ['', [Validators.required]],
   });
 
-  isValidField(field: string): boolean | undefined {
-    return this.userErrorService.isValidField(
+  isFieldInvalid(field: string): boolean | undefined {
+    return this.userErrorService.isFieldInvalid(
       field,
       this.registerForm,
       this.isSubmitted

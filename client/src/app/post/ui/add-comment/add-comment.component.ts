@@ -14,7 +14,7 @@ export class AddCommentComponent {
   constructor() {
     this.commentTextControl.valueChanges.subscribe(() => {
       if (this.commentTextControl.invalid)
-        return (this.errorMessage = this.formErrorHandler());
+        return (this.errorMessage = this.validationErrorHandler());
       return (this.errorMessage = null);
     });
   }
@@ -35,7 +35,7 @@ export class AddCommentComponent {
     this.commentTextControl.reset();
   }
 
-  formErrorHandler(): string {
+  validationErrorHandler(): string {
     if (
       this.commentTextControl.hasError('minlength') ||
       this.commentTextControl.hasError('maxlength')

@@ -22,7 +22,7 @@ export class LoginComponent implements OnDestroy {
         this.errorMessage = null;
         return (this.isButtonDisabled = false);
       }
-      if (this.isValidField('email') || this.isValidField('password')) {
+      if (this.isFieldInvalid('email') || this.isFieldInvalid('password')) {
         this.errorMessage = this.userErrorService.validationErrorHandler(
           this.loginForm
         );
@@ -43,8 +43,8 @@ export class LoginComponent implements OnDestroy {
     password: ['', [Validators.required]],
   });
 
-  isValidField(field: string): boolean | undefined {
-    return this.userErrorService.isValidField(
+  isFieldInvalid(field: string): boolean | undefined {
+    return this.userErrorService.isFieldInvalid(
       field,
       this.loginForm,
       this.isSubmitted

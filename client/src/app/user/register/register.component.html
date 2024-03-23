@@ -7,28 +7,28 @@
         id="register-username"
         placeholder="Username"
         formControlName="username"
-        [class.invalid]="isValidField('username')"
+        [class.invalid]="isFieldInvalid('username')"
       />
       <input
         type="text"
         id="register-email"
         placeholder="Email"
         formControlName="email"
-        [class.invalid]="isValidField('email')"
+        [class.invalid]="isFieldInvalid('email')"
       />
       <input
         type="password"
         id="register-password"
         placeholder="Password"
         formControlName="password"
-        [class.invalid]="isValidField('password')"
+        [class.invalid]="isFieldInvalid('password')"
       />
       <input
         type="password"
         id="repeat-password"
         placeholder="Repeat password"
         formControlName="rePassword"
-        [class.invalid]="isValidField('rePassword')"
+        [class.invalid]="isFieldInvalid('rePassword')"
       />
       <p id="error-msg" *ngIf="errorMessage">{{ errorMessage }}</p>
       <app-button
