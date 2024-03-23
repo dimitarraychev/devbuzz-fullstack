@@ -1,35 +1,53 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { UserService } from '../user.service';
+import { UserService } from '../services/user.service';
+import { UserErrorService } from '../services/user-error.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
 })
-export class LoginComponent {
+export class LoginComponent implements OnDestroy {
   constructor(
     private fb: FormBuilder,
     private userService: UserService,
+    private userErrorService: UserErrorService,
     private router: Router
-  ) {}
+  ) {
+    this.formSubscription = this.loginForm.valueChanges.subscribe(() => {
+      if (this.loginForm.valid) {
+        this.errorMessage = null;
+        return (this.isButtonDisabled = false);
+      }
+      if (this.isValidField('email') || this.isValidField('password')) {
+        this.errorMessage = this.userErrorService.validationErrorHandler(
+          this.loginForm
+        );
+        return (this.isButtonDisabled = true);
+      }
+      this.errorMessage = null;
+      return (this.isButtonDisabled = true);
+    });
+  }
+
+  errorMessage: string | null = null;
+  isSubmitted: boolean = false;
+  isButtonDisabled: boolean = true;
+  private formSubscription: Subscription;
 
   loginForm = this.fb.nonNullable.group({
     email: ['', [Validators.required]],
     password: ['', [Validators.required]],
   });
 
-  errorMessage: string | null = null;
-  isSubmitted: boolean = false;
-  isButtonDisabled: boolean = false;
-
-  isValid(element: string): boolean | undefined {
-    return (
-      this.loginForm.get(element)?.invalid &&
-      (this.loginForm.get(element)?.dirty ||
-        this.loginForm.get(element)?.touched ||
-        this.isSubmitted)
+  isValidField(field: string): boolean | undefined {
+    return this.userErrorService.isValidField(
+      field,
+      this.loginForm,
+      this.isSubmitted
     );
   }
 
@@ -39,7 +57,9 @@ export class LoginComponent {
     const { email, password } = this.loginForm.getRawValue();
 
     if (this.loginForm.invalid) {
-      this.errorMessage = this.validationErrorHandler();
+      this.errorMessage = this.userErrorService.validationErrorHandler(
+        this.loginForm
+      );
       return;
     }
 
@@ -60,12 +80,7 @@ export class LoginComponent {
       });
   }
 
-  validationErrorHandler(): string {
-    if (
-      this.loginForm.get('email')?.hasError('required') ||
-      this.loginForm.get('password')?.hasError('required')
-    )
-      return 'Uh-oh! All fields are required.';
-    return 'A wild error occurred! Try again.';
+  ngOnDestroy(): void {
+    this.formSubscription.unsubscribe();
   }
 }

@@ -1,19 +1,47 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { UserService } from '../user.service';
+import { UserService } from '../services/user.service';
 import { Router } from '@angular/router';
+import { UserErrorService } from '../services/user-error.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss'],
 })
-export class RegisterComponent {
+export class RegisterComponent implements OnDestroy {
   constructor(
     private fb: FormBuilder,
     private userService: UserService,
+    private userErrorService: UserErrorService,
     private router: Router
-  ) {}
+  ) {
+    this.formSubscription = this.registerForm.valueChanges.subscribe((val) => {
+      if (this.registerForm.valid) {
+        this.errorMessage = null;
+        return (this.isButtonDisabled = false);
+      }
+      if (
+        this.isValidField('username') ||
+        this.isValidField('email') ||
+        this.isValidField('password') ||
+        this.isValidField('rePassword')
+      ) {
+        this.errorMessage = this.userErrorService.validationErrorHandler(
+          this.registerForm
+        );
+        return (this.isButtonDisabled = true);
+      }
+      this.errorMessage = null;
+      return (this.isButtonDisabled = true);
+    });
+  }
+
+  errorMessage: string | null = null;
+  isSubmitted: boolean = false;
+  isButtonDisabled: boolean = true;
+  private formSubscription: Subscription;
 
   registerForm = this.fb.nonNullable.group({
     username: [
@@ -33,16 +61,11 @@ export class RegisterComponent {
     rePassword: ['', [Validators.required]],
   });
 
-  errorMessage: string | null = null;
-  isSubmitted: boolean = false;
-  isButtonDisabled: boolean = false;
-
-  isValid(element: string): boolean | undefined {
-    return (
-      this.registerForm.get(element)?.invalid &&
-      (this.registerForm.get(element)?.dirty ||
-        this.registerForm.get(element)?.touched ||
-        this.isSubmitted)
+  isValidField(field: string): boolean | undefined {
+    return this.userErrorService.isValidField(
+      field,
+      this.registerForm,
+      this.isSubmitted
     );
   }
 
@@ -53,7 +76,9 @@ export class RegisterComponent {
       this.registerForm.getRawValue();
 
     if (this.registerForm.invalid) {
-      this.errorMessage = this.validationErrorHandler();
+      this.errorMessage = this.userErrorService.validationErrorHandler(
+        this.registerForm
+      );
       return;
     }
 
@@ -80,28 +105,7 @@ export class RegisterComponent {
       });
   }
 
-  validationErrorHandler(): string {
-    if (
-      this.registerForm.get('username')?.hasError('required') ||
-      this.registerForm.get('email')?.hasError('required') ||
-      this.registerForm.get('password')?.hasError('required') ||
-      this.registerForm.get('rePassword')?.hasError('required')
-    )
-      return 'Uh-oh! All fields are required.';
-    if (
-      this.registerForm.get('username')?.hasError('minlength') ||
-      this.registerForm.get('username')?.hasError('maxlength')
-    )
-      return 'Sorry, username should be between 3 and 20 characters.';
-    if (
-      this.registerForm.get('email')?.hasError('minlength') ||
-      this.registerForm.get('email')?.hasError('maxlength')
-    )
-      return 'Sorry, email should be between 9 and 30 characters.';
-    if (this.registerForm.get('email')?.hasError('email'))
-      return 'Oops, a valid email email address is required';
-    if (this.registerForm.get('password')?.hasError('minlength'))
-      return 'Sorry, password should be at least 6 characters.';
-    return 'A wild error occurred! Try again.';
+  ngOnDestroy(): void {
+    this.formSubscription.unsubscribe();
   }
 }
