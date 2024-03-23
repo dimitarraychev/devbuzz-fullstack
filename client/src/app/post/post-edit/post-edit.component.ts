@@ -1,17 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { PostService } from '../services/post.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Post } from 'src/app/types/post.type';
 import { PostErrorService } from '../services/post-error.service';
 import { UserService } from 'src/app/user/services/user.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-post-edit',
   templateUrl: './post-edit.component.html',
   styleUrls: ['./post-edit.component.scss'],
 })
-export class PostEditComponent implements OnInit {
+export class PostEditComponent implements OnInit, OnDestroy {
   constructor(
     private fb: FormBuilder,
     private postService: PostService,
@@ -19,7 +20,35 @@ export class PostEditComponent implements OnInit {
     private userService: UserService,
     private router: Router,
     private activatedRoute: ActivatedRoute
-  ) {}
+  ) {
+    this.formSubscription = this.editForm.valueChanges.subscribe((val) => {
+      if (this.editForm.valid) {
+        this.errorMessage = null;
+        return (this.isButtonDisabled = false);
+      }
+      if (
+        this.isFieldInvalid('title') ||
+        this.isFieldInvalid('category') ||
+        this.isFieldInvalid('image') ||
+        this.isFieldInvalid('description')
+      ) {
+        this.errorMessage = this.postErrorService.validationErrorHandler(
+          this.editForm
+        );
+        return (this.isButtonDisabled = true);
+      }
+      this.errorMessage = null;
+      return (this.isButtonDisabled = true);
+    });
+  }
+
+  errorMessage: string | null = null;
+  isSubmitted: boolean = false;
+  post = {} as Post;
+  postId: string = '';
+  isLoading: boolean = true;
+  isButtonDisabled: boolean = false;
+  private formSubscription: Subscription;
 
   editForm = this.fb.nonNullable.group({
     title: [
@@ -41,13 +70,6 @@ export class PostEditComponent implements OnInit {
       ],
     ],
   });
-
-  errorMessage: string | null = null;
-  isSubmitted: boolean = false;
-  post = {} as Post;
-  postId: string = '';
-  isLoading: boolean = true;
-  isButtonDisabled: boolean = false;
 
   ngOnInit(): void {
     this.getPost();
@@ -79,12 +101,11 @@ export class PostEditComponent implements OnInit {
     });
   }
 
-  isValid(element: string): boolean | undefined {
-    return (
-      this.editForm.get(element)?.invalid &&
-      (this.editForm.get(element)?.dirty ||
-        this.editForm.get(element)?.touched ||
-        this.isSubmitted)
+  isFieldInvalid(field: string): boolean | undefined {
+    return this.postErrorService.isFieldInvalid(
+      field,
+      this.editForm,
+      this.isSubmitted
     );
   }
 
@@ -92,7 +113,9 @@ export class PostEditComponent implements OnInit {
     this.isSubmitted = true;
 
     if (this.editForm.invalid) {
-      this.errorMessage = this.postErrorService.formErrorHandler(this.editForm);
+      this.errorMessage = this.postErrorService.validationErrorHandler(
+        this.editForm
+      );
       return;
     }
 
@@ -107,5 +130,9 @@ export class PostEditComponent implements OnInit {
           this.isButtonDisabled = false;
         },
       });
+  }
+
+  ngOnDestroy(): void {
+    this.formSubscription.unsubscribe();
   }
 }
