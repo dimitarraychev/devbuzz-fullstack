@@ -26,6 +26,13 @@ router.post("/register", async (req, res) => {
 			user,
 		});
 	} catch (error) {
+		if (error.message.includes("email address already exists!")) {
+			return res.status(409).json({
+				ok: false,
+				message: error.message,
+			});
+		}
+
 		error.message =
 			error.message.match(validationRegex)?.[1] ?? error.message;
 
@@ -72,13 +79,7 @@ router.get("/authenticate", async (req, res) => {
 			user,
 		});
 	} catch (error) {
-		if (error.message.includes("email address already exists!")) {
-			return res.status(409).json({
-				ok: false,
-				message: error.message,
-			});
-		}
-		res.status(401).json({
+		res.status(204).json({
 			ok: false,
 			message: "Authentication failed: Not logged in. " + error.message,
 		});
