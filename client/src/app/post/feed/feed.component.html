@@ -1,24 +1,5 @@
 <div id="feed-page-wrapper">
-  <section id="top-menu">
-    <select id="dropdown" name="categories">
-      <option value="all">All</option>
-      <option value="artificial-intelligence">Artificial Intelligence</option>
-      <option value="blockchain">Blockchain</option>
-      <option value="development">Development</option>
-      <option value="other">Other</option>
-    </select>
-
-    <div id="search-container">
-      <input
-        type="search"
-        name="search"
-        id="searchfield"
-        placeholder="Search..."
-        class="interactable"
-      />
-      <i class="fa-solid fa-magnifying-glass"></i>
-    </div>
-  </section>
+  <app-filter-bar />
 
   <section id="hottest" class="section border-glow">
     <h3>🔥Hottest</h3>
@@ -45,6 +26,12 @@
 
     <div id="latestPostsContainer" *ngIf="!isLoadingLatest">
       <app-post-card *ngFor="let post of latestPosts" [post]="post" />
+    </div>
+
+    <div id="pagination-container">
+      <img src="./assets/images/arrow-left.svg" class="arrow" />
+      <p>Page 1/4</p>
+      <img src="./assets/images/arrow-right.svg" class="arrow" />
     </div>
   </section>
 </div>
