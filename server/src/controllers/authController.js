@@ -2,10 +2,6 @@ const router = require("express").Router();
 const authService = require("../services/authService");
 
 const validationRegex = new RegExp(/:\s([A-Z][\w\s]+!)/);
-const removePassword = (user) => {
-	const { password, __v, ...userData } = user;
-	return userData;
-};
 
 router.post("/register", async (req, res) => {
 	try {
@@ -16,8 +12,6 @@ router.post("/register", async (req, res) => {
 			email,
 			password
 		);
-
-		user = removePassword(user);
 
 		res.status(201).json({
 			ok: true,
@@ -49,8 +43,6 @@ router.post("/login", async (req, res) => {
 
 		let { token, user } = await authService.login(email, password);
 
-		user = removePassword(user);
-
 		res.status(200).json({
 			ok: true,
 			message: "Login successful.",
@@ -71,8 +63,6 @@ router.get("/authenticate", async (req, res) => {
 
 		let user = await authService.authenticate(_id);
 
-		user = removePassword(user);
-
 		res.status(200).json({
 			ok: true,
 			message: "Authentication successful.",
@@ -81,7 +71,7 @@ router.get("/authenticate", async (req, res) => {
 	} catch (error) {
 		res.status(204).json({
 			ok: false,
-			message: "Authentication failed: Not logged in. " + error.message,
+			message: "Authentication failed: Not logged in.",
 		});
 	}
 });
@@ -99,7 +89,7 @@ router.get("/logout", async (req, res) => {
 	} catch (error) {
 		res.status(500).json({
 			ok: false,
-			message: "Logout failed. " + error.message,
+			message: "Logout failed.",
 		});
 	}
 });

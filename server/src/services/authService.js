@@ -1,10 +1,8 @@
 const User = require("../models/User");
 const BlacklistedToken = require("../models/BlacklistedToken");
-
 const bcrypt = require("bcrypt");
-const jwt = require("../lib/jwt");
-
-const SECRET = process.env.SECRET;
+const { generateToken } = require("../utils/token");
+const { sanitizeUserObject } = require("../utils/sanitize");
 
 exports.register = async function (username, email, rawPassword) {
 	if (rawPassword.length < 6)
@@ -18,9 +16,9 @@ exports.register = async function (username, email, rawPassword) {
 
 	const user = await User.create({ username, email, password }).lean();
 
-	const token = await signToken(user._id, user.username, user.email);
+	const token = await generateToken(user._id, user.username, user.email);
 
-	return { token, user };
+	return { token, user: sanitizeUserObject(user) };
 };
 
 exports.login = async function (email, password) {
@@ -30,13 +28,18 @@ exports.login = async function (email, password) {
 	const isValid = await bcrypt.compare(password, user.password);
 	if (!isValid) throw new Error("Invalid email or password!");
 
-	const token = await signToken(user._id, user.username, user.email);
+	const token = await generateToken(user._id, user.username, user.email);
 
-	return { token, user };
+	return { token, user: sanitizeUserObject(user) };
 };
 
-exports.authenticate = (userId) =>
-	User.findOne({ _id: userId }, { password: 0, __v: 0 }).lean();
+exports.authenticate = async (userId) => {
+	const user = await User.findOne(
+		{ _id: userId },
+		{ password: 0, __v: 0 }
+	).lean();
+	return sanitizeUserObject(user);
+};
 
 exports.logout = (token) => BlacklistedToken.create({ token });
 
@@ -45,15 +48,3 @@ exports.checkBlacklist = async (token) => {
 	if (isBlacklisted) throw new Error("Blacklisted token.");
 	return token;
 };
-
-function signToken(_id, username, email) {
-	const payload = {
-		_id,
-		username,
-		email,
-	};
-
-	const token = jwt.sign(payload, SECRET, { expiresIn: "1d" });
-
-	return token;
-}
