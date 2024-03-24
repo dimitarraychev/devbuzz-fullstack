@@ -13,15 +13,15 @@ export class FeedComponent implements OnInit, OnDestroy {
 
   latestPosts: Post[] = [];
   isLoadingLatest: boolean = true;
-  private latestSubscription: Subscription = new Subscription();
+  private latestPostsSubscription: Subscription = new Subscription();
 
   hottestPosts: Post[] = [];
   isLoadingHottest: boolean = true;
-  private hottestSubscription: Subscription = new Subscription();
+  private hottestPostsSubscription: Subscription = new Subscription();
 
   ngOnInit(): void {
-    this.latestSubscription = this.getLatestPosts();
-    this.hottestSubscription = this.getHottestPosts();
+    this.latestPostsSubscription = this.getLatestPosts();
+    this.hottestPostsSubscription = this.getHottestPosts();
   }
 
   getLatestPosts(): Subscription {
@@ -45,7 +45,7 @@ export class FeedComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.latestSubscription.unsubscribe();
-    this.hottestSubscription.unsubscribe();
+    this.latestPostsSubscription.unsubscribe();
+    this.hottestPostsSubscription.unsubscribe();
   }
 }
