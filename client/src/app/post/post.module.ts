@@ -12,6 +12,7 @@ import { PostCardComponent } from './ui/post-card/post-card.component';
 import { DetailsCardComponent } from './ui/details-card/details-card.component';
 import { CommentComponent } from './ui/comment/comment.component';
 import { AddCommentComponent } from './ui/add-comment/add-comment.component';
+import { FilterBarComponent } from './ui/filter-bar/filter-bar.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { AddCommentComponent } from './ui/add-comment/add-comment.component';
     DetailsCardComponent,
     CommentComponent,
     AddCommentComponent,
+    FilterBarComponent,
   ],
   imports: [CommonModule, ReactiveFormsModule, SharedModule, PostRoutingModule],
 })
