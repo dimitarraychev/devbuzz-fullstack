@@ -1,6 +1,8 @@
 const User = require("../models/User");
 const BlacklistedToken = require("../models/BlacklistedToken");
+
 const bcrypt = require("bcrypt");
+
 const { generateToken } = require("../utils/token");
 const { sanitizeUserObject } = require("../utils/sanitize");
 
