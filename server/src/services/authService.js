@@ -7,14 +7,14 @@ const { generateToken } = require("../utils/token");
 const { sanitizeUserObject } = require("../utils/sanitize");
 
 exports.register = async function (username, email, rawPassword) {
+	const existingUser = await User.findOne({ email });
+	if (existingUser)
+		throw new Error("User with this email address already exists!");
+
 	if (rawPassword.length < 6)
 		throw new Error("Password should be at least 6 characters!");
 
 	const password = await bcrypt.hash(rawPassword, 12);
-
-	const existingUser = await User.findOne({ email });
-	if (existingUser)
-		throw new Error("User with this email address already exists!");
 
 	const user = await User.create({ username, email, password }).lean();
 
@@ -27,8 +27,8 @@ exports.login = async function (email, password) {
 	const user = await User.findOne({ email }).lean();
 	if (!user) throw new Error("Invalid email or password!");
 
-	const isValid = await bcrypt.compare(password, user.password);
-	if (!isValid) throw new Error("Invalid email or password!");
+	const isPasswordValid = await bcrypt.compare(password, user.password);
+	if (!isPasswordValid) throw new Error("Invalid email or password!");
 
 	const token = await generateToken(user._id, user.username, user.email);
 
