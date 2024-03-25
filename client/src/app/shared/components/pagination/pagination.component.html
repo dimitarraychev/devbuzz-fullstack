@@ -1,0 +1,17 @@
+<div id="pagination-container">
+  <img
+    src="./assets/images/arrow-left.svg"
+    class="arrow"
+    (click)="prevPage()"
+    [class.disabled]="currentPage == 1"
+    [class.enabled]="currentPage != 1"
+  />
+  <p>Page {{ currentPage }}/{{ totalPages }}</p>
+  <img
+    src="./assets/images/arrow-right.svg"
+    class="arrow"
+    (click)="nextPage()"
+    [class.disabled]="currentPage == totalPages"
+    [class.enabled]="currentPage != totalPages"
+  />
+</div>
