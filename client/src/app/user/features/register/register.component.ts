@@ -1,8 +1,8 @@
 import { Component, OnDestroy } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { UserService } from '../services/user.service';
+import { UserService } from '../../services/user.service';
 import { Router } from '@angular/router';
-import { UserErrorService } from '../services/user-error.service';
+import { UserErrorService } from '../../services/user-error.service';
 import { Subscription } from 'rxjs';
 import { specialCharactersValidator } from 'src/app/shared/validators/special-characters.validator';
 
