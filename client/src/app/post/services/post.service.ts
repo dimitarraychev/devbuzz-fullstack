@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { NewPost, Post } from '../../types/post.type';
 import { Observable } from 'rxjs';
-import { ApiResponse } from '../../types/api.type';
+import { ApiResponse, PaginationResponse } from '../../types/api.type';
 
 @Injectable({
   providedIn: 'root',
@@ -13,8 +13,10 @@ export class PostService {
 
   constructor(private http: HttpClient) {}
 
-  getLatestPosts(): Observable<Post[]> {
-    return this.http.get<Post[]>(this.apiUrl + '/posts');
+  getLatestPosts(page: number, limit: number): Observable<PaginationResponse> {
+    return this.http.get<PaginationResponse>(this.apiUrl + '/posts', {
+      params: { page: page.toString(), limit: limit.toString() },
+    });
   }
 
   getHottestPosts(): Observable<Post[]> {
