@@ -13,6 +13,7 @@ export class DetailsCardComponent {
 
   @Output() delete = new EventEmitter<void>();
   @Output() like = new EventEmitter<void>();
+  @Output() close = new EventEmitter<void>();
 
   constructor() {}
 
@@ -22,5 +23,9 @@ export class DetailsCardComponent {
 
   onLike(): void {
     this.like.emit();
+  }
+
+  onClose(): void {
+    this.close.emit();
   }
 }

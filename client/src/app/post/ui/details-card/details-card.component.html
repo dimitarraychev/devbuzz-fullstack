@@ -1,5 +1,15 @@
 <div id="details-container" class="border-glow">
+  <div id="close-button-container">
+    <img
+      src="./assets/images/icon-close.svg"
+      alt="close"
+      id="close-button"
+      (click)="onClose()"
+    />
+  </div>
+
   <app-loader *ngIf="isLoading" />
+
   <div class="details-info" *ngIf="!isLoading">
     <div class="details-info-top">
       <p class="details-category">{{ post.category }}</p>
