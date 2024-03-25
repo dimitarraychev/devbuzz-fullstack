@@ -1,4 +1,4 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { UserService } from '../../services/user.service';
 import { Router } from '@angular/router';
@@ -11,38 +11,22 @@ import { specialCharactersValidator } from 'src/app/shared/validators/special-ch
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss'],
 })
-export class RegisterComponent implements OnDestroy {
+export class RegisterComponent implements OnInit, OnDestroy {
   constructor(
     private fb: FormBuilder,
     private userService: UserService,
     private userErrorService: UserErrorService,
     private router: Router
-  ) {
-    this.formSubscription = this.registerForm.valueChanges.subscribe((val) => {
-      if (this.registerForm.valid) {
-        this.errorMessage = null;
-        return (this.isButtonDisabled = false);
-      }
-      if (
-        this.isFieldInvalid('username') ||
-        this.isFieldInvalid('email') ||
-        this.isFieldInvalid('password') ||
-        this.isFieldInvalid('rePassword')
-      ) {
-        this.errorMessage = this.userErrorService.validationErrorHandler(
-          this.registerForm
-        );
-        return (this.isButtonDisabled = true);
-      }
-      this.errorMessage = null;
-      return (this.isButtonDisabled = true);
-    });
+  ) {}
+
+  ngOnInit(): void {
+    this.formSubscription = this.subscribeToFormChanges();
   }
 
   errorMessage: string | null = null;
   isSubmitted: boolean = false;
   isButtonDisabled: boolean = true;
-  private formSubscription: Subscription;
+  private formSubscription: Subscription = new Subscription();
 
   registerForm = this.fb.nonNullable.group({
     username: [
@@ -66,6 +50,28 @@ export class RegisterComponent implements OnDestroy {
     password: ['', [Validators.required, Validators.minLength(6)]],
     rePassword: ['', [Validators.required]],
   });
+
+  subscribeToFormChanges(): Subscription {
+    return this.registerForm.valueChanges.subscribe((val) => {
+      if (this.registerForm.valid) {
+        this.errorMessage = null;
+        return (this.isButtonDisabled = false);
+      }
+      if (
+        this.isFieldInvalid('username') ||
+        this.isFieldInvalid('email') ||
+        this.isFieldInvalid('password') ||
+        this.isFieldInvalid('rePassword')
+      ) {
+        this.errorMessage = this.userErrorService.validationErrorHandler(
+          this.registerForm
+        );
+        return (this.isButtonDisabled = true);
+      }
+      this.errorMessage = null;
+      return (this.isButtonDisabled = true);
+    });
+  }
 
   isFieldInvalid(field: string): boolean | undefined {
     return this.userErrorService.isFieldInvalid(

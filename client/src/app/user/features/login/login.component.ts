@@ -1,4 +1,4 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from '../../services/user.service';
@@ -10,14 +10,30 @@ import { Subscription } from 'rxjs';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
 })
-export class LoginComponent implements OnDestroy {
+export class LoginComponent implements OnInit, OnDestroy {
   constructor(
     private fb: FormBuilder,
     private userService: UserService,
     private userErrorService: UserErrorService,
     private router: Router
-  ) {
-    this.formSubscription = this.loginForm.valueChanges.subscribe(() => {
+  ) {}
+
+  ngOnInit(): void {
+    this.formSubscription = this.subscribeToFormChanges();
+  }
+
+  errorMessage: string | null = null;
+  isSubmitted: boolean = false;
+  isButtonDisabled: boolean = true;
+  private formSubscription: Subscription = new Subscription();
+
+  loginForm = this.fb.nonNullable.group({
+    email: ['', [Validators.required]],
+    password: ['', [Validators.required]],
+  });
+
+  subscribeToFormChanges(): Subscription {
+    return this.loginForm.valueChanges.subscribe(() => {
       if (this.loginForm.valid) {
         this.errorMessage = null;
         return (this.isButtonDisabled = false);
@@ -32,16 +48,6 @@ export class LoginComponent implements OnDestroy {
       return (this.isButtonDisabled = true);
     });
   }
-
-  errorMessage: string | null = null;
-  isSubmitted: boolean = false;
-  isButtonDisabled: boolean = true;
-  private formSubscription: Subscription;
-
-  loginForm = this.fb.nonNullable.group({
-    email: ['', [Validators.required]],
-    password: ['', [Validators.required]],
-  });
 
   isFieldInvalid(field: string): boolean | undefined {
     return this.userErrorService.isFieldInvalid(
