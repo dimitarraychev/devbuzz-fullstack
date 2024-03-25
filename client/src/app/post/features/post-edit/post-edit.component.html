@@ -1,5 +1,7 @@
 <div id="edit-page-wrapper">
   <section id="edit-form-wrapper" class="border-glow">
+    <app-close-btn (close)="onClose()" />
+
     <h2>Edit Post</h2>
 
     <app-loader *ngIf="isLoading" />

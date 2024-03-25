@@ -138,6 +138,10 @@ export class PostEditComponent implements OnInit, OnDestroy {
       });
   }
 
+  onClose(): void {
+    this.router.navigate(['posts/feed']);
+  }
+
   ngOnDestroy(): void {
     this.formSubscription.unsubscribe();
   }

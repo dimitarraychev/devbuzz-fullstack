@@ -1,5 +1,7 @@
 <div id="create-page-wrapper">
   <section id="create-form-wrapper" class="border-glow">
+    <app-close-btn (close)="onClose()" />
+
     <h2>Create Post</h2>
     <form id="create-form" [formGroup]="createForm" (ngSubmit)="onSubmit()">
       <input
