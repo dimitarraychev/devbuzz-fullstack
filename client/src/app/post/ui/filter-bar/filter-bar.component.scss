@@ -38,10 +38,9 @@ $border-radius: 5px;
     height: 2em;
   }
 
-  .fa-magnifying-glass {
-    margin: 0;
-    padding: 0;
-    color: $font-color;
+  img {
+    width: 1.5em;
+    height: 1.5em;
     cursor: pointer;
   }
 }
