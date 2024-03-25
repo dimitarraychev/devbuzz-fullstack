@@ -1,4 +1,4 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -12,38 +12,22 @@ import { specialCharactersValidator } from 'src/app/shared/validators/special-ch
   templateUrl: './post-create.component.html',
   styleUrls: ['./post-create.component.scss'],
 })
-export class PostCreateComponent implements OnDestroy {
+export class PostCreateComponent implements OnInit, OnDestroy {
   constructor(
     private fb: FormBuilder,
     private postService: PostService,
     private postErrorService: PostErrorService,
     private router: Router
-  ) {
-    this.formSubscription = this.createForm.valueChanges.subscribe((val) => {
-      if (this.createForm.valid) {
-        this.errorMessage = null;
-        return (this.isButtonDisabled = false);
-      }
-      if (
-        this.isFieldInvalid('title') ||
-        this.isFieldInvalid('category') ||
-        this.isFieldInvalid('image') ||
-        this.isFieldInvalid('description')
-      ) {
-        this.errorMessage = this.postErrorService.validationErrorHandler(
-          this.createForm
-        );
-        return (this.isButtonDisabled = true);
-      }
-      this.errorMessage = null;
-      return (this.isButtonDisabled = true);
-    });
+  ) {}
+
+  ngOnInit(): void {
+    this.formSubscription = this.subscribeToFormChanges();
   }
 
   errorMessage: string | null = null;
   isSubmitted: boolean = false;
   isButtonDisabled: boolean = true;
-  private formSubscription: Subscription;
+  private formSubscription: Subscription = new Subscription();
 
   createForm = this.fb.nonNullable.group({
     title: [
@@ -66,6 +50,28 @@ export class PostCreateComponent implements OnDestroy {
       ],
     ],
   });
+
+  subscribeToFormChanges(): Subscription {
+    return this.createForm.valueChanges.subscribe((val) => {
+      if (this.createForm.valid) {
+        this.errorMessage = null;
+        return (this.isButtonDisabled = false);
+      }
+      if (
+        this.isFieldInvalid('title') ||
+        this.isFieldInvalid('category') ||
+        this.isFieldInvalid('image') ||
+        this.isFieldInvalid('description')
+      ) {
+        this.errorMessage = this.postErrorService.validationErrorHandler(
+          this.createForm
+        );
+        return (this.isButtonDisabled = true);
+      }
+      this.errorMessage = null;
+      return (this.isButtonDisabled = false);
+    });
+  }
 
   isFieldInvalid(field: string): boolean | undefined {
     return this.postErrorService.isFieldInvalid(

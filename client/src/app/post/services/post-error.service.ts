@@ -36,7 +36,7 @@ export class PostErrorService {
           form.get(field)?.errors?.['maxlength'].requiredLength
         } characters.`;
       if (form.get(field)?.hasError('specialCharacters'))
-        return `Oops! ${field} cannot contain any special characters..`;
+        return `Oops! ${field} cannot contain any special characters.`;
       if (form.get(field)?.hasError('pattern'))
         return 'Sorry, image should start with "http://" or "https://".';
     }

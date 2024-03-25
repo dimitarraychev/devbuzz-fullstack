@@ -22,26 +22,11 @@ export class PostEditComponent implements OnInit, OnDestroy {
     private userService: UserService,
     private router: Router,
     private activatedRoute: ActivatedRoute
-  ) {
-    this.formSubscription = this.editForm.valueChanges.subscribe((val) => {
-      if (this.editForm.valid) {
-        this.errorMessage = null;
-        return (this.isButtonDisabled = false);
-      }
-      if (
-        this.isFieldInvalid('title') ||
-        this.isFieldInvalid('category') ||
-        this.isFieldInvalid('image') ||
-        this.isFieldInvalid('description')
-      ) {
-        this.errorMessage = this.postErrorService.validationErrorHandler(
-          this.editForm
-        );
-        return (this.isButtonDisabled = true);
-      }
-      this.errorMessage = null;
-      return (this.isButtonDisabled = true);
-    });
+  ) {}
+
+  ngOnInit(): void {
+    this.getPost();
+    this.formSubscription = this.subscribeToFormChanges();
   }
 
   errorMessage: string | null = null;
@@ -50,7 +35,7 @@ export class PostEditComponent implements OnInit, OnDestroy {
   postId: string = '';
   isLoading: boolean = true;
   isButtonDisabled: boolean = false;
-  private formSubscription: Subscription;
+  private formSubscription: Subscription = new Subscription();
 
   editForm = this.fb.nonNullable.group({
     title: [
@@ -74,8 +59,26 @@ export class PostEditComponent implements OnInit, OnDestroy {
     ],
   });
 
-  ngOnInit(): void {
-    this.getPost();
+  subscribeToFormChanges(): Subscription {
+    return this.editForm.valueChanges.subscribe((val) => {
+      if (this.editForm.valid) {
+        this.errorMessage = null;
+        return (this.isButtonDisabled = false);
+      }
+      if (
+        this.isFieldInvalid('title') ||
+        this.isFieldInvalid('category') ||
+        this.isFieldInvalid('image') ||
+        this.isFieldInvalid('description')
+      ) {
+        this.errorMessage = this.postErrorService.validationErrorHandler(
+          this.editForm
+        );
+        return (this.isButtonDisabled = true);
+      }
+      this.errorMessage = null;
+      return (this.isButtonDisabled = true);
+    });
   }
 
   getPost(): void {
