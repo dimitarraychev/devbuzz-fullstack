@@ -13,7 +13,9 @@
       name="search"
       id="searchfield"
       placeholder="Search..."
+      [formControl]="searchInputControl"
+      (keyup.enter)="onSearch()"
     />
-    <i class="fa-solid fa-magnifying-glass"></i>
+    <i class="fa-solid fa-magnifying-glass" (search)="onSearch()"></i>
   </div>
 </section>

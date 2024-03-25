@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Output } from '@angular/core';
+import { FormControl, Validators } from '@angular/forms';
 import { PostCategory } from 'src/app/types/post.type';
 
 @Component({
@@ -8,6 +9,20 @@ import { PostCategory } from 'src/app/types/post.type';
 })
 export class FilterBarComponent {
   @Output() category = new EventEmitter<PostCategory>();
+  @Output() search = new EventEmitter<string>();
+
+  searchInputControl = new FormControl('', {
+    nonNullable: true,
+    validators: [Validators.required],
+  });
+
+  onSearch(): void {
+    const search: string = this.searchInputControl.value;
+
+    if (this.searchInputControl.invalid) return;
+
+    this.search.emit(search);
+  }
 
   onCategoryChange(event: Event): void {
     const category = (event.target as HTMLSelectElement).value as PostCategory;
