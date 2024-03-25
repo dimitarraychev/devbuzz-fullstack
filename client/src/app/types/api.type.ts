@@ -26,9 +26,10 @@ export type ApiResponse = {
   comments?: PostComment[];
 };
 
-export type PaginationResponse = {
+export type ApiPostResponse = {
   posts: Post[];
-  page: number;
   category: PostCategory;
+  search: string;
+  page: number;
   totalPages: number;
 };

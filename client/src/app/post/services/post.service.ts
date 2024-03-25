@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { NewPost, Post } from '../../types/post.type';
 import { Observable } from 'rxjs';
-import { ApiResponse, PaginationResponse } from '../../types/api.type';
+import { ApiResponse, ApiPostResponse } from '../../types/api.type';
 
 @Injectable({
   providedIn: 'root',
@@ -18,8 +18,8 @@ export class PostService {
     limit: number,
     category: string,
     search: string
-  ): Observable<PaginationResponse> {
-    return this.http.get<PaginationResponse>(this.apiUrl + '/posts', {
+  ): Observable<ApiPostResponse> {
+    return this.http.get<ApiPostResponse>(this.apiUrl + '/posts', {
       params: {
         page: page.toString(),
         limit: limit.toString(),
