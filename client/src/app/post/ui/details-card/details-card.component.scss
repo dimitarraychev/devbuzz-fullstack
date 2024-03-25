@@ -37,7 +37,7 @@ $border-radius: 5px;
 
 .details-info {
   display: grid;
-  padding-left: 3vw;
+  padding-left: 2.5em;
   grid-template-rows: 0.5fr 1fr 0.5fr;
   width: 40vw;
 
@@ -76,7 +76,7 @@ $border-radius: 5px;
 }
 
 .details-img {
-  padding: 20px;
+  padding-right: 1em;
   width: 35vw;
   height: 40vh;
   border-radius: 30px;
