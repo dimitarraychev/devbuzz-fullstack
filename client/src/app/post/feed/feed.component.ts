@@ -76,9 +76,10 @@ export class FeedComponent implements OnInit, OnDestroy {
 
   changeCategory(category: PostCategory): void {
     this.currentCategory = category;
+    this.currentPage = 1;
 
     const navigationExtras: NavigationExtras = {
-      queryParams: { category: category },
+      queryParams: { category: category, page: this.currentPage },
       queryParamsHandling: 'merge',
     };
     this.router.navigate([], navigationExtras);
