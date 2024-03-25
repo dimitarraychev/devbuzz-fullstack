@@ -37,9 +37,9 @@ export class FeedComponent implements OnInit, OnDestroy {
       this.currentCategory = params['category'] || 'all';
       this.currentSearch = params['search'] || '';
 
+      this.hottestPostsSubscription = this.getHottestPosts();
       this.latestPostsSubscription = this.getLatestPosts();
     });
-    this.hottestPostsSubscription = this.getHottestPosts();
   }
 
   getLatestPosts(): Subscription {
@@ -63,7 +63,7 @@ export class FeedComponent implements OnInit, OnDestroy {
   }
 
   getHottestPosts(): Subscription {
-    return this.postService.getHottestPosts().subscribe({
+    return this.postService.getHottestPosts(this.currentCategory).subscribe({
       next: (posts) => {
         this.hottestPosts = posts;
         this.isLoadingHottest = false;

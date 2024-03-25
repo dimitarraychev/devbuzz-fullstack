@@ -29,8 +29,10 @@ export class PostService {
     });
   }
 
-  getHottestPosts(): Observable<Post[]> {
-    return this.http.get<Post[]>(this.apiUrl + '/posts/hottest');
+  getHottestPosts(category: string): Observable<Post[]> {
+    return this.http.get<Post[]>(this.apiUrl + '/posts/hottest', {
+      params: { category },
+    });
   }
 
   getPost(postId: string): Observable<Post> {
