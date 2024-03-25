@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { PostService } from '../services/post.service';
-import { Post } from 'src/app/types/post.type';
-import { Subscription } from 'rxjs';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Post, PostCategory } from 'src/app/types/post.type';
+import { Subscription, map } from 'rxjs';
+import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 
 @Component({
   selector: 'app-feed',
@@ -17,6 +17,7 @@ export class FeedComponent implements OnInit, OnDestroy {
   ) {}
 
   currentPage: number = 1;
+  currentCategory: PostCategory = 'all';
   pageSize: number = 6;
   totalPages: number = 0;
   private routeSubscription: Subscription = new Subscription();
@@ -32,6 +33,8 @@ export class FeedComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.routeSubscription = this.route.queryParams.subscribe((params) => {
       this.currentPage = Number(params['page']) || 1;
+      this.currentCategory = params['category'] || 'all';
+
       this.latestPostsSubscription = this.getLatestPosts();
     });
     this.hottestPostsSubscription = this.getHottestPosts();
@@ -63,10 +66,22 @@ export class FeedComponent implements OnInit, OnDestroy {
 
   changePage(page: number): void {
     this.currentPage = page;
-    this.getLatestPosts();
-    this.router.navigate(['/posts/feed'], {
+
+    const navigationExtras: NavigationExtras = {
       queryParams: { page: this.currentPage },
-    });
+      queryParamsHandling: 'merge',
+    };
+    this.router.navigate([], navigationExtras);
+  }
+
+  changeCategory(category: PostCategory): void {
+    this.currentCategory = category;
+
+    const navigationExtras: NavigationExtras = {
+      queryParams: { category: category },
+      queryParamsHandling: 'merge',
+    };
+    this.router.navigate([], navigationExtras);
   }
 
   ngOnDestroy(): void {

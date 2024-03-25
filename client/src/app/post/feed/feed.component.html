@@ -1,5 +1,5 @@
 <div id="feed-page-wrapper">
-  <app-filter-bar />
+  <app-filter-bar (category)="changeCategory($event)" />
 
   <section id="hottest" class="section border-glow">
     <h3>🔥Hottest</h3>
