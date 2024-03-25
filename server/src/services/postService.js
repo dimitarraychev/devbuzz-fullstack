@@ -15,7 +15,14 @@ exports.getOne = (postId) =>
 		options: { sort: { createdAt: -1 } },
 	});
 
-exports.getLatest = () => Post.find().sort({ createdAt: -1 }).limit(6);
+exports.getLatest = async (limit, skip) => {
+	const totalPosts = await Post.countDocuments();
+	const posts = await Post.find()
+		.sort({ createdAt: -1 })
+		.skip(skip)
+		.limit(limit);
+	return { posts, totalPosts };
+};
 
 exports.getHottest = () => Post.find().sort({ likes: -1 }).limit(3);
 
