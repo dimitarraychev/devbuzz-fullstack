@@ -4,6 +4,7 @@ import { PostService } from '../services/post.service';
 import { Router } from '@angular/router';
 import { PostErrorService } from '../services/post-error.service';
 import { Subscription } from 'rxjs';
+import { specialCharactersValidator } from 'src/app/shared/validators/special-characters.validator';
 
 @Component({
   selector: 'app-post-create',
@@ -50,6 +51,7 @@ export class PostCreateComponent implements OnDestroy {
         Validators.required,
         Validators.minLength(10),
         Validators.maxLength(100),
+        specialCharactersValidator(),
       ],
     ],
     category: ['', [Validators.required]],

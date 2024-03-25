@@ -30,13 +30,15 @@ export class UserErrorService {
       if (form.get(field)?.hasError('minlength'))
         return `Sorry, ${field} should be at least ${
           form.get(field)?.errors?.['minlength'].requiredLength
-        } characters`;
+        } characters.`;
       if (form.get(field)?.hasError('maxlength'))
         return `Sorry, ${field} should be no more than ${
           form.get(field)?.errors?.['maxlength'].requiredLength
-        } characters`;
+        } characters.`;
+      if (form.get(field)?.hasError('specialCharacters'))
+        return `Oops! ${field} cannot contain any special characters.`;
       if (form.get(field)?.hasError('email'))
-        return `Oops, a valid email email address is required`;
+        return `Oops, a valid email email address is required.`;
     }
     return 'A wild error occurred! Try again.';
   }

@@ -6,6 +6,7 @@ import { Post } from 'src/app/types/post.type';
 import { PostErrorService } from '../services/post-error.service';
 import { UserService } from 'src/app/user/services/user.service';
 import { Subscription } from 'rxjs';
+import { specialCharactersValidator } from 'src/app/shared/validators/special-characters.validator';
 
 @Component({
   selector: 'app-post-edit',
@@ -57,6 +58,7 @@ export class PostEditComponent implements OnInit, OnDestroy {
         Validators.required,
         Validators.minLength(10),
         Validators.maxLength(100),
+        specialCharactersValidator(),
       ],
     ],
     category: ['', [Validators.required]],

@@ -4,6 +4,7 @@ import { UserService } from '../services/user.service';
 import { Router } from '@angular/router';
 import { UserErrorService } from '../services/user-error.service';
 import { Subscription } from 'rxjs';
+import { specialCharactersValidator } from 'src/app/shared/validators/special-characters.validator';
 
 @Component({
   selector: 'app-register',
@@ -46,7 +47,12 @@ export class RegisterComponent implements OnDestroy {
   registerForm = this.fb.nonNullable.group({
     username: [
       '',
-      [Validators.required, Validators.minLength(3), Validators.maxLength(20)],
+      [
+        Validators.required,
+        Validators.minLength(3),
+        Validators.maxLength(20),
+        specialCharactersValidator(),
+      ],
     ],
     email: [
       '',
