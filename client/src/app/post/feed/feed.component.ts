@@ -11,6 +11,10 @@ import { Subscription } from 'rxjs';
 export class FeedComponent implements OnInit, OnDestroy {
   constructor(private postService: PostService) {}
 
+  currentPage: number = 1;
+  pageSize: number = 6;
+  totalPages: number = 0;
+
   latestPosts: Post[] = [];
   isLoadingLatest: boolean = true;
   private latestPostsSubscription: Subscription = new Subscription();
@@ -25,13 +29,17 @@ export class FeedComponent implements OnInit, OnDestroy {
   }
 
   getLatestPosts(): Subscription {
-    return this.postService.getLatestPosts().subscribe({
-      next: (posts) => {
-        this.latestPosts = posts;
-        this.isLoadingLatest = false;
-      },
-      error: (e) => console.log(e), // TODO handle error?,
-    });
+    return this.postService
+      .getLatestPosts(this.currentPage, this.pageSize)
+      .subscribe({
+        next: (res) => {
+          this.currentPage = res.currentPage;
+          this.totalPages = res.totalPages;
+          this.latestPosts = res.posts;
+          this.isLoadingLatest = false;
+        },
+        error: (e) => console.log(e), // TODO handle error?,
+      });
   }
 
   getHottestPosts(): Subscription {
@@ -42,6 +50,11 @@ export class FeedComponent implements OnInit, OnDestroy {
       },
       error: (e) => console.log(e), // TODO handle error?,
     });
+  }
+
+  changePage(page: number): void {
+    this.currentPage = page;
+    this.getLatestPosts();
   }
 
   ngOnDestroy(): void {

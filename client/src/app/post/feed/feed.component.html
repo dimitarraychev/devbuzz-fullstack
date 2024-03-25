@@ -28,10 +28,10 @@
       <app-post-card *ngFor="let post of latestPosts" [post]="post" />
     </div>
 
-    <div id="pagination-container">
-      <img src="./assets/images/arrow-left.svg" class="arrow" />
-      <p>Page 1/4</p>
-      <img src="./assets/images/arrow-right.svg" class="arrow" />
-    </div>
+    <app-pagination
+      [currentPage]="currentPage"
+      [totalPages]="totalPages"
+      (page)="changePage($event)"
+    />
   </section>
 </div>

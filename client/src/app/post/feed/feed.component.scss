@@ -37,25 +37,6 @@ $border-radius: 5px;
   flex-wrap: wrap;
 }
 
-#pagination-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto 1em auto;
-  gap: 2em;
-
-  .arrow {
-    background-size: cover;
-    width: 2.5em;
-    height: 2.5em;
-
-    &:hover {
-      filter: brightness(0.8);
-      cursor: pointer;
-    }
-  }
-}
-
 #latestPostsContainer {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(15em, 1fr));
