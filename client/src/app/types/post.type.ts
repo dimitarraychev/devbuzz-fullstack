@@ -36,3 +36,10 @@ type Owner = {
   _id: string;
   username: string;
 };
+
+export type PostCategory =
+  | 'all'
+  | 'artificial-intelligence'
+  | 'blockchain'
+  | 'development'
+  | 'other';
