@@ -1,4 +1,4 @@
-import { PostComment } from './post.type';
+import { Post, PostComment } from './post.type';
 
 export type AuthResponse = {
   ok: boolean;
@@ -24,4 +24,10 @@ export type ApiResponse = {
   _id?: string;
   likes?: number;
   comments?: PostComment[];
+};
+
+export type PaginationResponse = {
+  posts: Post[];
+  currentPage: number;
+  totalPages: number;
 };
