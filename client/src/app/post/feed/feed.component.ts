@@ -93,9 +93,13 @@ export class FeedComponent implements OnInit, OnDestroy {
     this.router.navigate([], navigationExtras);
   }
 
-  searchByTitle(title: string) {
-    this.currentSearch = title;
+  searchByTitle(title: string | Event) {
+    this.currentSearch = '';
     this.currentPage = 1;
+
+    if (!(title instanceof Event)) {
+      this.currentSearch = title;
+    }
 
     const navigationExtras: NavigationExtras = {
       queryParams: { search: this.currentSearch, page: this.currentPage },
