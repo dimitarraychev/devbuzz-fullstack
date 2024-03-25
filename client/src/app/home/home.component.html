@@ -22,7 +22,11 @@
             Code Chronicles: Unleashing dev wonders, from tech tricks to coding
             treats!
           </p>
-          <app-button buttonText="Read More" buttonSize="small" />
+          <app-button
+            buttonText="Read More"
+            buttonSize="small"
+            (click)="navigateToDevelopment()"
+          />
         </section>
       </article>
 
@@ -34,7 +38,11 @@
             Dive into AI wonders: from deep learning mysteries to machine-made
             art magic!
           </p>
-          <app-button buttonText="Read More" buttonSize="small" />
+          <app-button
+            buttonText="Read More"
+            buttonSize="small"
+            (click)="navigateToArtificialIntelligence()"
+          />
         </section>
       </article>
 
@@ -46,7 +54,11 @@
             Blockchain Bounty: Unraveling the tech behind the decentralized
             revolution!
           </p>
-          <app-button buttonText="Read More" buttonSize="small" />
+          <app-button
+            buttonText="Read More"
+            buttonSize="small"
+            (click)="navigateToBlockchain()"
+          />
         </section>
       </article>
     </div>
