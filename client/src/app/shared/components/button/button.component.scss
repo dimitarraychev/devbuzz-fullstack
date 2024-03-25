@@ -23,13 +23,15 @@ button {
   cursor: pointer;
   transition: filter 0.3s;
   text-align: center;
+}
 
+.enabled {
   &:hover {
     filter: brightness(0.8);
   }
 }
 
-.is-disabled {
+.disabled {
   background: gray;
   filter: brightness(0.6);
   cursor: not-allowed;
