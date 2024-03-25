@@ -2,10 +2,17 @@ const mongoose = require("mongoose");
 
 const userSchema = new mongoose.Schema({
 	username: {
+		type: String,
 		required: [true, "Username is required!"],
 		minLength: [3, "Username should be between 3 and 20 characters!"],
 		maxLength: [20, "Username should be between 3 and 20 characters!"],
-		type: String,
+		validate: {
+			validator: function (value) {
+				const specialCharacterRegex = /[!@#$%^&*(),.?":{}|<>]/;
+				return !specialCharacterRegex.test(value);
+			},
+			message: "Username should not contain special characters!",
+		},
 	},
 	email: {
 		required: [true, "Email is required!"],
