@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { PostService } from '../services/post.service';
 import { Post } from 'src/app/types/post.type';
 import { Subscription } from 'rxjs';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-feed',
@@ -9,11 +10,16 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./feed.component.scss'],
 })
 export class FeedComponent implements OnInit, OnDestroy {
-  constructor(private postService: PostService) {}
+  constructor(
+    private postService: PostService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {}
 
   currentPage: number = 1;
   pageSize: number = 6;
   totalPages: number = 0;
+  private routeSubscription: Subscription = new Subscription();
 
   latestPosts: Post[] = [];
   isLoadingLatest: boolean = true;
@@ -24,7 +30,10 @@ export class FeedComponent implements OnInit, OnDestroy {
   private hottestPostsSubscription: Subscription = new Subscription();
 
   ngOnInit(): void {
-    this.latestPostsSubscription = this.getLatestPosts();
+    this.routeSubscription = this.route.queryParams.subscribe((params) => {
+      this.currentPage = Number(params['page']) || 1;
+      this.latestPostsSubscription = this.getLatestPosts();
+    });
     this.hottestPostsSubscription = this.getHottestPosts();
   }
 
@@ -55,9 +64,13 @@ export class FeedComponent implements OnInit, OnDestroy {
   changePage(page: number): void {
     this.currentPage = page;
     this.getLatestPosts();
+    this.router.navigate(['/posts/feed'], {
+      queryParams: { page: this.currentPage },
+    });
   }
 
   ngOnDestroy(): void {
+    this.routeSubscription.unsubscribe();
     this.latestPostsSubscription.unsubscribe();
     this.hottestPostsSubscription.unsubscribe();
   }

@@ -17,6 +17,10 @@ const routes: Routes = [
     component: FeedComponent,
   },
   {
+    path: 'feed?:query',
+    component: FeedComponent,
+  },
+  {
     path: 'create',
     component: PostCreateComponent,
     canActivate: [authGuard],
