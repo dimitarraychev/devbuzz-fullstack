@@ -1,9 +1,10 @@
 import { Component, OnDestroy } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { PostService } from '../services/post.service';
 import { Router } from '@angular/router';
-import { PostErrorService } from '../services/post-error.service';
 import { Subscription } from 'rxjs';
+
+import { PostService } from '../services/post.service';
+import { PostErrorService } from '../services/post-error.service';
 import { specialCharactersValidator } from 'src/app/shared/validators/special-characters.validator';
 
 @Component({

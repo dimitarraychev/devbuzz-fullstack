@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { PostService } from '../services/post.service';
-import { Post, PostComment } from 'src/app/types/post.type';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
+
+import { Post } from 'src/app/types/post.type';
+import { PostService } from '../services/post.service';
 import { UserService } from 'src/app/user/services/user.service';
 import { CommentService } from '../services/comment.service';
 
