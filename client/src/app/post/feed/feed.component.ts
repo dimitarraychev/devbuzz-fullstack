@@ -18,6 +18,7 @@ export class FeedComponent implements OnInit, OnDestroy {
 
   currentPage: number = 1;
   currentCategory: PostCategory = 'all';
+  currentSearch: string = '';
   pageSize: number = 6;
   totalPages: number = 0;
   private routeSubscription: Subscription = new Subscription();
@@ -34,6 +35,7 @@ export class FeedComponent implements OnInit, OnDestroy {
     this.routeSubscription = this.route.queryParams.subscribe((params) => {
       this.currentPage = Number(params['page']) || 1;
       this.currentCategory = params['category'] || 'all';
+      this.currentSearch = params['search'] || '';
 
       this.latestPostsSubscription = this.getLatestPosts();
     });
@@ -42,10 +44,16 @@ export class FeedComponent implements OnInit, OnDestroy {
 
   getLatestPosts(): Subscription {
     return this.postService
-      .getLatestPosts(this.currentPage, this.pageSize, this.currentCategory)
+      .getLatestPosts(
+        this.currentPage,
+        this.pageSize,
+        this.currentCategory,
+        this.currentSearch
+      )
       .subscribe({
         next: (res) => {
-          this.currentPage = res.currentPage;
+          this.currentCategory = res.category;
+          this.currentPage = res.page;
           this.totalPages = res.totalPages;
           this.latestPosts = res.posts;
           this.isLoadingLatest = false;
@@ -79,7 +87,18 @@ export class FeedComponent implements OnInit, OnDestroy {
     this.currentPage = 1;
 
     const navigationExtras: NavigationExtras = {
-      queryParams: { category: category, page: this.currentPage },
+      queryParams: { category: this.currentCategory, page: this.currentPage },
+      queryParamsHandling: 'merge',
+    };
+    this.router.navigate([], navigationExtras);
+  }
+
+  searchByTitle(title: string) {
+    this.currentSearch = title;
+    this.currentPage = 1;
+
+    const navigationExtras: NavigationExtras = {
+      queryParams: { search: this.currentSearch, page: this.currentPage },
       queryParamsHandling: 'merge',
     };
     this.router.navigate([], navigationExtras);

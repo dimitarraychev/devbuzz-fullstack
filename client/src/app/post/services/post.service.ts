@@ -16,10 +16,16 @@ export class PostService {
   getLatestPosts(
     page: number,
     limit: number,
-    category: string
+    category: string,
+    search: string
   ): Observable<PaginationResponse> {
     return this.http.get<PaginationResponse>(this.apiUrl + '/posts', {
-      params: { page: page.toString(), limit: limit.toString(), category },
+      params: {
+        page: page.toString(),
+        limit: limit.toString(),
+        category,
+        search,
+      },
     });
   }
 
