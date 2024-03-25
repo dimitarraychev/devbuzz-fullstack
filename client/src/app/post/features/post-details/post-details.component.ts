@@ -46,14 +46,14 @@ export class PostDetailsComponent implements OnInit {
     });
   }
 
-  deletePost(): void {
+  onPostDelete(): void {
     this.postService.deletePost(this.post._id).subscribe({
       error: console.log,
       complete: () => this.router.navigate(['posts/feed']),
     });
   }
 
-  likePost(): void {
+  onPostLike(): void {
     this.postService.likePost(this.post._id).subscribe({
       next: (res) => {
         if (res.likes) this.likesCount$.next(res.likes);
@@ -62,11 +62,11 @@ export class PostDetailsComponent implements OnInit {
     });
   }
 
-  closePost(): void {
+  onPostClose(): void {
     this.router.navigate(['posts/feed']);
   }
 
-  addComment(message: string): void {
+  onCommentAdd(message: string): void {
     this.commentService
       .addComment({ message, _postId: this.post._id })
       .subscribe({
@@ -77,7 +77,7 @@ export class PostDetailsComponent implements OnInit {
       });
   }
 
-  deleteComment(commentId: string): void {
+  onCommentDelete(commentId: string): void {
     this.commentService.deleteComent(commentId).subscribe({
       next: (res) => {
         if (res.comments) this.post.comments = res.comments;

@@ -3,15 +3,15 @@
     [post]="post"
     [isLoading]="isLoading"
     [likesCount]="likesCount$ | async"
-    (delete)="deletePost()"
-    (like)="likePost()"
-    (close)="closePost()"
+    (delete)="onPostDelete()"
+    (like)="onPostLike()"
+    (close)="onPostClose()"
   />
 
   <section id="comments-container">
     <app-add-comment
       [username]="userInfo?.username"
-      (add)="addComment($event)"
+      (add)="onCommentAdd($event)"
     />
 
     <div
@@ -25,7 +25,7 @@
     <app-comment
       *ngFor="let comment of post.comments"
       [comment]="comment"
-      (delete)="deleteComment($event)"
+      (delete)="onCommentDelete($event)"
     />
   </section>
 </div>
