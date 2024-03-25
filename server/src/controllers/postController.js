@@ -6,11 +6,17 @@ const validationRegex = new RegExp(/:\s([A-Z][\w\s]+!)/);
 
 router.get("/", async (req, res) => {
 	try {
+		console.log(req.query);
+		const category = req.query.category || "all";
 		const limit = parseInt(req.query.limit) || 6;
 		const page = parseInt(req.query.page) || 1;
 		const skip = (page - 1) * limit;
 
-		const { posts, totalPosts } = await postService.getLatest(limit, skip);
+		const { posts, totalPosts } = await postService.getLatest(
+			category,
+			limit,
+			skip
+		);
 
 		res.status(200).json({
 			posts,

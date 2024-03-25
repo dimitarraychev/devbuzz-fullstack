@@ -15,9 +15,15 @@ exports.getOne = (postId) =>
 		options: { sort: { createdAt: -1 } },
 	});
 
-exports.getLatest = async (limit, skip) => {
-	const totalPosts = await Post.countDocuments();
-	const posts = await Post.find()
+exports.getLatest = async (category, limit, skip) => {
+	let query = {};
+
+	if (category !== "all") {
+		query.category = category;
+	}
+
+	const totalPosts = await Post.countDocuments(query);
+	const posts = await Post.find(query)
 		.sort({ createdAt: -1 })
 		.skip(skip)
 		.limit(limit);
