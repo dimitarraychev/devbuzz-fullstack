@@ -34,7 +34,17 @@ exports.getLatest = async (search, category, limit, skip) => {
 	return { posts, totalPosts };
 };
 
-exports.getHottest = () => Post.find().sort({ likes: -1 }).limit(3);
+exports.getHottest = async (category) => {
+	let query = {};
+
+	if (category !== "all") {
+		query.category = category;
+	}
+
+	const posts = Post.find(query).sort({ likes: -1 }).limit(3);
+
+	return posts;
+};
 
 exports.like = (postId, userId) =>
 	Post.findByIdAndUpdate(

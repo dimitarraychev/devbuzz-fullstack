@@ -70,7 +70,9 @@ router.post("/", isAuth, async (req, res) => {
 
 router.get("/hottest", async (req, res) => {
 	try {
-		const posts = await postService.getHottest();
+		const category = req.query.category || "all";
+
+		const posts = await postService.getHottest(category);
 
 		res.status(200).json(posts);
 	} catch (error) {
