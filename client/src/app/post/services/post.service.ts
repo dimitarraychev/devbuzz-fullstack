@@ -13,9 +13,13 @@ export class PostService {
 
   constructor(private http: HttpClient) {}
 
-  getLatestPosts(page: number, limit: number): Observable<PaginationResponse> {
+  getLatestPosts(
+    page: number,
+    limit: number,
+    category: string
+  ): Observable<PaginationResponse> {
     return this.http.get<PaginationResponse>(this.apiUrl + '/posts', {
-      params: { page: page.toString(), limit: limit.toString() },
+      params: { page: page.toString(), limit: limit.toString(), category },
     });
   }
 

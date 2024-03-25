@@ -42,7 +42,7 @@ export class FeedComponent implements OnInit, OnDestroy {
 
   getLatestPosts(): Subscription {
     return this.postService
-      .getLatestPosts(this.currentPage, this.pageSize)
+      .getLatestPosts(this.currentPage, this.pageSize, this.currentCategory)
       .subscribe({
         next: (res) => {
           this.currentPage = res.currentPage;
