@@ -4,8 +4,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 
 import { Post } from 'src/app/types/post.type';
-import { PostService } from '../services/post.service';
-import { PostErrorService } from '../services/post-error.service';
+import { PostService } from '../../services/post.service';
+import { PostErrorService } from '../../services/post-error.service';
 import { UserService } from 'src/app/user/services/user.service';
 import { specialCharactersValidator } from 'src/app/shared/validators/special-characters.validator';
 

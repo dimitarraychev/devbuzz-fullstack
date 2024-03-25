@@ -3,9 +3,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 
 import { Post } from 'src/app/types/post.type';
-import { PostService } from '../services/post.service';
+import { PostService } from '../../services/post.service';
 import { UserService } from 'src/app/user/services/user.service';
-import { CommentService } from '../services/comment.service';
+import { CommentService } from '../../services/comment.service';
 
 @Component({
   selector: 'app-post-details',

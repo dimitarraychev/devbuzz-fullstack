@@ -3,8 +3,8 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 
-import { PostService } from '../services/post.service';
-import { PostErrorService } from '../services/post-error.service';
+import { PostService } from '../../services/post.service';
+import { PostErrorService } from '../../services/post-error.service';
 import { specialCharactersValidator } from 'src/app/shared/validators/special-characters.validator';
 
 @Component({

@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 
-import { PostService } from '../services/post.service';
+import { PostService } from '../../services/post.service';
 import { Post, PostCategory } from 'src/app/types/post.type';
 
 @Component({
