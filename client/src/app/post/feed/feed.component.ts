@@ -20,7 +20,7 @@ export class FeedComponent implements OnInit, OnDestroy {
   currentCategory: PostCategory = 'all';
   currentSearch: string = '';
   pageSize: number = 6;
-  totalPages: number = 0;
+  totalPages: number = 1;
   private routeSubscription: Subscription = new Subscription();
 
   latestPosts: Post[] = [];
