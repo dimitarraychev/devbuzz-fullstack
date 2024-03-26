@@ -1,0 +1,10 @@
+#delete-button {
+  width: 2.5em;
+  height: 2.5em;
+  margin: 0.5em;
+
+  &:hover {
+    cursor: pointer;
+    filter: brightness(0.8);
+  }
+}
