@@ -26,7 +26,7 @@ export class PostDetailsComponent implements OnInit {
   likesCount$ = new BehaviorSubject<number>(0);
   postId: string = this.route.snapshot.params['id'];
 
-  get userInfo() {
+  get loggedUser() {
     return this.userService.user;
   }
 

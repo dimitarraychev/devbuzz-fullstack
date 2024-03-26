@@ -15,7 +15,7 @@ export class HeaderComponent {
     return !!this.userService.user;
   }
 
-  get userInfo() {
+  get loggedUser() {
     return this.userService.user;
   }
 

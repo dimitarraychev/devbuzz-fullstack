@@ -26,7 +26,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
   private userSubscription: Subscription = new Subscription();
   private routeSubscription: Subscription = new Subscription();
 
-  get userInfo() {
+  get loggedUser() {
     return this.userService.user;
   }
 

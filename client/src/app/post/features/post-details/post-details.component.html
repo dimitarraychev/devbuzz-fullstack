@@ -9,7 +9,7 @@
 
   <section id="comments-container">
     <app-add-comment
-      [username]="userInfo?.username"
+      [username]="loggedUser?.username"
       (add)="onCommentAdd($event)"
     />
 
