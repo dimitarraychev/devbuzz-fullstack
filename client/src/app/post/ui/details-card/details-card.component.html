@@ -1,5 +1,10 @@
 <div id="details-container" class="border-glow">
-  <div id="close-button-container">
+  <div id="top-buttons-container">
+    <div id="owner-btns">
+      <app-delete-btn (click)="onDelete()" />
+      <app-edit-btn [routerLink]="['/posts', post._id, 'edit']" />
+    </div>
+
     <app-close-btn />
   </div>
 
@@ -16,27 +21,10 @@
     <div class="details-info-bottom">
       <div class="details-owner">
         <p class="owner-name">{{ post.owner.username }}</p>
-        <app-button
-          buttonSize="small"
-          buttonText="Edit"
-          buttonIcon="edit"
-          [routerLink]="['/posts', post._id, 'edit']"
-        />
-        <app-button
-          buttonSize="small"
-          buttonText="Delete"
-          buttonIcon="delete"
-          (click)="onDelete()"
-        />
       </div>
-      <div class="like">
+      <div class="like-container">
         <p>Likes: {{ likesCount }}</p>
-        <app-button
-          buttonIcon="like"
-          buttonText="Like"
-          buttonSize="small"
-          (click)="onLike()"
-        />
+        <app-like-btn (click)="onLike()" />
       </div>
     </div>
   </div>
