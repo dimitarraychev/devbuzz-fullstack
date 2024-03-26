@@ -7,5 +7,5 @@ import { Post } from 'src/app/types/post.type';
   styleUrls: ['./post-card.component.scss'],
 })
 export class PostCardComponent {
-  @Input() post = {} as Post;
+  @Input({ required: true }) post = {} as Post;
 }
