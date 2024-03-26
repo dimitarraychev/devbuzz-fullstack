@@ -17,10 +17,17 @@ router.get("/top", async (req, res) => {
 router.get("/:userId", async (req, res) => {
 	try {
 		const userId = req.params.userId;
+		const limit = parseInt(req.query.limit) || 6;
+		const page = parseInt(req.query.page) || 1;
+		const skip = (page - 1) * limit;
 
-		let user = await userService.getOne(userId);
+		let { user, totalPosts } = await userService.getOne(
+			userId,
+			limit,
+			skip
+		);
 
-		res.status(200).json(user);
+		res.status(200).json({ user, totalPosts });
 	} catch (error) {
 		res.status(500).json({
 			ok: false,
