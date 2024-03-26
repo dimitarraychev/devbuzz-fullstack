@@ -33,7 +33,11 @@ export class FeedComponent implements OnInit, OnDestroy {
   private hottestPostsSubscription: Subscription = new Subscription();
 
   ngOnInit(): void {
-    this.routeSubscription = this.route.queryParams.subscribe((params) => {
+    this.routeSubscription = this.subscribeToRouteChanges();
+  }
+
+  subscribeToRouteChanges(): Subscription {
+    return this.route.queryParams.subscribe((params) => {
       this.currentPage = Number(params['page']) || 1;
       this.currentCategory = params['category'] || 'all';
       this.currentSearch = params['search'] || '';
