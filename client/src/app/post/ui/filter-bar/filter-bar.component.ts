@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { PostCategory } from 'src/app/types/post.type';
 
@@ -8,6 +8,7 @@ import { PostCategory } from 'src/app/types/post.type';
   styleUrls: ['./filter-bar.component.scss'],
 })
 export class FilterBarComponent {
+  @Input() selectedCategory: PostCategory = 'all';
   @Output() category = new EventEmitter<PostCategory>();
   @Output() search = new EventEmitter<string>();
 

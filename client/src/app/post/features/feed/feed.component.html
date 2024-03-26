@@ -2,6 +2,7 @@
   <app-filter-bar
     (category)="onCategoryChange($event)"
     (search)="onSearch($event)"
+    [selectedCategory]="currentCategory"
   />
 
   <section id="hottest" class="section border-glow">

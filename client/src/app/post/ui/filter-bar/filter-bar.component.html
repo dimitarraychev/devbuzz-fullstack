@@ -1,5 +1,10 @@
 <section id="filter-bar">
-  <select id="dropdown" name="categories" (change)="onCategoryChange($event)">
+  <select
+    id="dropdown"
+    name="categories"
+    (change)="onCategoryChange($event)"
+    [value]="selectedCategory"
+  >
     <option value="all">All</option>
     <option value="artificial-intelligence">Artificial Intelligence</option>
     <option value="blockchain">Blockchain</option>
