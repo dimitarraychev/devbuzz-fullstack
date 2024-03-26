@@ -33,3 +33,19 @@ export type ApiPostResponse = {
   page: number;
   totalPages: number;
 };
+
+export type ApiUserResponse = {
+  user: ApiUser;
+  page: number;
+  totalPages: number;
+};
+
+export type ApiUser = {
+  _id: string;
+  username: string;
+  email: string;
+  posts: Post[];
+  totalPosts: number;
+  createdAt: string;
+  updatedAt: string;
+};
