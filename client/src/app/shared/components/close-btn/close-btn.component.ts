@@ -5,10 +5,4 @@ import { Component, Output, EventEmitter } from '@angular/core';
   templateUrl: './close-btn.component.html',
   styleUrls: ['./close-btn.component.scss'],
 })
-export class CloseBtnComponent {
-  @Output() close = new EventEmitter<void>();
-
-  onClose(): void {
-    this.close.emit();
-  }
-}
+export class CloseBtnComponent {}

@@ -62,10 +62,6 @@ export class PostDetailsComponent implements OnInit {
     });
   }
 
-  onPostClose(): void {
-    this.router.navigate(['posts/feed']);
-  }
-
   onCommentAdd(message: string): void {
     this.commentService
       .addComment({ message, _postId: this.post._id })

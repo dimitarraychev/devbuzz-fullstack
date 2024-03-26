@@ -24,8 +24,4 @@ export class DetailsCardComponent {
   onLike(): void {
     this.like.emit();
   }
-
-  onClose(): void {
-    this.close.emit();
-  }
 }
