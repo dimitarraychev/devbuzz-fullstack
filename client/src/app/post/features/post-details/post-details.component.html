@@ -1,6 +1,7 @@
 <div id="details-page-wrapper">
   <app-details-card
     [post]="post"
+    [isOwner]="isOwner"
     [isLoading]="isLoading"
     [likesCount]="likesCount$ | async"
     [isLiked]="isLiked$ | async"

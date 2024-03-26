@@ -1,8 +1,11 @@
 <div id="details-container" class="border-glow">
   <div id="top-buttons-container">
     <div id="owner-btns">
-      <app-delete-btn (click)="onDelete()" />
-      <app-edit-btn [routerLink]="['/posts', post._id, 'edit']" />
+      <app-delete-btn (click)="onDelete()" *ngIf="isOwner" />
+      <app-edit-btn
+        [routerLink]="['/posts', post._id, 'edit']"
+        *ngIf="isOwner"
+      />
     </div>
 
     <app-close-btn />
@@ -24,7 +27,11 @@
       </div>
       <div class="like-container">
         <p>Likes: {{ likesCount }}</p>
-        <app-like-btn (like)="onLike($event)" [isLiked]="isLiked" />
+        <app-like-btn
+          (like)="onLike($event)"
+          [isLiked]="isLiked"
+          *ngIf="!isOwner"
+        />
       </div>
     </div>
   </div>

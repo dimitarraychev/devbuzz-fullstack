@@ -9,6 +9,7 @@ import { Post } from 'src/app/types/post.type';
 export class DetailsCardComponent {
   @Input() post = {} as Post;
   @Input() isLoading: boolean = true;
+  @Input() isOwner: boolean = false;
   @Input() likesCount: number | null = 0;
   @Input() isLiked: boolean | null = false;
 

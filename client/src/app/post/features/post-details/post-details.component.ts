@@ -23,6 +23,7 @@ export class PostDetailsComponent implements OnInit {
 
   post = {} as Post;
   isLoading: boolean = true;
+  isOwner: boolean = false;
   likesCount$ = new BehaviorSubject<number>(0);
   isLiked$ = new BehaviorSubject<boolean>(false);
   postId: string = this.route.snapshot.params['id'];
@@ -41,6 +42,7 @@ export class PostDetailsComponent implements OnInit {
         this.post = post;
         this.likesCount$.next(post.likes.length);
         this.isLiked$.next(post.likes.some((id) => id == this.loggedUser?._id));
+        this.isOwner = post.owner._id == this.loggedUser?._id;
         this.isLoading = false;
       },
       error: (e) => this.router.navigate(['404']),
