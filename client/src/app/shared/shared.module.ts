@@ -11,18 +11,20 @@ import { TruncateWithElipsisPipe } from './pipes/truncate-with-elipsis.pipe';
 import { RouterModule } from '@angular/router';
 import { EditBtnComponent } from './components/edit-btn/edit-btn.component';
 import { DeleteBtnComponent } from './components/delete-btn/delete-btn.component';
+import { LikeBtnComponent } from './components/like-btn/like-btn.component';
 
 @NgModule({
   declarations: [
     ButtonComponent,
     LoaderComponent,
-    RelativeTimePipe,
-    TruncateWithElipsisPipe,
+    PostCardComponent,
     PaginationComponent,
     CloseBtnComponent,
-    PostCardComponent,
     EditBtnComponent,
     DeleteBtnComponent,
+    LikeBtnComponent,
+    RelativeTimePipe,
+    TruncateWithElipsisPipe,
   ],
   imports: [CommonModule, RouterModule],
   exports: [
@@ -33,6 +35,7 @@ import { DeleteBtnComponent } from './components/delete-btn/delete-btn.component
     CloseBtnComponent,
     EditBtnComponent,
     DeleteBtnComponent,
+    LikeBtnComponent,
     RelativeTimePipe,
     TruncateWithElipsisPipe,
   ],
