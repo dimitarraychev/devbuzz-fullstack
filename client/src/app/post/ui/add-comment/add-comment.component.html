@@ -12,6 +12,7 @@
     placeholder="Add a comment..."
     [formControl]="commentTextControl"
     [class.invalid]="commentTextControl.invalid && commentTextControl.dirty"
+    (keyup.enter)="onAdd()"
   ></textarea>
   <p id="error-msg" *ngIf="errorMessage">{{ errorMessage }}</p>
   <app-button buttonSize="small" buttonText="Comment" (click)="onAdd()" />
