@@ -2,7 +2,12 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable, OnDestroy } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { User } from '../../types/user.type';
-import { AuthResponse, AuthUser, LogoutResponse } from '../../types/api.type';
+import {
+  ApiUserResponse,
+  AuthResponse,
+  AuthUser,
+  LogoutResponse,
+} from '../../types/api.type';
 import { CookieService } from 'ngx-cookie-service';
 import { BehaviorSubject, Observable, Subscription, tap } from 'rxjs';
 
@@ -55,6 +60,19 @@ export class UserService implements OnDestroy {
       error: (e) => {
         this.cookieService.delete('auth');
         this.user$$.next(undefined);
+      },
+    });
+  }
+
+  getProfile(
+    userId: string,
+    page: number,
+    limit: number
+  ): Observable<ApiUserResponse> {
+    return this.http.get<ApiUserResponse>(this.apiUrl + '/users/' + userId, {
+      params: {
+        page: page.toString(),
+        limit: limit.toString(),
       },
     });
   }
