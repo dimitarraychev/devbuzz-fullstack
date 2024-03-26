@@ -36,6 +36,7 @@ export type ApiPostResponse = {
 
 export type ApiUserResponse = {
   user: ApiUser;
+  totalPosts: number;
   page: number;
   totalPages: number;
 };
@@ -45,7 +46,6 @@ export type ApiUser = {
   username: string;
   email: string;
   posts: Post[];
-  totalPosts: number;
   createdAt: string;
   updatedAt: string;
 };
