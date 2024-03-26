@@ -1,1 +1,26 @@
-<p>profile works!</p>
+<div id="profile-page-wrapper">
+  <section id="user" class="section border-glow">
+    <h3>👨🏻‍💻User</h3>
+
+    <app-loader *ngIf="isLoading" />
+  </section>
+  <section id="posts" class="section border-glow">
+    <h3>🌟Posts</h3>
+
+    <app-loader *ngIf="isLoading" />
+
+    <div class="no-posts" *ngIf="!isLoading && user.posts.length < 1">
+      Sorry, no posts yet. Quick, be the first!
+    </div>
+
+    <div id="posts-container" *ngIf="!isLoading">
+      <app-post-card *ngFor="let post of user.posts" [post]="post" />
+    </div>
+
+    <app-pagination
+      [currentPage]="currentPage"
+      [totalPages]="totalPages"
+      (page)="onPageChange($event)"
+    />
+  </section>
+</div>

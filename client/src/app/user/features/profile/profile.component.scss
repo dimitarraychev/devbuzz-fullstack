@@ -1,0 +1,70 @@
+$font-color: white;
+$dark-bg: rgba(18, 18, 18, 1);
+$light-bg: rgba(30, 30, 30, 1);
+$border-radius: 5px;
+
+#profile-page-wrapper {
+  padding-top: 5em;
+}
+
+.section {
+  color: $font-color;
+  width: 70%;
+  margin: auto;
+  background-color: $dark-bg;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+
+  h3 {
+    font-size: 30px;
+    letter-spacing: 0.5px;
+    margin: auto;
+    text-align: center;
+    padding: 1em;
+  }
+}
+
+#user {
+  margin-bottom: 1em;
+  width: 40%;
+}
+
+#posts-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(15em, 1fr));
+  grid-template-rows: auto;
+  place-items: center;
+  gap: 1em;
+  padding: 0 1em 1em 1em;
+}
+
+.no-posts {
+  font-size: 22px;
+  margin: auto;
+  text-align: center;
+  padding-bottom: 2em;
+}
+
+app-loader {
+  margin: 2em auto;
+  padding-bottom: 2em;
+}
+
+@media screen and (min-width: 1138px) {
+  #posts-container {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media screen and (max-width: 1138px) {
+  #posts-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (max-width: 773px) {
+  #posts-container {
+    grid-template-columns: 1fr;
+  }
+}
