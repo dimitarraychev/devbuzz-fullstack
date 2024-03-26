@@ -20,6 +20,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
   currentPage: number = 1;
   pageSize: number = 6;
   totalPages: number = 1;
+  totalPosts: number = 0;
   user = {} as ApiUser;
   userId: string = this.route.snapshot.params['id'];
 
@@ -47,12 +48,13 @@ export class ProfileComponent implements OnInit, OnDestroy {
       .getProfile(this.userId, this.currentPage, this.pageSize)
       .subscribe({
         next: (res) => {
+          this.user = res.user;
           this.currentPage = res.page;
           this.totalPages = res.totalPages;
-          this.user = res.user;
+          this.totalPosts = res.totalPosts;
           this.isLoading = false;
         },
-        error: (e) => console.log(e), // TODO handle error?,
+        error: (e) => this.router.navigate(['404']),
       });
   }
 
