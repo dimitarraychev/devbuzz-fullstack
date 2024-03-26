@@ -27,7 +27,9 @@ router.get("/:userId", async (req, res) => {
 			skip
 		);
 
-		res.status(200).json({ user, totalPosts });
+		const totalPages = Math.ceil(totalPosts / limit) || 1;
+
+		res.status(200).json({ user, page, totalPages });
 	} catch (error) {
 		res.status(500).json({
 			ok: false,
