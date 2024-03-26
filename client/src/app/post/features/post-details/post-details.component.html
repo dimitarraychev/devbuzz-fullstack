@@ -3,8 +3,9 @@
     [post]="post"
     [isLoading]="isLoading"
     [likesCount]="likesCount$ | async"
+    [isLiked]="isLiked$ | async"
     (delete)="onPostDelete()"
-    (like)="onPostLike()"
+    (like)="onPostLike($event)"
   />
 
   <section id="comments-container">

@@ -1,6 +1,8 @@
 <img
-  src="./assets/images/icon-like.svg"
+  [src]="
+    isLiked ? './assets/images/icon-liked.svg' : './assets/images/icon-like.svg'
+  "
   alt="like"
   id="like-button"
-  (click)="onEdit()"
+  (click)="isLiked ? onUnlike() : onLike()"
 />

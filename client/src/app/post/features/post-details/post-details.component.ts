@@ -24,6 +24,7 @@ export class PostDetailsComponent implements OnInit {
   post = {} as Post;
   isLoading: boolean = true;
   likesCount$ = new BehaviorSubject<number>(0);
+  isLiked$ = new BehaviorSubject<boolean>(false);
   postId: string = this.route.snapshot.params['id'];
 
   get loggedUser() {
@@ -39,6 +40,7 @@ export class PostDetailsComponent implements OnInit {
       next: (post) => {
         this.post = post;
         this.likesCount$.next(post.likes.length);
+        this.isLiked$.next(post.likes.some((id) => id == this.loggedUser?._id));
         this.isLoading = false;
       },
       error: (e) => this.router.navigate(['404']),
@@ -47,17 +49,18 @@ export class PostDetailsComponent implements OnInit {
 
   onPostDelete(): void {
     this.postService.deletePost(this.postId).subscribe({
-      error: console.log,
+      error: console.log, // TODO handle error?
       complete: () => this.router.navigate(['posts/feed']),
     });
   }
 
-  onPostLike(): void {
+  onPostLike(isLiked: boolean): void {
     this.postService.likePost(this.postId).subscribe({
       next: (res) => {
         if (res.likes) this.likesCount$.next(res.likes);
+        this.isLiked$.next(true);
       },
-      error: console.log,
+      error: console.log, // TODO handle error?
     });
   }
 
@@ -68,7 +71,7 @@ export class PostDetailsComponent implements OnInit {
         next: (res) => {
           if (res.comments) this.post.comments = res.comments;
         },
-        error: console.log,
+        error: console.log, // TODO handle error?
       });
   }
 
@@ -77,7 +80,7 @@ export class PostDetailsComponent implements OnInit {
       next: (res) => {
         if (res.comments) this.post.comments = res.comments;
       },
-      error: console.log,
+      error: console.log, // TODO handle error?
     });
   }
 }

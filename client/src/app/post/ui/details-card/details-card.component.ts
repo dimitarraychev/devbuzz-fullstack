@@ -10,9 +10,10 @@ export class DetailsCardComponent {
   @Input() post = {} as Post;
   @Input() isLoading: boolean = true;
   @Input() likesCount: number | null = 0;
+  @Input() isLiked: boolean | null = false;
 
   @Output() delete = new EventEmitter<void>();
-  @Output() like = new EventEmitter<void>();
+  @Output() like = new EventEmitter<boolean>();
   @Output() close = new EventEmitter<void>();
 
   constructor() {}
@@ -21,7 +22,7 @@ export class DetailsCardComponent {
     this.delete.emit();
   }
 
-  onLike(): void {
-    this.like.emit();
+  onLike(isLiked: boolean): void {
+    this.like.emit(isLiked);
   }
 }

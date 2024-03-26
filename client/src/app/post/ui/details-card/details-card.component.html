@@ -24,7 +24,7 @@
       </div>
       <div class="like-container">
         <p>Likes: {{ likesCount }}</p>
-        <app-like-btn (click)="onLike()" />
+        <app-like-btn (like)="onLike($event)" [isLiked]="isLiked" />
       </div>
     </div>
   </div>
