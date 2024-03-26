@@ -32,7 +32,7 @@ export class PostEditComponent implements OnInit, OnDestroy {
   errorMessage: string | null = null;
   isSubmitted: boolean = false;
   post = {} as Post;
-  postId: string = '';
+  postId: string = this.activatedRoute.snapshot.params['id'];
   isLoading: boolean = true;
   isButtonDisabled: boolean = false;
   private formSubscription: Subscription = new Subscription();
@@ -82,8 +82,6 @@ export class PostEditComponent implements OnInit, OnDestroy {
   }
 
   getPost(): void {
-    this.postId = this.activatedRoute.snapshot.params['id'];
-
     this.postService.getPost(this.postId).subscribe({
       next: (post) => {
         if (post.owner._id != this.userService.user?._id) {
