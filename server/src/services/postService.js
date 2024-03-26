@@ -41,7 +41,7 @@ exports.getHottest = async (category) => {
 		query.category = category;
 	}
 
-	const posts = Post.find(query).sort({ likes: -1 }).limit(3);
+	const posts = Post.find(query).sort({ likes: 1 }).limit(3);
 
 	return posts;
 };
@@ -60,5 +60,3 @@ exports.update = (postId, postData) =>
 	});
 
 exports.delete = (postId) => Post.findByIdAndDelete(postId);
-
-// exports.search = (name) => Post.find({ name: new RegExp(name, "i") });
