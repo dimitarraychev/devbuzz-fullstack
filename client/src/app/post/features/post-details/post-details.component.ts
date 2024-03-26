@@ -17,13 +17,14 @@ export class PostDetailsComponent implements OnInit {
     private postService: PostService,
     private userService: UserService,
     private commentService: CommentService,
-    private activatedRoute: ActivatedRoute,
+    private route: ActivatedRoute,
     private router: Router
   ) {}
 
   post = {} as Post;
   isLoading: boolean = true;
   likesCount$ = new BehaviorSubject<number>(0);
+  postId: string = this.route.snapshot.params['id'];
 
   get userInfo() {
     return this.userService.user;
@@ -34,9 +35,7 @@ export class PostDetailsComponent implements OnInit {
   }
 
   getPost(): void {
-    const postId = this.activatedRoute.snapshot.params['id'];
-
-    this.postService.getPost(postId).subscribe({
+    this.postService.getPost(this.postId).subscribe({
       next: (post) => {
         this.post = post;
         this.likesCount$.next(post.likes.length);
@@ -47,14 +46,14 @@ export class PostDetailsComponent implements OnInit {
   }
 
   onPostDelete(): void {
-    this.postService.deletePost(this.post._id).subscribe({
+    this.postService.deletePost(this.postId).subscribe({
       error: console.log,
       complete: () => this.router.navigate(['posts/feed']),
     });
   }
 
   onPostLike(): void {
-    this.postService.likePost(this.post._id).subscribe({
+    this.postService.likePost(this.postId).subscribe({
       next: (res) => {
         if (res.likes) this.likesCount$.next(res.likes);
       },
@@ -64,7 +63,7 @@ export class PostDetailsComponent implements OnInit {
 
   onCommentAdd(message: string): void {
     this.commentService
-      .addComment({ message, _postId: this.post._id })
+      .addComment({ message, _postId: this.postId })
       .subscribe({
         next: (res) => {
           if (res.comments) this.post.comments = res.comments;
