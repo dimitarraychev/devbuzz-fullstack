@@ -15,8 +15,8 @@ export class HeaderComponent {
     return !!this.userService.user;
   }
 
-  get username() {
-    return this.userService.user?.username;
+  get userInfo() {
+    return this.userService.user;
   }
 
   toggleMenu(): void {
