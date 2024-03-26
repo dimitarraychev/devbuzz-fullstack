@@ -73,7 +73,7 @@ export class FeedComponent implements OnInit, OnDestroy {
     });
   }
 
-  changePage(page: number): void {
+  onPageChange(page: number): void {
     this.currentPage = page;
 
     const navigationExtras: NavigationExtras = {
@@ -83,24 +83,27 @@ export class FeedComponent implements OnInit, OnDestroy {
     this.router.navigate([], navigationExtras);
   }
 
-  changeCategory(category: PostCategory): void {
-    this.currentCategory = category;
+  onCategoryChange(category: PostCategory): void {
+    this.currentSearch = '';
     this.currentPage = 1;
+    this.currentCategory = category;
 
     const navigationExtras: NavigationExtras = {
-      queryParams: { category: this.currentCategory, page: this.currentPage },
+      queryParams: {
+        category: this.currentCategory,
+        page: this.currentPage,
+        search: this.currentSearch,
+      },
       queryParamsHandling: 'merge',
     };
     this.router.navigate([], navigationExtras);
   }
 
-  searchByTitle(title: string | Event) {
+  onSearch(search: string | Event) {
     this.currentSearch = '';
     this.currentPage = 1;
 
-    if (!(title instanceof Event)) {
-      this.currentSearch = title;
-    }
+    if (typeof search == 'string') this.currentSearch = search;
 
     const navigationExtras: NavigationExtras = {
       queryParams: { search: this.currentSearch, page: this.currentPage },

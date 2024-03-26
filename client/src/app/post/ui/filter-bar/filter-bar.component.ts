@@ -18,14 +18,13 @@ export class FilterBarComponent {
 
   onSearch(): void {
     const search: string = this.searchInputControl.value;
-
     if (this.searchInputControl.invalid) return;
-
     this.search.emit(search);
   }
 
   onCategoryChange(event: Event): void {
     const category = (event.target as HTMLSelectElement).value as PostCategory;
+    this.searchInputControl.reset();
     this.category.emit(category);
   }
 }

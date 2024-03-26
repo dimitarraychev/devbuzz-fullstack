@@ -1,7 +1,7 @@
 <div id="feed-page-wrapper">
   <app-filter-bar
-    (category)="changeCategory($event)"
-    (search)="searchByTitle($event)"
+    (category)="onCategoryChange($event)"
+    (search)="onSearch($event)"
   />
 
   <section id="hottest" class="section border-glow">
@@ -34,7 +34,7 @@
     <app-pagination
       [currentPage]="currentPage"
       [totalPages]="totalPages"
-      (page)="changePage($event)"
+      (page)="onPageChange($event)"
     />
   </section>
 </div>
