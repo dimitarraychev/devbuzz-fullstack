@@ -25,10 +25,6 @@ export class UserService implements OnDestroy {
   user: AuthUser | undefined;
   private userSubscription: Subscription;
 
-  private hasAcceptedCookiesSubject = new BehaviorSubject<boolean>(false);
-  public hasAcceptedCookies$: Observable<boolean> =
-    this.hasAcceptedCookiesSubject.asObservable();
-
   constructor(
     private http: HttpClient,
     private cookieService: CookieService,
@@ -98,14 +94,13 @@ export class UserService implements OnDestroy {
     return this.http.get<ApiUser[]>(this.apiUrl + '/users/top');
   }
 
+  get hasAcceptedCookies(): boolean {
+    return !!this.cookieService.get('hasAcceptedCookies');
+  }
+
   setCookie(res: AuthResponse): void {
     if (res.token)
       this.cookieService.set('auth', res.token, { expires: 2, path: '/' });
-  }
-
-  checkIfAcceptedCookies(): void {
-    const hasAcceptedCookies = !!this.cookieService.get('hasAcceptedCookies');
-    this.hasAcceptedCookiesSubject.next(hasAcceptedCookies);
   }
 
   acceptCookies(): void {
