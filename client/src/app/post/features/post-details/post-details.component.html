@@ -5,6 +5,7 @@
     [isLoading]="isLoading"
     [likesCount]="likesCount$ | async"
     [isLiked]="isLiked$ | async"
+    [isLikeButtonDisabled]="loggedUser ? false : true"
     (delete)="onPostDelete()"
     (like)="onPostLike($event)"
   />
