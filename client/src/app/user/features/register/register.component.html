@@ -14,7 +14,7 @@
         id="register-email"
         placeholder="Email"
         formControlName="email"
-        [class.invalid]="isFieldInvalid('email')"
+        [class.invalid]="isFieldInvalid('email') || userAlreadyExists"
       />
       <input
         type="password"

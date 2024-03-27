@@ -26,6 +26,8 @@ export class RegisterComponent implements OnInit, OnDestroy {
   errorMessage: string | null = null;
   isSubmitted: boolean = false;
   isButtonDisabled: boolean = true;
+  userAlreadyExists: boolean = false;
+  lastEmailValue: string | undefined = undefined;
   private formSubscription: Subscription = new Subscription();
 
   registerForm = this.fb.nonNullable.group({
@@ -53,7 +55,14 @@ export class RegisterComponent implements OnInit, OnDestroy {
 
   subscribeToFormChanges(): Subscription {
     return this.registerForm.valueChanges.subscribe((val) => {
-      if (this.registerForm.valid) {
+      if (val.email !== this.lastEmailValue) {
+        this.userAlreadyExists = false;
+        this.lastEmailValue = val.email;
+      }
+
+      if (this.userAlreadyExists) return (this.isButtonDisabled = true);
+
+      if (this.registerForm.valid && !this.userAlreadyExists) {
         this.errorMessage = null;
         return (this.isButtonDisabled = false);
       }
@@ -111,6 +120,9 @@ export class RegisterComponent implements OnInit, OnDestroy {
         next: (res) => this.userService.setCookie(res),
         error: (e) => {
           this.errorMessage = e.error.message;
+          if (this.errorMessage?.includes(' email address already exists!'))
+            this.userAlreadyExists = true;
+
           this.isButtonDisabled = false;
         },
         complete: () => this.router.navigate(['/home']),
