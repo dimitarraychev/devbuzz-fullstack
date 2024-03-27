@@ -32,7 +32,7 @@ export class RequestInterceptor implements HttpInterceptor {
     return next.handle(clonedRequest).pipe(
       catchError((errorRes: HttpErrorResponse) => {
         if (errorRes.status === 401) {
-          this.cookieService.deleteAll();
+          this.cookieService.delete('auth', '/');
           this.router.navigate(['/user/login']);
           return EMPTY;
         }

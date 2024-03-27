@@ -1,13 +1,15 @@
-<div id="cookie-popup">
-  <p id="cookie-msg">
-    This website uses cookies to ensure you get the best experience. By using
-    our website, you agree to our use of cookies.
-  </p>
-  <img
-    title="Accept"
-    src="./assets/images/icon-cookie.svg"
-    alt="cookie"
-    id="cookie-button"
-    (click)="onAccept()"
-  />
-</div>
+<section id="cookie-wrapper">
+  <div id="cookie-popup" *ngIf="!hasAcceptedCookies">
+    <p id="cookie-msg">
+      This website uses cookies to ensure you get the best experience. By using
+      our website, you agree to our use of cookies.
+    </p>
+    <img
+      title="Accept"
+      src="./assets/images/icon-cookie.svg"
+      alt="cookie"
+      id="cookie-button"
+      (click)="onAccept()"
+    />
+  </div>
+</section>

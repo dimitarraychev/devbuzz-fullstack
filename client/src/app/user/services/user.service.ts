@@ -25,6 +25,10 @@ export class UserService implements OnDestroy {
   user: AuthUser | undefined;
   private userSubscription: Subscription;
 
+  private hasAcceptedCookiesSubject = new BehaviorSubject<boolean>(false);
+  public hasAcceptedCookies$: Observable<boolean> =
+    this.hasAcceptedCookiesSubject.asObservable();
+
   constructor(
     private http: HttpClient,
     private cookieService: CookieService,
@@ -50,29 +54,29 @@ export class UserService implements OnDestroy {
   authenticate() {
     return this.http.get<AuthResponse>(this.apiUrl + '/auth/authenticate').pipe(
       tap((res) => {
-        if (res == null) this.cookieService.deleteAll();
+        if (res == null) this.cookieService.delete('auth', '/');
 
         this.user$$.next(res.user);
       })
     );
   }
 
-  setCookie(res: AuthResponse): void {
-    if (res.token)
-      this.cookieService.set('auth', res.token, { expires: 2, path: '/' });
-  }
-
   logout(): void {
     this.http.get<LogoutResponse>(this.apiUrl + '/auth/logout').subscribe({
       next: (res) => {
-        this.cookieService.deleteAll();
-        this.user$$.next(undefined);
         this.router.navigate(['/home']);
+        this.cookieService.delete('auth', '/');
+        this.user$$.next(undefined);
       },
       error: (e) => {
-        this.cookieService.deleteAll();
-        this.user$$.next(undefined);
         this.router.navigate(['/home']);
+        this.cookieService.delete('auth', '/');
+        this.user$$.next(undefined);
+      },
+      complete: () => {
+        this.router.navigate(['/home']);
+        this.cookieService.delete('auth', '/');
+        this.user$$.next(undefined);
       },
     });
   }
@@ -92,6 +96,23 @@ export class UserService implements OnDestroy {
 
   getTopContributors(): Observable<ApiUser[]> {
     return this.http.get<ApiUser[]>(this.apiUrl + '/users/top');
+  }
+
+  setCookie(res: AuthResponse): void {
+    if (res.token)
+      this.cookieService.set('auth', res.token, { expires: 2, path: '/' });
+  }
+
+  checkIfAcceptedCookies(): void {
+    const hasAcceptedCookies = !!this.cookieService.get('hasAcceptedCookies');
+    this.hasAcceptedCookiesSubject.next(hasAcceptedCookies);
+  }
+
+  acceptCookies(): void {
+    this.cookieService.set('hasAcceptedCookies', 'true', {
+      expires: 2,
+      path: '/',
+    });
   }
 
   ngOnDestroy(): void {
