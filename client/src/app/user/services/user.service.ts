@@ -50,7 +50,7 @@ export class UserService implements OnDestroy {
   authenticate() {
     return this.http.get<AuthResponse>(this.apiUrl + '/auth/authenticate').pipe(
       tap((res) => {
-        if (res == null) this.cookieService.deleteAll('/');
+        if (res == null) this.cookieService.deleteAll();
 
         this.user$$.next(res.user);
       })
@@ -58,18 +58,19 @@ export class UserService implements OnDestroy {
   }
 
   setCookie(res: AuthResponse): void {
-    if (res.token) this.cookieService.set('auth', res.token, 2);
+    if (res.token)
+      this.cookieService.set('auth', res.token, { expires: 2, path: '/' });
   }
 
   logout(): void {
     this.http.get<LogoutResponse>(this.apiUrl + '/auth/logout').subscribe({
       next: (res) => {
-        this.cookieService.deleteAll('/');
+        this.cookieService.deleteAll();
         this.user$$.next(undefined);
         this.router.navigate(['/home']);
       },
       error: (e) => {
-        this.cookieService.deleteAll('/');
+        this.cookieService.deleteAll();
         this.user$$.next(undefined);
         this.router.navigate(['/home']);
       },
