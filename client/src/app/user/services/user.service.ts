@@ -42,15 +42,13 @@ export class UserService implements OnDestroy {
   }
 
   authenticate() {
-    return this.http
-      .get<AuthResponse>(this.apiUrl + '/auth/authenticate')
-      .pipe(
-        tap((res) =>
-          res.user
-            ? this.user$$.next(res.user)
-            : this.cookieService.delete('auth')
-        )
-      );
+    return this.http.get<AuthResponse>(this.apiUrl + '/auth/authenticate').pipe(
+      tap((res) => {
+        if (res == null) this.cookieService.delete('auth');
+
+        this.user$$.next(res.user);
+      })
+    );
   }
 
   setCookie(res: AuthResponse): void {
