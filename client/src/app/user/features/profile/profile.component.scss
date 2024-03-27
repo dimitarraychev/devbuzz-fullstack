@@ -30,13 +30,14 @@ $border-radius: 5px;
   width: 40%;
   display: flex;
   align-items: center;
-  gap: 0.75em;
+  // gap: 0.75em;
   margin-bottom: 1em;
-  padding: 0 1em 1em 1em;
+  padding: 0 1em 0.25em 1em;
 }
 
 .user-info-wrapper {
   padding: 0.5em;
+  margin-bottom: 0.75em;
 }
 
 .user-info {
