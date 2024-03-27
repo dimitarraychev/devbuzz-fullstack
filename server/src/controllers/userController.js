@@ -3,7 +3,7 @@ const userService = require("../services/userService");
 
 router.get("/top", async (req, res) => {
 	try {
-		let users = await userService.getTop();
+		const users = await userService.getTop();
 
 		res.status(200).json(users);
 	} catch (error) {
