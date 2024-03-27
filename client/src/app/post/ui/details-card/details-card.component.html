@@ -23,13 +23,14 @@
 
     <div class="details-info-bottom">
       <div class="details-owner">
-        <p class="owner-name">{{ post.owner.username }}</p>
+        <p class="owner-name">by {{ post.owner.username }}</p>
       </div>
       <div class="like-container">
         <p>Likes: {{ likesCount }}</p>
         <app-like-btn
           (like)="onLike($event)"
           [isLiked]="isLiked"
+          [isDisabled]="isLikeButtonDisabled"
           *ngIf="!isOwner"
         />
       </div>
