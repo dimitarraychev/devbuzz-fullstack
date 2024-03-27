@@ -69,7 +69,7 @@ export class PostCreateComponent implements OnInit, OnDestroy {
         return (this.isButtonDisabled = true);
       }
       this.errorMessage = null;
-      return (this.isButtonDisabled = false);
+      return (this.isButtonDisabled = true);
     });
   }
 
