@@ -8,6 +8,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 export class LikeBtnComponent {
   @Input() isLiked: boolean | null = false;
   @Input() isDisabled: boolean = false;
+  @Input() isLogged: boolean = false;
 
   @Output() like = new EventEmitter<boolean>();
 

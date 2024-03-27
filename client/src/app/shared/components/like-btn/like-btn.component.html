@@ -1,5 +1,5 @@
 <img
-  [title]="isLiked ? 'Unlike' : 'Like'"
+  [title]="isLogged ? (isLiked ? 'Unlike' : 'Like') : 'Login required'"
   [src]="isLiked ? iconsEnum.liked : iconsEnum.like"
   alt="like"
   id="like-button"

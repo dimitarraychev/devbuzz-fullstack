@@ -29,6 +29,7 @@
         <p>Likes: {{ likesCount }}</p>
         <app-like-btn
           *ngIf="!isOwner"
+          [isLogged]="isLogged"
           [isLiked]="isLiked"
           [isDisabled]="isLikeButtonDisabled"
           (like)="onLike($event)"

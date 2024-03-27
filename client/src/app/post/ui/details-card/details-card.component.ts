@@ -12,6 +12,7 @@ export class DetailsCardComponent {
   @Input() isOwner: boolean = false;
   @Input() likesCount: number | null = 0;
   @Input() isLiked: boolean | null = false;
+  @Input() isLogged: boolean = false;
   @Input() isLikeButtonDisabled: boolean = false;
 
   @Output() delete = new EventEmitter<void>();

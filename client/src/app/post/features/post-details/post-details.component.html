@@ -2,6 +2,7 @@
   <app-details-card
     [post]="post"
     [isOwner]="isOwner"
+    [isLogged]="!!loggedUser"
     [isLoading]="isLoading"
     [likesCount]="likesCount$ | async"
     [isLiked]="isLiked$ | async"
