@@ -7,7 +7,7 @@ import { UserService } from '../user/services/user.service';
   styleUrls: ['./authentication.component.scss'],
 })
 export class AuthenticationComponent implements OnInit {
-  isAuthenticating = true;
+  isAuthenticating: boolean = true;
 
   constructor(private userService: UserService) {}
 
