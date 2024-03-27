@@ -73,13 +73,25 @@
       </div>
 
       <section id="contributors" *ngIf="!isLoading">
-        <p class="border-glow" *ngIf="users && users.length > 0">
+        <p
+          class="border-glow"
+          *ngIf="users && users.length > 0"
+          [routerLink]="['/user', users[0]._id]"
+        >
           🥇1st place - {{ users[0].username }}
         </p>
-        <p class="border-glow" *ngIf="users && users.length > 1">
+        <p
+          class="border-glow"
+          *ngIf="users && users.length > 1"
+          [routerLink]="['/user', users[1]._id]"
+        >
           🥈2nd place - {{ users[1].username }}
         </p>
-        <p class="border-glow" *ngIf="users && users.length > 2">
+        <p
+          class="border-glow"
+          *ngIf="users && users.length > 2"
+          [routerLink]="['/user', users[2]._id]"
+        >
           🥉3rd place - {{ users[2].username }}
         </p>
       </section>
