@@ -69,10 +69,7 @@ router.get("/authenticate", async (req, res) => {
 			user,
 		});
 	} catch (error) {
-		res.status(204).json({
-			ok: false,
-			message: "Authentication failed: Not logged in.",
-		});
+		res.status(204).end();
 	}
 });
 
@@ -82,10 +79,7 @@ router.get("/logout", async (req, res) => {
 
 		await authService.logout(token);
 
-		res.status(204).json({
-			ok: true,
-			message: "Logout successful.",
-		});
+		res.status(204).end();
 	} catch (error) {
 		res.status(500).json({
 			ok: false,
