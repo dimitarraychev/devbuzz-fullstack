@@ -1,8 +1,8 @@
 <img
-  [src]="
-    isLiked ? './assets/images/icon-liked.svg' : './assets/images/icon-like.svg'
-  "
+  [src]="isLiked ? iconsEnum.liked : iconsEnum.like"
   alt="like"
   id="like-button"
-  (click)="isLiked ? onUnlike() : onLike()"
+  [class.disabled]="isDisabled"
+  [class.enabled]="!isDisabled"
+  (click)="onToggle()"
 />

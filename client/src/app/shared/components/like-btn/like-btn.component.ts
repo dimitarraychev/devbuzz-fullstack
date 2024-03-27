@@ -7,19 +7,18 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 })
 export class LikeBtnComponent {
   @Input() isLiked: boolean | null = false;
+  @Input() isDisabled: boolean = false;
 
   @Output() like = new EventEmitter<boolean>();
 
-  iconsMap = {
+  iconsEnum = {
     like: './assets/images/icon-like.svg',
     liked: './assets/images/icon-liked.svg',
   };
 
-  onLike(): void {
-    this.like.emit(true);
-  }
+  onToggle(): void {
+    if (this.isDisabled) return;
 
-  onUnlike(): void {
-    this.like.emit(false);
+    this.isLiked ? this.like.emit(false) : this.like.emit(true);
   }
 }

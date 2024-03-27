@@ -2,9 +2,16 @@
   width: 2.5em;
   height: 2.5em;
   margin: 0.5em;
+}
 
+.enabled {
   &:hover {
     cursor: pointer;
     filter: brightness(0.8);
   }
+}
+
+.disabled {
+  filter: brightness(0.6);
+  cursor: not-allowed;
 }
