@@ -16,11 +16,13 @@ exports.register = async function (username, email, rawPassword) {
 
 	const password = await bcrypt.hash(rawPassword, 12);
 
-	const user = await User.create({ username, email, password }).lean();
+	const user = await User.create({ username, email, password });
 
 	const token = await generateToken(user._id, user.username, user.email);
 
-	return { token, user: sanitizeUserObject(user) };
+	const userObject = user.toObject();
+
+	return { token, user: sanitizeUserObject(userObject) };
 };
 
 exports.login = async function (email, password) {
