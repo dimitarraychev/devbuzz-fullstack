@@ -59,4 +59,14 @@ exports.update = (postId, postData) =>
 		new: true,
 	});
 
-exports.delete = (postId) => Post.findByIdAndDelete(postId);
+exports.delete = async (postId) => {
+	const post = await Post.findByIdAndDelete(postId);
+	const user = await User.findById(post.owner._id);
+
+	await Comment.deleteMany({ _postId: post._id });
+
+	user.posts = user.posts.filter((postId) => postId != post._id);
+	await user.save();
+
+	return post;
+};
