@@ -20,9 +20,9 @@ exports.register = async function (username, email, rawPassword) {
 
 	const token = await generateToken(user._id, user.username, user.email);
 
-	const userObject = user.toObject();
+	const userObj = user.toObject();
 
-	return { token, user: sanitizeUserObject(userObject) };
+	return { token, user: sanitizeUserObject(userObj) };
 };
 
 exports.login = async function (email, password) {

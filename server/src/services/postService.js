@@ -1,5 +1,6 @@
 const Post = require("../models/Post");
 const User = require("../models/User");
+const Comment = require("../models/Comment");
 
 exports.create = async (postData) => {
 	const post = await Post.create(postData);
@@ -65,7 +66,7 @@ exports.delete = async (postId) => {
 
 	await Comment.deleteMany({ _postId: post._id });
 
-	user.posts = user.posts.filter((postId) => postId != post._id);
+	user.posts = user.posts.filter((id) => id != postId);
 	await user.save();
 
 	return post;

@@ -46,14 +46,12 @@ router.delete("/:commentId", isAuth, async (req, res) => {
 		if (comment.owner._id != req.user._id)
 			throw new Error("Owner verification failed!");
 
-		await commentService.delete(commentId);
-
-		const post = await postService.getOne(comment._postId);
+		const comments = await commentService.delete(commentId);
 
 		res.status(200).json({
 			ok: true,
 			message: "Comment successfully deleted.",
-			comments: post.comments,
+			comments,
 		});
 	} catch (error) {
 		res.status(400).json({
