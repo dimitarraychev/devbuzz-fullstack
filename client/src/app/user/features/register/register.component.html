@@ -35,7 +35,7 @@
         buttonSize="large"
         buttonText="Register"
         id="register-button"
-        [isDisabled]="isButtonDisabled"
+        [isDisabled]="isButtonDisabled || userAlreadyExists"
       />
     </form>
 
