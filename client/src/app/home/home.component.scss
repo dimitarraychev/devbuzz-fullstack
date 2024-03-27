@@ -43,11 +43,6 @@ $bee-yellow: #e9ab17;
   display: flex;
   gap: 1em;
 
-  #contributors-wrapper {
-    height: 100%;
-    padding-bottom: 3em;
-  }
-
   div {
     background-color: $dark-bg;
 
@@ -88,15 +83,35 @@ $bee-yellow: #e9ab17;
   }
 }
 
-#contributors {
+#contributors-wrapper {
+  height: 100%;
+  padding-bottom: 3em;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
 
-  p {
-    padding: 1em 0.5em;
-    margin: 0 1em 1em 1em;
-    background-color: $light-bg;
+  app-loader {
+    margin: 2em 0;
   }
+
+  #contributors {
+    display: flex;
+    flex-direction: column;
+
+    p {
+      padding: 1em 0.5em;
+      margin: 0 1em 1em 1em;
+      background-color: $light-bg;
+    }
+  }
+}
+
+#no-contributors {
+  font-size: 22px;
+  width: 80%;
+  text-align: center;
+  padding: 2em 0;
 }
 
 @media screen and (max-width: 1000px) {

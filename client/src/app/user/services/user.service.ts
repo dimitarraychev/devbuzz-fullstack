@@ -3,6 +3,7 @@ import { Injectable, OnDestroy } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { User } from '../../types/user.type';
 import {
+  ApiUser,
   ApiUserResponse,
   AuthResponse,
   AuthUser,
@@ -79,6 +80,10 @@ export class UserService implements OnDestroy {
         limit: limit.toString(),
       },
     });
+  }
+
+  getTopContributors(): Observable<ApiUser[]> {
+    return this.http.get<ApiUser[]>(this.apiUrl + '/users/top');
   }
 
   ngOnDestroy(): void {

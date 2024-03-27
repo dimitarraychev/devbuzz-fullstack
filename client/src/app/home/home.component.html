@@ -66,10 +66,22 @@
     <div class="border-glow" id="contributors-wrapper">
       <h3>🏆Top Contributors</h3>
 
-      <section id="contributors">
-        <p class="border-glow">🥇1st place - Alex Techton</p>
-        <p class="border-glow">🥈2nd place - Marie Curie</p>
-        <p class="border-glow">🥉3rd place - John Cena</p>
+      <app-loader *ngIf="isLoading" />
+
+      <div id="no-contributors" *ngIf="!isLoading && users.length < 1">
+        Sorry, no contributions yet. Quick, be the first!
+      </div>
+
+      <section id="contributors" *ngIf="!isLoading">
+        <p class="border-glow" *ngIf="users && users.length > 0">
+          🥇1st place - {{ users[0].username }}
+        </p>
+        <p class="border-glow" *ngIf="users && users.length > 1">
+          🥈2nd place - {{ users[1].username }}
+        </p>
+        <p class="border-glow" *ngIf="users && users.length > 2">
+          🥉3rd place - {{ users[2].username }}
+        </p>
       </section>
     </div>
   </div>
