@@ -11,6 +11,7 @@ import {
 } from '../../types/api.type';
 import { CookieService } from 'ngx-cookie-service';
 import { BehaviorSubject, Observable, Subscription, tap } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -24,7 +25,11 @@ export class UserService implements OnDestroy {
   user: AuthUser | undefined;
   private userSubscription: Subscription;
 
-  constructor(private http: HttpClient, private cookieService: CookieService) {
+  constructor(
+    private http: HttpClient,
+    private cookieService: CookieService,
+    private router: Router
+  ) {
     this.userSubscription = this.user$.subscribe((user) => {
       this.user = user;
     });
@@ -45,7 +50,7 @@ export class UserService implements OnDestroy {
   authenticate() {
     return this.http.get<AuthResponse>(this.apiUrl + '/auth/authenticate').pipe(
       tap((res) => {
-        if (res == null) this.cookieService.delete('auth');
+        if (res == null) this.cookieService.deleteAll('/');
 
         this.user$$.next(res.user);
       })
@@ -59,12 +64,14 @@ export class UserService implements OnDestroy {
   logout(): void {
     this.http.get<LogoutResponse>(this.apiUrl + '/auth/logout').subscribe({
       next: (res) => {
-        this.cookieService.delete('auth');
+        this.cookieService.deleteAll('/');
         this.user$$.next(undefined);
+        this.router.navigate(['/home']);
       },
       error: (e) => {
-        this.cookieService.delete('auth');
+        this.cookieService.deleteAll('/');
         this.user$$.next(undefined);
+        this.router.navigate(['/home']);
       },
     });
   }
