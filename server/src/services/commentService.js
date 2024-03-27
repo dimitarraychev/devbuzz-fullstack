@@ -17,4 +17,12 @@ exports.add = async (commentData) => {
 
 exports.getOne = (commentId) => Comment.findById(commentId);
 
-exports.delete = (commentId) => Comment.findByIdAndDelete(commentId);
+exports.delete = async (commentId) => {
+	const comment = Comment.findByIdAndDelete(commentId);
+	const post = await Post.findById(comment._postId);
+
+	post.comments = post.comments.filter(
+		(commentId) => commentId != comment._id
+	);
+	await user.save();
+};
