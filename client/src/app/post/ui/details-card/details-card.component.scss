@@ -90,6 +90,12 @@ $border-radius: 5px;
   }
 }
 
+#owner-btns {
+  display: flex;
+  gap: 0.5em;
+  margin: 0.5em;
+}
+
 app-loader {
   position: absolute;
   top: 50%;
