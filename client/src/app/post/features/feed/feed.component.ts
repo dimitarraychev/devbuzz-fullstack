@@ -63,7 +63,10 @@ export class FeedComponent implements OnInit, OnDestroy {
           this.latestPosts = res.posts;
           this.isLoadingLatest = false;
         },
-        error: (e) => console.log(e), // TODO handle error?,
+        error: (e) => {
+          console.log(e);
+          this.isLoadingLatest = false; // TODO handle error?,
+        },
       });
   }
 
@@ -73,7 +76,10 @@ export class FeedComponent implements OnInit, OnDestroy {
         this.hottestPosts = posts;
         this.isLoadingHottest = false;
       },
-      error: (e) => console.log(e), // TODO handle error?,
+      error: (e) => {
+        console.log(e);
+        this.isLoadingHottest = false; // TODO handle error?,
+      },
     });
   }
 
