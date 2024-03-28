@@ -9,6 +9,7 @@
       buttonSize="large"
       buttonIcon="create"
       routerLink="/posts/create"
+      [isDisabled]="!isLogged"
     />
     <a id="feedLink" routerLink="/posts/feed">Feed</a>
     <p id="username" [class.menu-opened]="isMenuOpen" (click)="toggleMenu()">

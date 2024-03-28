@@ -1,12 +1,11 @@
 <button
+  [title]="isDisabled ? 'Login required' : 'Create'"
   [ngStyle]="buttonStyles"
   [disabled]="isDisabled"
   [class.disabled]="isDisabled"
   [class.enabled]="!isDisabled"
 >
   {{ buttonText }}
-  <i *ngIf="buttonIcon === 'like'" class="fa-regular fa-heart interactable"></i>
+  <!-- <i *ngIf="buttonIcon === 'like'" class="fa-regular fa-heart interactable"></i> -->
   <i *ngIf="buttonIcon === 'create'" class="fa-regular fa-pen-to-square"></i>
-  <i *ngIf="buttonIcon === 'edit'" class="fa-solid fa-pencil"></i>
-  <i *ngIf="buttonIcon === 'delete'" class="fa-solid fa-trash-can"></i>
 </button>
