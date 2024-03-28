@@ -7,14 +7,16 @@
         id="email"
         placeholder="Email"
         formControlName="email"
-        [class.invalid]="isFieldInvalid('email')"
+        [class.invalid]="isFieldInvalid('email') || invalidUsernameOrPassword"
       />
       <input
         type="password"
         id="password"
         placeholder="Password"
         formControlName="password"
-        [class.invalid]="isFieldInvalid('password')"
+        [class.invalid]="
+          isFieldInvalid('password') || invalidUsernameOrPassword
+        "
       />
       <p id="error-msg" *ngIf="errorMessage">{{ errorMessage }}</p>
       <app-button

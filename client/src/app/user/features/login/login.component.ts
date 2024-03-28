@@ -25,6 +25,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   errorMessage: string | null = null;
   isSubmitted: boolean = false;
   isButtonDisabled: boolean = true;
+  invalidUsernameOrPassword: boolean = false;
   private formSubscription: Subscription = new Subscription();
 
   loginForm = this.fb.nonNullable.group({
@@ -34,6 +35,8 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   subscribeToFormChanges(): Subscription {
     return this.loginForm.valueChanges.subscribe(() => {
+      this.invalidUsernameOrPassword = false;
+
       if (this.loginForm.valid) {
         this.errorMessage = null;
         return (this.isButtonDisabled = false);
@@ -80,6 +83,7 @@ export class LoginComponent implements OnInit, OnDestroy {
         next: (res) => this.userService.setCookie(res),
         error: (e) => {
           this.errorMessage = e.error.message;
+          this.invalidUsernameOrPassword = true;
           this.isButtonDisabled = false;
         },
         complete: () => this.router.navigate(['/home']),
