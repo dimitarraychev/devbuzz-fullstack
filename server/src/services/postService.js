@@ -42,7 +42,7 @@ exports.getHottest = async (category) => {
 		query.category = category;
 	}
 
-	const posts = Post.find(query).sort({ likes: 1 }).limit(3);
+	const posts = Post.find(query).sort({ likes: -1 }).limit(3);
 
 	return posts;
 };
