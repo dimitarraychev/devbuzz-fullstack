@@ -12,6 +12,7 @@ import { RouterModule } from '@angular/router';
 import { EditBtnComponent } from './components/edit-btn/edit-btn.component';
 import { DeleteBtnComponent } from './components/delete-btn/delete-btn.component';
 import { LikeBtnComponent } from './components/like-btn/like-btn.component';
+import { ModalPopupComponent } from './components/modal-popup/modal-popup.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { LikeBtnComponent } from './components/like-btn/like-btn.component';
     LikeBtnComponent,
     RelativeTimePipe,
     TruncateWithElipsisPipe,
+    ModalPopupComponent,
   ],
   imports: [CommonModule, RouterModule],
   exports: [
@@ -36,6 +38,7 @@ import { LikeBtnComponent } from './components/like-btn/like-btn.component';
     EditBtnComponent,
     DeleteBtnComponent,
     LikeBtnComponent,
+    ModalPopupComponent,
     RelativeTimePipe,
     TruncateWithElipsisPipe,
   ],

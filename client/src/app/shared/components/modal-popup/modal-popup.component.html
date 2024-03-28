@@ -1,0 +1,22 @@
+<div id="overlay"></div>
+<div id="confirmation-dialog" class="border-glow">
+  <p id="confirmation-message">{{ message }}</p>
+  <div id="confirmation-buttons">
+    <img
+      title="Confirm"
+      src="./assets/images/icon-confirm.svg"
+      alt="confirm"
+      id="confirm-button"
+      class="button"
+      (click)="onConfirm()"
+    />
+    <img
+      title="Close"
+      src="./assets/images/icon-close.svg"
+      alt="close"
+      id="close-button"
+      class="button"
+      (click)="onCancel()"
+    />
+  </div>
+</div>
