@@ -12,17 +12,19 @@
       [isDisabled]="!isLogged"
     />
     <a id="feedLink" routerLink="/posts/feed">Feed</a>
-    <p id="username" [class.menu-opened]="isMenuOpen" (click)="toggleMenu()">
-      {{ loggedUser?.username || "Guest" }}
-    </p>
-    <i
-      class="fa-solid"
-      [class.fa-user-astronaut]="isLogged"
-      [class.fa-user-secret]="!isLogged"
-      id="user-icon"
-      [class.menu-opened]="isMenuOpen"
-      (click)="toggleMenu()"
-    ></i>
+    <div id="user-container">
+      <p id="username" [class.menu-opened]="isMenuOpen" (click)="toggleMenu()">
+        {{ loggedUser?.username || "Guest" }}
+      </p>
+      <i
+        class="fa-solid"
+        [class.fa-user-astronaut]="isLogged"
+        [class.fa-user-secret]="!isLogged"
+        id="user-icon"
+        [class.menu-opened]="isMenuOpen"
+        (click)="toggleMenu()"
+      ></i>
+    </div>
   </div>
 </nav>
 <div id="menu-items" (click)="hideMenu()" *ngIf="isMenuOpen">

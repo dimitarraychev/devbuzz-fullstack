@@ -56,6 +56,15 @@ nav {
   gap: 0.2em;
 }
 
+#user-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.2em;
+
+  @include hoverEffect;
+}
+
 #feedLink {
   color: $font-color;
   margin: 3em;
@@ -67,16 +76,12 @@ nav {
 #username {
   color: $font-color;
   cursor: pointer;
-
-  @include hoverEffect;
 }
 
 #user-icon {
   font-size: 26px;
   color: $font-color;
   cursor: pointer;
-
-  @include hoverEffect;
 }
 
 #menu-items {
