@@ -8,4 +8,5 @@ import { Post } from 'src/app/types/post.type';
 })
 export class PostCardComponent {
   @Input({ required: true }) post = {} as Post;
+  @Input() moreInfo: 'time' | 'likes' | undefined = undefined;
 }

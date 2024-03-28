@@ -4,6 +4,12 @@
     onerror="this.src='assets/images/image-missing.jpg'"
     alt="Post Image"
   />
+  <p class="info" *ngIf="moreInfo == 'time'">
+    {{ post.createdAt | relativeTime }}
+  </p>
+  <p class="info" *ngIf="moreInfo == 'likes'">
+    {{ post.likes.length }}<i class="fa-solid fa-heart"></i>
+  </p>
   <div class="post-content">
     <div class="post-title">{{ post.title | truncateWithElipsis }}</div>
     <app-button
