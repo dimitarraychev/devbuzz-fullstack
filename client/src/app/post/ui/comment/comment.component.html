@@ -1,14 +1,19 @@
 <div class="comment border-glow">
   <div class="comment-top-container">
     <div class="comment-top-left">
-      <i class="fa-regular fa-user"></i>
-      <p class="comment-username">{{ comment.owner.username }}</p>
+      <i
+        class="fa-regular fa-user"
+        [style.color]="isOwner ? '#e9ab17' : 'gray'"
+      ></i>
+      <p class="comment-username" [style.color]="isOwner ? '#e9ab17' : 'gray'">
+        {{ comment.owner.username }}
+      </p>
     </div>
     <div class="comment-top-right">
       <p class="comment-time">
         {{ comment.createdAt | relativeTime }}
       </p>
-      <app-button buttonSize="small" buttonText="Delete" (click)="onDelete()" />
+      <app-delete-btn *ngIf="isOwner" (click)="onDelete()" />
     </div>
   </div>
   <p class="comment-text">{{ comment.message }}</p>

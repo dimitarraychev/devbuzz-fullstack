@@ -8,6 +8,7 @@ import { PostComment } from 'src/app/types/post.type';
 })
 export class CommentComponent {
   @Input() comment = {} as PostComment;
+  @Input() isOwner: boolean = false;
 
   @Output() delete = new EventEmitter<string>();
 
