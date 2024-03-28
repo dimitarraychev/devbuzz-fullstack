@@ -26,5 +26,5 @@ exports.delete = async (commentId) => {
 
 	const postObj = post.toObject();
 
-	return postObj.comments;
+	return post.comments;
 };
