@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Post } from 'src/app/types/post.type';
+import { PostCard } from 'src/app/types/post.type';
 
 @Component({
   selector: 'app-post-card',
@@ -7,6 +7,6 @@ import { Post } from 'src/app/types/post.type';
   styleUrls: ['./post-card.component.scss'],
 })
 export class PostCardComponent {
-  @Input({ required: true }) post = {} as Post;
+  @Input({ required: true }) post = {} as PostCard;
   @Input() moreInfo: 'time' | 'likes' | undefined = undefined;
 }

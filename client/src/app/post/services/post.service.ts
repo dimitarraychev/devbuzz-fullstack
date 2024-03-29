@@ -3,8 +3,8 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { environment } from 'src/environments/environment';
-import { NewPost, Post } from '../../types/post.type';
-import { ApiResponse, ApiPostResponse } from '../../types/api.type';
+import { NewPost, Post, PostCard } from '../../types/post.type';
+import { ApiPostResponse } from '../../types/api.type';
 
 @Injectable({
   providedIn: 'root',
@@ -30,8 +30,8 @@ export class PostService {
     });
   }
 
-  getHottestPosts(category: string): Observable<Post[]> {
-    return this.http.get<Post[]>(this.apiUrl + '/posts/hottest', {
+  getHottestPosts(category: string): Observable<PostCard[]> {
+    return this.http.get<PostCard[]>(this.apiUrl + '/posts/hottest', {
       params: { category },
     });
   }
@@ -40,30 +40,24 @@ export class PostService {
     return this.http.get<Post>(this.apiUrl + '/posts/' + postId);
   }
 
-  createPost(postData: NewPost): Observable<ApiResponse> {
-    return this.http.post<ApiResponse>(this.apiUrl + '/posts', postData);
+  createPost(postData: NewPost): Observable<Post> {
+    return this.http.post<Post>(this.apiUrl + '/posts', postData);
   }
 
-  editPost(postId: string, postData: NewPost): Observable<ApiResponse> {
-    return this.http.patch<ApiResponse>(
-      this.apiUrl + '/posts/' + postId,
-      postData
-    );
+  editPost(postId: string, postData: NewPost): Observable<Post> {
+    return this.http.patch<Post>(this.apiUrl + '/posts/' + postId, postData);
   }
 
-  deletePost(postId: string): Observable<ApiResponse> {
-    return this.http.delete<ApiResponse>(this.apiUrl + '/posts/' + postId);
+  deletePost(postId: string): Observable<Post> {
+    return this.http.delete<Post>(this.apiUrl + '/posts/' + postId);
   }
 
-  likePost(postId: string): Observable<ApiResponse> {
-    return this.http.post<ApiResponse>(
-      this.apiUrl + '/posts/' + postId + '/like',
-      {}
-    );
+  likePost(postId: string): Observable<Post> {
+    return this.http.post<Post>(this.apiUrl + '/posts/' + postId + '/like', {});
   }
 
-  unlikePost(postId: string): Observable<ApiResponse> {
-    return this.http.post<ApiResponse>(
+  unlikePost(postId: string): Observable<Post> {
+    return this.http.post<Post>(
       this.apiUrl + '/posts/' + postId + '/unlike',
       {}
     );

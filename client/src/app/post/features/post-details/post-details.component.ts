@@ -64,8 +64,8 @@ export class PostDetailsComponent implements OnInit {
 
   onPostLike() {
     this.postService.likePost(this.postId).subscribe({
-      next: (res) => {
-        if (res.likes != undefined) this.likesCount$.next(res.likes);
+      next: (post) => {
+        this.likesCount$.next(post.likes.length);
 
         this.isLiked$.next(true);
       },
@@ -75,8 +75,8 @@ export class PostDetailsComponent implements OnInit {
 
   onPostUnlike() {
     this.postService.unlikePost(this.postId).subscribe({
-      next: (res) => {
-        if (res.likes != undefined) this.likesCount$.next(res.likes);
+      next: (post) => {
+        this.likesCount$.next(post.likes.length);
 
         this.isLiked$.next(false);
       },
@@ -88,9 +88,7 @@ export class PostDetailsComponent implements OnInit {
     this.commentService
       .addComment({ message, _postId: this.postId })
       .subscribe({
-        next: (res) => {
-          if (res.comments) this.post.comments = res.comments;
-        },
+        next: (post) => (this.post.comments = post.comments),
         error: console.log, // TODO handle error?
       });
   }
@@ -105,25 +103,23 @@ export class PostDetailsComponent implements OnInit {
 
     if (!isConfirmed) return;
 
-    if (this.commentToDelete == undefined) return this.onPostDelete();
+    if (this.commentToDelete == undefined) return this.deletePost();
 
-    return this.onCommentDelete();
+    return this.deleteComment();
   }
 
-  onPostDelete(): void {
+  deletePost(): void {
     this.postService.deletePost(this.postId).subscribe({
       error: console.log, // TODO handle error?
       complete: () => this.router.navigate(['posts/feed']),
     });
   }
 
-  onCommentDelete(): void {
+  deleteComment(): void {
     if (!this.commentToDelete) return;
 
     this.commentService.deleteComent(this.commentToDelete).subscribe({
-      next: (res) => {
-        if (res.comments) this.post.comments = res.comments;
-      },
+      next: (post) => (this.post.comments = post.comments),
       error: console.log, // TODO handle error?
     });
 

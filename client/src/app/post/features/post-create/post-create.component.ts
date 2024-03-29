@@ -97,7 +97,7 @@ export class PostCreateComponent implements OnInit, OnDestroy {
     this.isButtonDisabled = true;
 
     this.postService.createPost(this.createForm.getRawValue()).subscribe({
-      next: (res) => this.router.navigate(['/posts', res._id]),
+      next: (post) => this.router.navigate(['/posts', post._id]),
       error: (e) => {
         this.errorMessage = e.error.message;
         this.isButtonDisabled = false;

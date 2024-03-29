@@ -131,7 +131,7 @@ export class PostEditComponent implements OnInit, OnDestroy {
     this.postService
       .editPost(this.postId, this.editForm.getRawValue())
       .subscribe({
-        next: (res) => this.router.navigate(['/posts', res._id]),
+        next: (post) => this.router.navigate(['/posts', post._id]),
         error: (e) => {
           this.errorMessage = e.error.message;
           this.isButtonDisabled = false;

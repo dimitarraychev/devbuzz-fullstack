@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, OnDestroy } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { User } from '../../types/user.type';
+import { NewUser } from '../../types/api.type';
 import {
   ApiUser,
   ApiUserResponse,
@@ -35,13 +35,13 @@ export class UserService implements OnDestroy {
     });
   }
 
-  login(userData: User): Observable<AuthResponse> {
+  login(userData: NewUser): Observable<AuthResponse> {
     return this.http
       .post<AuthResponse>(this.apiUrl + '/auth/login', userData)
       .pipe(tap((res) => this.user$$.next(res.user)));
   }
 
-  register(userData: User): Observable<AuthResponse> {
+  register(userData: NewUser): Observable<AuthResponse> {
     return this.http
       .post<AuthResponse>(this.apiUrl + '/auth/register', userData)
       .pipe(tap((res) => this.user$$.next(res.user)));

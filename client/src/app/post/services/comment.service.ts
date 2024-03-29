@@ -3,8 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { environment } from 'src/environments/environment';
-import { ApiResponse } from 'src/app/types/api.type';
-import { NewComment } from 'src/app/types/post.type';
+import { NewComment, Post } from 'src/app/types/post.type';
 
 @Injectable({
   providedIn: 'root',
@@ -14,13 +13,11 @@ export class CommentService {
 
   constructor(private http: HttpClient) {}
 
-  addComment(commentData: NewComment): Observable<ApiResponse> {
-    return this.http.post<ApiResponse>(this.apiUrl + '/comments', commentData);
+  addComment(commentData: NewComment): Observable<Post> {
+    return this.http.post<Post>(this.apiUrl + '/comments', commentData);
   }
 
-  deleteComent(commentId: string): Observable<ApiResponse> {
-    return this.http.delete<ApiResponse>(
-      this.apiUrl + '/comments/' + commentId
-    );
+  deleteComent(commentId: string): Observable<Post> {
+    return this.http.delete<Post>(this.apiUrl + '/comments/' + commentId);
   }
 }
