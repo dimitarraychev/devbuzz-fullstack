@@ -1,3 +1,5 @@
+$shadow: 0.2em 0.2em 0.5em rgba(0, 0, 0, 0.5);
+
 #pagination-container {
   display: flex;
   align-items: center;
@@ -7,8 +9,10 @@
 
   .arrow {
     background-size: cover;
-    width: 2.5em;
     height: 2.5em;
+    width: auto;
+    border-radius: 50%;
+    box-shadow: $shadow;
   }
 }
 
