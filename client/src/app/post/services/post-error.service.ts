@@ -24,8 +24,6 @@ export class PostErrorService {
   }
 
   validationErrorHandler(form: FormGroup): string {
-    console.log(form);
-
     for (const field of this.postFormFields) {
       if (form.get(field)?.hasError('required'))
         return `Uh-oh! ${field} is required.`;
