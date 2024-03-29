@@ -99,7 +99,6 @@ $shadow: 0.2em 0.2em 0.5em rgba(0, 0, 0, 0.5);
   overflow-wrap: break-word;
   white-space: pre-line;
   padding: 1em 0 2em 0;
-  text-shadow: $shadow;
 
   &::first-letter {
     initial-letter: 2;

@@ -24,6 +24,7 @@ $shadow: 0.2em 0.2em 0.5em rgba(0, 0, 0, 0.5);
     font-size: 36px;
     margin-bottom: 0.5rem;
     font-weight: 900;
+    text-shadow: $shadow;
   }
 
   p {
@@ -53,6 +54,7 @@ $shadow: 0.2em 0.2em 0.5em rgba(0, 0, 0, 0.5);
       margin: auto;
       text-align: center;
       padding: 1em;
+      text-shadow: $shadow;
     }
   }
 }
@@ -82,6 +84,7 @@ $shadow: 0.2em 0.2em 0.5em rgba(0, 0, 0, 0.5);
 
   h4 {
     font-size: 22px;
+    text-shadow: $shadow;
   }
 }
 

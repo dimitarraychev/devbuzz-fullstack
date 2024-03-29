@@ -3,6 +3,7 @@ $nav-light-bg-color: rgba(60, 64, 66, 0.8);
 $font-color: white;
 $border-radius: 5px;
 $bee-yellow: #e9ab17;
+$shadow: 0.2em 0.2em 0.5em rgba(0, 0, 0, 0.5);
 
 @mixin hoverEffect {
   &:hover {
@@ -37,6 +38,11 @@ nav {
     letter-spacing: -2px;
     font-weight: bold;
     color: $font-color;
+    text-shadow: $shadow;
+  }
+
+  i {
+    text-shadow: $shadow;
   }
 
   span {
@@ -69,6 +75,7 @@ nav {
   color: $font-color;
   margin: 3em;
   cursor: pointer;
+  text-shadow: $shadow;
 
   @include hoverEffect;
 }
@@ -76,12 +83,14 @@ nav {
 #username {
   color: $font-color;
   cursor: pointer;
+  text-shadow: $shadow;
 }
 
 #user-icon {
   font-size: 26px;
   color: $font-color;
   cursor: pointer;
+  text-shadow: $shadow;
 }
 
 #menu-items {
