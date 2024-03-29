@@ -3,7 +3,7 @@ import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 
 import { PostService } from '../../services/post.service';
-import { Post, PostCategory } from 'src/app/types/post.type';
+import { Post, PostCard, PostCategory } from 'src/app/types/post.type';
 
 @Component({
   selector: 'app-feed',
@@ -24,11 +24,11 @@ export class FeedComponent implements OnInit, OnDestroy {
   totalPages: number = 1;
   private routeSubscription: Subscription = new Subscription();
 
-  latestPosts: Post[] = [];
+  latestPosts: PostCard[] = [];
   isLoadingLatest: boolean = true;
   private latestPostsSubscription: Subscription = new Subscription();
 
-  hottestPosts: Post[] = [];
+  hottestPosts: PostCard[] = [];
   isLoadingHottest: boolean = true;
   private hottestPostsSubscription: Subscription = new Subscription();
 
