@@ -24,8 +24,12 @@ export class PostDetailsComponent implements OnInit {
   post = {} as Post;
   isLoading: boolean = true;
   isOwner: boolean = false;
+  showPopup: boolean = false;
+  commentToDelete: string | undefined = undefined;
+
   likesCount$ = new BehaviorSubject<number>(0);
   isLiked$ = new BehaviorSubject<boolean>(false);
+
   postId: string = this.route.snapshot.params['id'];
 
   get loggedUser() {
@@ -46,13 +50,6 @@ export class PostDetailsComponent implements OnInit {
         this.isLoading = false;
       },
       error: (e) => this.router.navigate(['404']),
-    });
-  }
-
-  onPostDelete(): void {
-    this.postService.deletePost(this.postId).subscribe({
-      error: console.log, // TODO handle error?
-      complete: () => this.router.navigate(['posts/feed']),
     });
   }
 
@@ -77,12 +74,38 @@ export class PostDetailsComponent implements OnInit {
       });
   }
 
-  onCommentDelete(commentId: string): void {
-    this.commentService.deleteComent(commentId).subscribe({
+  onDelete(commentId: string | undefined): void {
+    this.showPopup = true;
+    if (commentId) this.commentToDelete = commentId;
+  }
+
+  onConfirmedDelete(isConfirmed: boolean): void {
+    this.showPopup = false;
+
+    if (!isConfirmed) return;
+
+    if (this.commentToDelete == undefined) return this.onPostDelete();
+
+    return this.onCommentDelete();
+  }
+
+  onPostDelete(): void {
+    this.postService.deletePost(this.postId).subscribe({
+      error: console.log, // TODO handle error?
+      complete: () => this.router.navigate(['posts/feed']),
+    });
+  }
+
+  onCommentDelete(): void {
+    if (!this.commentToDelete) return;
+
+    this.commentService.deleteComent(this.commentToDelete).subscribe({
       next: (res) => {
         if (res.comments) this.post.comments = res.comments;
       },
       error: console.log, // TODO handle error?
     });
+
+    this.commentToDelete = undefined;
   }
 }

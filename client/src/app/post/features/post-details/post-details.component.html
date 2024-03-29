@@ -1,4 +1,5 @@
 <div id="details-page-wrapper">
+  <app-modal-popup *ngIf="showPopup" (confirmed)="onConfirmedDelete($event)" />
   <app-details-card
     [post]="post"
     [isOwner]="isOwner"
@@ -7,7 +8,7 @@
     [likesCount]="likesCount$ | async"
     [isLiked]="isLiked$ | async"
     [isLikeButtonDisabled]="loggedUser ? false : true"
-    (delete)="onPostDelete()"
+    (delete)="onDelete(undefined)"
     (like)="onPostLike($event)"
   />
 
@@ -29,7 +30,7 @@
       *ngFor="let comment of post.comments"
       [isOwner]="comment.owner._id == loggedUser?._id"
       [comment]="comment"
-      (delete)="onCommentDelete($event)"
+      (delete)="onDelete(comment._id)"
     />
   </section>
 </div>
