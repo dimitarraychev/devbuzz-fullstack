@@ -8,6 +8,7 @@ import { PostService } from '../../services/post.service';
 import { PostErrorService } from '../../services/post-error.service';
 import { UserService } from 'src/app/user/services/user.service';
 import { specialCharactersValidator } from 'src/app/shared/validators/special-characters.validator';
+import { profanityValidator } from 'src/app/shared/validators/profanity.validator';
 
 @Component({
   selector: 'app-post-edit',
@@ -45,6 +46,7 @@ export class PostEditComponent implements OnInit, OnDestroy {
         Validators.minLength(10),
         Validators.maxLength(100),
         specialCharactersValidator(),
+        profanityValidator(),
       ],
     ],
     category: ['', [Validators.required]],
@@ -55,6 +57,7 @@ export class PostEditComponent implements OnInit, OnDestroy {
         Validators.required,
         Validators.minLength(50),
         Validators.maxLength(3000),
+        profanityValidator(),
       ],
     ],
   });

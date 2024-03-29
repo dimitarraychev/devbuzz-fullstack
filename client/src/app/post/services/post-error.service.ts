@@ -24,6 +24,8 @@ export class PostErrorService {
   }
 
   validationErrorHandler(form: FormGroup): string {
+    console.log(form);
+
     for (const field of this.postFormFields) {
       if (form.get(field)?.hasError('required'))
         return `Uh-oh! ${field} is required.`;
@@ -37,6 +39,8 @@ export class PostErrorService {
         } characters.`;
       if (form.get(field)?.hasError('specialCharacters'))
         return `Oops! ${field} cannot contain any special characters.`;
+      if (form.get(field)?.hasError('profane'))
+        return `Sorry, ${field} cannot contain profanity.`;
       if (form.get(field)?.hasError('pattern'))
         return 'Sorry, image should start with "http://" or "https://".';
     }
