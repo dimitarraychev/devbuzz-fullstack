@@ -17,6 +17,12 @@ $shadow: 0.2em 0.2em 0.5em rgba(0, 0, 0, 0.5);
   color: $font-color;
 }
 
+#owner-btns {
+  display: flex;
+  gap: 0.5em;
+  margin: 0.5em;
+}
+
 #top-buttons-container {
   position: relative;
   grid-column: span 2;
@@ -25,13 +31,13 @@ $shadow: 0.2em 0.2em 0.5em rgba(0, 0, 0, 0.5);
   justify-content: space-between;
 }
 
-.details-info {
+#details-info {
   display: grid;
   padding-left: 2.5em;
   grid-template-rows: 0.5fr 1fr 0.5fr;
   width: 40vw;
 
-  .details-info-top {
+  #details-info-top {
     color: gray;
     align-self: end;
     font-style: italic;
@@ -40,33 +46,47 @@ $shadow: 0.2em 0.2em 0.5em rgba(0, 0, 0, 0.5);
     align-items: center;
     justify-items: center;
 
-    .post-time {
+    #category {
+      text-shadow: $shadow;
+    }
+
+    #post-time {
       font-size: 12px;
+      text-shadow: $shadow;
     }
   }
 
-  .details-title {
+  #details-title {
     font-size: 32px;
     letter-spacing: 1px;
+    text-shadow: $shadow;
   }
 
-  .details-info-bottom {
+  #details-info-bottom {
     display: flex;
     justify-content: space-between;
     align-items: center;
 
-    .like-container {
+    #owner-name {
+      text-shadow: $shadow;
+    }
+
+    #like-container {
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       height: 10vh;
       width: 10vh;
+
+      #likes-count {
+        text-shadow: $shadow;
+      }
     }
   }
 }
 
-.details-img {
+#details-img {
   padding-right: 1em;
   width: 35vw;
   height: 40vh;
@@ -75,7 +95,7 @@ $shadow: 0.2em 0.2em 0.5em rgba(0, 0, 0, 0.5);
   box-shadow: $shadow;
 }
 
-.details-description {
+#details-description {
   margin: auto;
   width: 70%;
   grid-column: span 2;
@@ -84,18 +104,13 @@ $shadow: 0.2em 0.2em 0.5em rgba(0, 0, 0, 0.5);
   overflow-wrap: break-word;
   white-space: pre-line;
   padding: 1em 0 2em 0;
+  text-shadow: $shadow;
 
   &::first-letter {
     initial-letter: 2;
     padding-right: 0.2em;
     font-weight: bold;
   }
-}
-
-#owner-btns {
-  display: flex;
-  gap: 0.5em;
-  margin: 0.5em;
 }
 
 app-loader {

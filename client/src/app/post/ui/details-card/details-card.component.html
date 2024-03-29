@@ -13,20 +13,20 @@
 
   <app-loader *ngIf="isLoading" />
 
-  <div class="details-info" *ngIf="!isLoading">
-    <div class="details-info-top">
-      <p class="details-category">{{ post.category }}</p>
-      <p class="post-time">{{ post.createdAt | date }}</p>
+  <div id="details-info" *ngIf="!isLoading">
+    <div id="details-info-top">
+      <p id="category">{{ post.category }}</p>
+      <p id="post-time">{{ post.createdAt | date }}</p>
     </div>
 
-    <h1 class="details-title">{{ post.title }}</h1>
+    <h1 id="details-title">{{ post.title }}</h1>
 
-    <div class="details-info-bottom">
-      <div class="details-owner">
-        <p class="owner-name">by {{ post.owner.username }}</p>
+    <div id="details-info-bottom">
+      <div id="details-owner">
+        <p id="owner-name">by {{ post.owner.username }}</p>
       </div>
-      <div class="like-container">
-        <p>Likes: {{ likesCount }}</p>
+      <div id="like-container">
+        <p id="likes-count">Likes: {{ likesCount }}</p>
         <app-like-btn
           *ngIf="!isOwner"
           [isLogged]="isLogged"
@@ -42,8 +42,8 @@
     [src]="post.image"
     onerror="this.src='assets/images/image-missing.jpg'"
     alt="Post Image"
-    class="details-img"
+    id="details-img"
   />
 
-  <p class="details-description">{{ post.description }}</p>
+  <p id="details-description">{{ post.description }}</p>
 </div>
