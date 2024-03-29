@@ -2,6 +2,7 @@ $font-color: white;
 $dark-bg: rgba(18, 18, 18, 1);
 $light-bg: rgba(30, 30, 30, 1);
 $border-radius: 5px;
+$shadow: 0.2em 0.2em 0.5em rgba(0, 0, 0, 0.5);
 
 #confirmation-dialog {
   position: fixed;
@@ -31,6 +32,8 @@ $border-radius: 5px;
   img {
     height: 2.5em;
     width: auto;
+    border-radius: 50%;
+    box-shadow: $shadow;
 
     &:hover {
       cursor: pointer;
