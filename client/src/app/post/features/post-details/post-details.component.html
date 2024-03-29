@@ -9,7 +9,7 @@
     [isLiked]="isLiked$ | async"
     [isLikeButtonDisabled]="loggedUser ? false : true"
     (delete)="onDelete(undefined)"
-    (like)="onPostLike($event)"
+    (like)="onPostLikeToggle($event)"
   />
 
   <section id="comments-container">

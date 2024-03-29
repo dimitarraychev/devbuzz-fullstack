@@ -25,7 +25,7 @@ export class DetailsCardComponent {
     this.delete.emit();
   }
 
-  onLike(isLiked: boolean): void {
-    this.like.emit(isLiked);
+  onLike(isLike: boolean): void {
+    this.like.emit(isLike);
   }
 }

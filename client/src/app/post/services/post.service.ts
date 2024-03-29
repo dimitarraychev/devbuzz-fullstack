@@ -61,4 +61,11 @@ export class PostService {
       {}
     );
   }
+
+  unlikePost(postId: string): Observable<ApiResponse> {
+    return this.http.post<ApiResponse>(
+      this.apiUrl + '/posts/' + postId + '/unlike',
+      {}
+    );
+  }
 }

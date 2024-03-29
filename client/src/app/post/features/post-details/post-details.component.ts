@@ -53,11 +53,32 @@ export class PostDetailsComponent implements OnInit {
     });
   }
 
-  onPostLike(isLiked: boolean): void {
+  onPostLikeToggle(isLike: boolean): void {
+    if (isLike) {
+      this.onPostLike();
+      return;
+    }
+
+    this.onPostUnlike();
+  }
+
+  onPostLike() {
     this.postService.likePost(this.postId).subscribe({
       next: (res) => {
-        if (res.likes) this.likesCount$.next(res.likes);
+        if (res.likes != undefined) this.likesCount$.next(res.likes);
+
         this.isLiked$.next(true);
+      },
+      error: console.log, // TODO handle error?
+    });
+  }
+
+  onPostUnlike() {
+    this.postService.unlikePost(this.postId).subscribe({
+      next: (res) => {
+        if (res.likes != undefined) this.likesCount$.next(res.likes);
+
+        this.isLiked$.next(false);
       },
       error: console.log, // TODO handle error?
     });
