@@ -1,5 +1,6 @@
 $font-color: white;
 $dark-bg: rgba(18, 18, 18, 1);
+$shadow: 0.2em 0.2em 0.5em rgba(0, 0, 0, 0.5);
 
 #not-found-page-wrapper {
   padding-top: 5em;
@@ -16,12 +17,21 @@ $dark-bg: rgba(18, 18, 18, 1);
   background-color: $dark-bg;
   color: $font-color;
 
-  img {
+  #not-found {
     width: 35em;
     height: 30em;
   }
 
-  app-button {
-    margin-bottom: 2em;
+  #home-button {
+    height: 2.5em;
+    width: auto;
+    margin-bottom: 1em;
+    border-radius: 50%;
+    box-shadow: $shadow;
+
+    &:hover {
+      cursor: pointer;
+      filter: brightness(0.8);
+    }
   }
 }
