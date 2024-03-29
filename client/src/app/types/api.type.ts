@@ -18,14 +18,6 @@ export type LogoutResponse = {
   message: string;
 };
 
-export type ApiResponse = {
-  ok: boolean;
-  message: string;
-  _id?: string;
-  likes?: number;
-  comments?: PostComment[];
-};
-
 export type ApiPostResponse = {
   posts: Post[];
   category: PostCategory;
@@ -48,4 +40,10 @@ export type ApiUser = {
   posts: Post[];
   createdAt: string;
   updatedAt: string;
+};
+
+export type NewUser = {
+  username?: string;
+  email: string;
+  password: string;
 };

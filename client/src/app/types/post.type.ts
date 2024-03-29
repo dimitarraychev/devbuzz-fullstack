@@ -11,6 +11,14 @@ export type Post = {
   updatedAt: string;
 };
 
+export type PostCard = {
+  _id: string;
+  title: string;
+  image: string;
+  likes: string[];
+  createdAt: string;
+};
+
 export type NewPost = {
   title: string;
   category: string;
