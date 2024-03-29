@@ -17,15 +17,9 @@ router.post("/", isAuth, async (req, res) => {
 			},
 		};
 
-		await commentService.add(commentData);
+		const post = await commentService.add(commentData);
 
-		const post = await postService.getOne(commentData._postId);
-
-		res.status(201).json({
-			ok: true,
-			message: "Comment successfully added.",
-			comments: post.comments,
-		});
+		res.status(201).json(post);
 	} catch (error) {
 		error.message =
 			error.message.match(validationRegex)?.[1] ?? error.message;
@@ -40,19 +34,11 @@ router.post("/", isAuth, async (req, res) => {
 router.delete("/:commentId", isAuth, async (req, res) => {
 	try {
 		const commentId = req.params.commentId;
+		const userId = req.user._id;
 
-		const comment = await commentService.getOne(commentId);
+		const post = await commentService.delete(commentId, userId);
 
-		if (comment.owner._id != req.user._id)
-			throw new Error("Owner verification failed!");
-
-		const comments = await commentService.delete(commentId);
-
-		res.status(200).json({
-			ok: true,
-			message: "Comment successfully deleted.",
-			comments,
-		});
+		res.status(200).json(post);
 	} catch (error) {
 		res.status(400).json({
 			ok: false,

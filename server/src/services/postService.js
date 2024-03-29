@@ -31,7 +31,8 @@ exports.getLatest = async (search, category, limit, skip) => {
 	const posts = await Post.find(query)
 		.sort({ createdAt: -1 })
 		.skip(skip)
-		.limit(limit);
+		.limit(limit)
+		.select("_id title image likes createdAt");
 	return { posts, totalPosts };
 };
 
@@ -42,35 +43,53 @@ exports.getHottest = async (category) => {
 		query.category = category;
 	}
 
-	const posts = Post.find(query).sort({ likes: -1 }).limit(3);
+	const posts = Post.find(query)
+		.sort({ likes: -1 })
+		.limit(3)
+		.select("_id title image likes createdAt");
 
 	return posts;
 };
 
-exports.like = (postId, userId) =>
+exports.like = async (postId, userId) =>
 	Post.findByIdAndUpdate(
-		postId,
+		{ _id: postId, "owner._id": { $ne: userId } },
 		{ $addToSet: { likes: userId } },
 		{ new: true }
 	);
 
 exports.unlike = (postId, userId) =>
-	Post.findByIdAndUpdate(postId, { $pull: { likes: userId } }, { new: true });
+	Post.findByIdAndUpdate(
+		{ _id: postId, "owner._id": { $ne: userId } },
+		{ $pull: { likes: userId } },
+		{ new: true }
+	);
 
-exports.update = (postId, postData) =>
-	Post.findByIdAndUpdate(postId, postData, {
-		runValidators: true,
-		new: true,
+exports.update = async (postId, postData, userId) => {
+	const updatedPost = await Post.findOneAndUpdate(
+		{ _id: postId, "owner._id": userId },
+		postData,
+		{ runValidators: true, new: true }
+	);
+
+	if (!updatedPost)
+		throw new Error("Post not found or owner verification failed!");
+
+	return updatedPost;
+};
+
+exports.delete = async (postId, userId) => {
+	const deletedPost = await Post.findOneAndDelete({
+		_id: postId,
+		"owner._id": userId,
 	});
 
-exports.delete = async (postId) => {
-	const post = await Post.findByIdAndDelete(postId);
-	const user = await User.findById(post.owner._id);
+	if (!deletedPost)
+		throw new Error("Post not found or owner verification failed!");
 
-	await Comment.deleteMany({ _postId: post._id });
+	await Comment.deleteMany({ _postId: postId });
 
-	user.posts = user.posts.filter((id) => id != postId);
-	await user.save();
+	await User.updateOne({ _id: userId }, { $pull: { posts: postId } });
 
-	return post;
+	return deletedPost;
 };

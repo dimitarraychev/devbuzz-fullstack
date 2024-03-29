@@ -8,17 +8,22 @@ exports.add = async (commentData) => {
 
 	const comment = await Comment.create(commentData);
 
-	await Post.findByIdAndUpdate(comment._postId, {
-		$addToSet: { comments: comment._id },
-	});
+	const post = await Post.findByIdAndUpdate(
+		comment._postId,
+		{ $addToSet: { comments: comment._id } },
+		{ new: true }
+	).populate("comments");
 
-	return comment._id;
+	return post;
 };
 
 exports.getOne = (commentId) => Comment.findById(commentId);
 
-exports.delete = async (commentId) => {
-	const comment = await Comment.findByIdAndDelete(commentId);
+exports.delete = async (commentId, userId) => {
+	const comment = await Comment.findOneAndDelete({
+		_id: commentId,
+		"owner._id": userId,
+	});
 	const post = await Post.findById(comment._postId).populate("comments");
 
 	post.comments = post.comments.filter((c) => c.id != commentId);
@@ -26,5 +31,5 @@ exports.delete = async (commentId) => {
 
 	const postObj = post.toObject();
 
-	return postObj.comments;
+	return postObj;
 };

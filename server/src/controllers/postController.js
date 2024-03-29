@@ -52,11 +52,7 @@ router.post("/", isAuth, async (req, res) => {
 
 		const post = await postService.create(postData);
 
-		res.status(201).json({
-			ok: true,
-			message: "Post successfully created.",
-			_id: post._id,
-		});
+		res.status(201).json(post);
 	} catch (error) {
 		error.message =
 			error.message.match(validationRegex)?.[1] ?? error.message;
@@ -101,18 +97,11 @@ router.patch("/:postId", isAuth, async (req, res) => {
 	try {
 		const postId = req.params.postId;
 		const postData = req.body;
+		const userId = req.user._id;
 
-		const post = await postService.getOne(postId);
-		if (post.owner._id != req.user._id)
-			throw new Error("Owner verification failed!");
+		const post = await postService.update(postId, postData, userId);
 
-		await postService.update(postId, postData);
-
-		res.status(200).json({
-			ok: true,
-			message: "Post successfully edited",
-			_id: postId,
-		});
+		res.status(200).json(post);
 	} catch (error) {
 		error.message =
 			error.message.match(validationRegex)?.[1] ?? error.message;
@@ -127,17 +116,11 @@ router.patch("/:postId", isAuth, async (req, res) => {
 router.delete("/:postId", isAuth, async (req, res) => {
 	try {
 		const postId = req.params.postId;
+		const userId = req.user._id;
 
-		const post = await postService.getOne(postId);
-		if (post.owner._id != req.user._id)
-			throw new Error("Owner verification failed!");
+		const post = await postService.delete(postId, userId);
 
-		await postService.delete(postId);
-
-		res.status(200).json({
-			ok: true,
-			message: "Post successfully deleted",
-		});
+		res.status(200).json(post);
 	} catch (error) {
 		res.status(400).json({
 			ok: false,
@@ -151,17 +134,9 @@ router.post("/:postId/like", isAuth, async (req, res) => {
 		const postId = req.params.postId;
 		const userId = req.user._id;
 
-		const postBeforeUpdate = await postService.getOne(postId);
-		if (postBeforeUpdate.owner._id == req.user._id)
-			throw new Error("Cannot like own post!");
-
 		const post = await postService.like(postId, userId);
 
-		res.status(200).json({
-			ok: true,
-			message: "Post successfully liked",
-			likes: post.likes.length,
-		});
+		res.status(200).json(post);
 	} catch (error) {
 		res.status(500).json({
 			ok: false,
@@ -175,17 +150,9 @@ router.post("/:postId/unlike", isAuth, async (req, res) => {
 		const postId = req.params.postId;
 		const userId = req.user._id;
 
-		const postBeforeUpdate = await postService.getOne(postId);
-		if (postBeforeUpdate.owner._id == req.user._id)
-			throw new Error("Cannot unlike own post!");
-
 		const post = await postService.unlike(postId, userId);
 
-		res.status(200).json({
-			ok: true,
-			message: "Post successfully unliked",
-			likes: post.likes.length,
-		});
+		res.status(200).json(post);
 	} catch (error) {
 		res.status(500).json({
 			ok: false,
