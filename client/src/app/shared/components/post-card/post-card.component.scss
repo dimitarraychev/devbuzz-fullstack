@@ -1,4 +1,6 @@
 $font-color: white;
+$shadow: 0.2em 0.2em 0.5em rgba(0, 0, 0, 0.5);
+$bento-shadow-hover: 0 0 0.5em rgba(255, 255, 255, 0.3);
 
 .post {
   position: relative;
@@ -6,6 +8,11 @@ $font-color: white;
   height: 15em;
   overflow: hidden;
   margin-bottom: 1em;
+  box-shadow: $shadow;
+
+  &:hover {
+    box-shadow: $bento-shadow-hover;
+  }
 
   &:hover app-button {
     display: inline-block;
