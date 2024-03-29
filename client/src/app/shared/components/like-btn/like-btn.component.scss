@@ -1,7 +1,11 @@
+$shadow: 0.2em 0.2em 0.5em rgba(0, 0, 0, 0.5);
+
 #like-button {
-  width: 2.5em;
   height: 2.5em;
+  width: auto;
   margin: 0.5em;
+  border-radius: 50%;
+  box-shadow: $shadow;
 }
 
 .enabled {
