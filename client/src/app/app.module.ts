@@ -5,7 +5,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { provideFirebaseApp, getApp, initializeApp } from '@angular/fire/app';
 
 import { AppComponent } from './app.component';
-import { HomeComponent } from './home/home.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { AuthenticationComponent } from './authentication/authentication.component';
 import { CoreModule } from './core/core.module';
@@ -16,12 +15,7 @@ import { environment } from 'src/environments/environment';
 import { interceptorProvider } from './core/interceptors/request.interceptor';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HomeComponent,
-    NotFoundComponent,
-    AuthenticationComponent,
-  ],
+  declarations: [AppComponent, NotFoundComponent, AuthenticationComponent],
   imports: [
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     BrowserModule,
