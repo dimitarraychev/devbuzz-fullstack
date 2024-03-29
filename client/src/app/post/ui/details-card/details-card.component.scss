@@ -46,13 +46,8 @@ $shadow: 0.2em 0.2em 0.5em rgba(0, 0, 0, 0.5);
     align-items: center;
     justify-items: center;
 
-    #category {
-      text-shadow: $shadow;
-    }
-
     #post-time {
       font-size: 12px;
-      text-shadow: $shadow;
     }
   }
 

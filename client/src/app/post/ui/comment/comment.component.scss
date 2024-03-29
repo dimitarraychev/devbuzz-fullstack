@@ -1,5 +1,6 @@
 $dark-bg: rgba(18, 18, 18, 1);
 $bee-yellow: #e9ab17;
+$shadow: 0.2em 0.2em 0.5em rgba(0, 0, 0, 0.5);
 
 .comment {
   width: 60%;
@@ -24,6 +25,13 @@ $bee-yellow: #e9ab17;
     justify-items: center;
     color: gray;
     gap: 5px;
+
+    i {
+      text-shadow: $shadow;
+    }
+    .comment-username {
+      text-shadow: $shadow;
+    }
   }
 
   .comment-top-right {
@@ -38,4 +46,5 @@ $bee-yellow: #e9ab17;
 
 .comment-text {
   padding: 1em 0.2em 0 0.2em;
+  text-shadow: $shadow;
 }
