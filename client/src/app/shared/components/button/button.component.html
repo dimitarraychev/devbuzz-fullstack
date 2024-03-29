@@ -1,11 +1,19 @@
 <button
   [title]="isDisabled ? 'Login required' : 'Create'"
-  [ngStyle]="buttonStyles"
   [disabled]="isDisabled"
   [class.disabled]="isDisabled"
   [class.enabled]="!isDisabled"
+  [ngStyle]="buttonStyles"
 >
-  {{ buttonText }}
-  <!-- <i *ngIf="buttonIcon === 'like'" class="fa-regular fa-heart interactable"></i> -->
-  <i *ngIf="buttonIcon === 'create'" class="fa-regular fa-pen-to-square"></i>
+  <p>{{ buttonText }}</p>
+  <div class="svg-wrapper-1">
+    <div class="svg-wrapper">
+      <img
+        [title]="buttonText"
+        [src]="getButtonIconSrc()"
+        [alt]="buttonIcon"
+        [id]="buttonIcon + '-button'"
+      />
+    </div>
+  </div>
 </button>

@@ -8,8 +8,7 @@ import { Component, Input } from '@angular/core';
 export class ButtonComponent {
   @Input() buttonText: string = '';
   @Input() buttonSize: string = 'default';
-  @Input() buttonIcon: 'like' | 'create' | 'edit' | 'delete' | undefined =
-    undefined;
+  @Input() buttonIcon: 'create' | 'more' | 'edit' | undefined = undefined;
   @Input() isDisabled: boolean = false;
 
   get buttonStyles(): { [key: string]: string } {
@@ -26,6 +25,19 @@ export class ButtonComponent {
         return '18px';
       default:
         return '16px';
+    }
+  }
+
+  getButtonIconSrc(): string {
+    switch (this.buttonIcon) {
+      case 'create':
+        return './assets/images/icon-add.svg';
+      case 'more':
+        return './assets/images/icon-more.svg';
+      case 'edit':
+        return './assets/images/icon-edit.svg';
+      default:
+        return ''; // or specify a default image source if buttonIcon is undefined
     }
   }
 }

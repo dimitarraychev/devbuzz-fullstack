@@ -2,33 +2,49 @@ $bee-yellow: #e9ab17;
 $shadow: 0.2em 0.2em 0.5em rgba(0, 0, 0, 0.5);
 
 button {
-  // background: linear-gradient(
-  //   to bottom,
-  //   rgb(203, 210, 255) 0%,
-  //   rgb(91, 182, 255) 3%,
-  //   rgb(91, 112, 255) 15%
-  // );
-
+  font-size: 1em;
   background: linear-gradient(
     to bottom,
     rgb(203, 210, 255) 0%,
     #ecc76f 3%,
-    $bee-yellow 15%
+    #e9ab17 15%
   );
-
-  box-shadow: inset 0 -1em 0.5em rgba(0, 0, 0, 0.3), $shadow;
-  color: #fff;
-  border: none;
-  padding: 7px;
-  border-radius: 5px;
+  box-shadow: inset 0 -1em 0.5em rgba(0, 0, 0, 0.3),
+    0.2em 0.2em 0.5em rgba(0, 0, 0, 0.5);
+  color: white;
+  fill: rgb(155, 153, 153);
+  padding: 0.4em 0.4em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
-  transition: filter 0.3s;
-  text-align: center;
+  border: none;
+  border-radius: 0.5em;
 }
 
 .enabled {
-  &:hover {
-    filter: brightness(0.8);
+  &:hover .svg-wrapper {
+    transform: scale(1.25);
+    transition: 0.5s linear;
+    animation: jump 0.5s ease-in-out infinite;
+  }
+
+  img {
+    position: relative;
+  }
+
+  &:hover img {
+    transform: translateX(-1.7em) scale(1.4);
+    fill: #fff;
+  }
+
+  &:hover p {
+    opacity: 0;
+    transition: 0.5s linear;
+
+    &:active {
+      transform: scale(0.95);
+    }
   }
 }
 
@@ -36,4 +52,29 @@ button {
   background: gray;
   filter: brightness(0.6);
   cursor: not-allowed;
+}
+
+button p {
+  display: block;
+  margin-left: 0.3em;
+  transition: all 0.3s ease-in-out;
+}
+
+button img {
+  height: 1em;
+  width: auto;
+  display: block;
+  margin: 0.1em;
+  transform-origin: center center;
+  transition: transform 0.3s ease-in-out;
+}
+
+@keyframes jump {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-0.1em);
+  }
 }
