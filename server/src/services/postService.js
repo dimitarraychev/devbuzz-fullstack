@@ -54,6 +54,9 @@ exports.like = (postId, userId) =>
 		{ new: true }
 	);
 
+exports.unlike = (postId, userId) =>
+	Post.findByIdAndUpdate(postId, { $pull: { likes: userId } }, { new: true });
+
 exports.update = (postId, postData) =>
 	Post.findByIdAndUpdate(postId, postData, {
 		runValidators: true,

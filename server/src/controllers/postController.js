@@ -170,4 +170,28 @@ router.post("/:postId/like", isAuth, async (req, res) => {
 	}
 });
 
+router.post("/:postId/unlike", isAuth, async (req, res) => {
+	try {
+		const postId = req.params.postId;
+		const userId = req.user._id;
+
+		const postBeforeUpdate = await postService.getOne(postId);
+		if (postBeforeUpdate.owner._id == req.user._id)
+			throw new Error("Cannot unlike own post!");
+
+		const post = await postService.unlike(postId, userId);
+
+		res.status(200).json({
+			ok: true,
+			message: "Post successfully unliked",
+			likes: post.likes.length,
+		});
+	} catch (error) {
+		res.status(500).json({
+			ok: false,
+			message: error.message,
+		});
+	}
+});
+
 module.exports = router;
