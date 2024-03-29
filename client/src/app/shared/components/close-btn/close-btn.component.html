@@ -4,4 +4,6 @@
   alt="close"
   id="close-button"
   (click)="navigateBack()"
+  [class.disabled]="isDisabled"
+  [class.enabled]="!isDisabled"
 />

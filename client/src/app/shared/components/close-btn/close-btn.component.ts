@@ -7,9 +7,12 @@ import { NavigationService } from 'src/app/core/services/navigation.service';
   styleUrls: ['./close-btn.component.scss'],
 })
 export class CloseBtnComponent {
+  isDisabled: boolean = false;
+
   constructor(private navigationService: NavigationService) {}
 
   navigateBack(): void {
+    this.isDisabled = true;
     this.navigationService.back();
   }
 }
