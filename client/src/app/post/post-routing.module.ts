@@ -4,7 +4,7 @@ import { FeedComponent } from './features/feed/feed.component';
 import { PostDetailsComponent } from './features/post-details/post-details.component';
 import { PostCreateComponent } from './features/post-create/post-create.component';
 import { PostEditComponent } from './features/post-edit/post-edit.component';
-import { authGuard } from '../guards/auth.guard';
+import { authGuard } from '../core/guards/auth.guard';
 
 const routes: Routes = [
   {

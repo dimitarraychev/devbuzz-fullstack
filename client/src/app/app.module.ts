@@ -13,7 +13,7 @@ import { SharedModule } from './shared/shared.module';
 import { AppRoutingModule } from './app-routing.module';
 
 import { environment } from 'src/environments/environment';
-import { interceptorProvider } from './interceptors/request.interceptor';
+import { interceptorProvider } from './core/interceptors/request.interceptor';
 
 @NgModule({
   declarations: [
