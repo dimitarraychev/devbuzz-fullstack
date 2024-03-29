@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { UserErrorService } from '../../services/user-error.service';
 import { Subscription } from 'rxjs';
 import { specialCharactersValidator } from 'src/app/shared/validators/special-characters.validator';
+import { profanityValidator } from 'src/app/shared/validators/profanity.validator';
 
 @Component({
   selector: 'app-register',
@@ -38,6 +39,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
         Validators.minLength(3),
         Validators.maxLength(20),
         specialCharactersValidator(),
+        profanityValidator(),
       ],
     ],
     email: [

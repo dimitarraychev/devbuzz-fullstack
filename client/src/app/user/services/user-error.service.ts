@@ -37,6 +37,8 @@ export class UserErrorService {
         } characters.`;
       if (form.get(field)?.hasError('specialCharacters'))
         return `Oops! ${field} cannot contain any special characters.`;
+      if (form.get(field)?.hasError('profane'))
+        return `Sorry, ${field} cannot contain profanity.`;
       if (form.get(field)?.hasError('email'))
         return `Oops, a valid email email address is required.`;
     }
