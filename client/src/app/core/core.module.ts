@@ -6,6 +6,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { CookieConsentComponent } from './components/cookie-consent/cookie-consent.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
+import { AuthenticationComponent } from './components/authentication/authentication.component';
 
 import { SharedModule } from '../shared/shared.module';
 import { AppRoutingModule } from '../app-routing.module';
@@ -17,6 +18,7 @@ import { AppRoutingModule } from '../app-routing.module';
     FooterComponent,
     CookieConsentComponent,
     NotFoundComponent,
+    AuthenticationComponent,
   ],
   imports: [CommonModule, SharedModule, AppRoutingModule],
   exports: [
@@ -25,6 +27,7 @@ import { AppRoutingModule } from '../app-routing.module';
     FooterComponent,
     CookieConsentComponent,
     NotFoundComponent,
+    AuthenticationComponent,
   ],
 })
 export class CoreModule {}
