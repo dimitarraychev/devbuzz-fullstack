@@ -1,12 +1,11 @@
-#close-button {
-  width: 2.5em;
-  height: auto;
-  margin: 0.5em;
+$shadow: 0.2em 0.2em 0.5em rgba(0, 0, 0, 0.5);
 
-  &:hover {
-    cursor: pointer;
-    filter: brightness(0.8);
-  }
+#close-button {
+  height: 2.5em;
+  width: auto;
+  margin: 0.5em;
+  border-radius: 50%;
+  box-shadow: $shadow;
 }
 
 .enabled {
