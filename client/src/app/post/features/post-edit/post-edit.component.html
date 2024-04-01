@@ -8,51 +8,66 @@
 
     <ng-container *ngIf="!isLoading">
       <form id="edit-form" [formGroup]="editForm" (ngSubmit)="onSubmit()">
-        <input
-          type="text"
-          id="title"
-          placeholder="Title"
-          formControlName="title"
-          [class.invalid]="isFieldInvalid('title')"
-        />
-        <select
-          id="category"
-          formControlName="category"
-          [class.invalid]="isFieldInvalid('category')"
-        >
-          <option value="" disabled selected hidden id="default-option">
-            Select Category...
-          </option>
-          <option value="development">Development</option>
-          <option value="blockchain">Blockchain</option>
-          <option value="artificial-intelligence">
-            Artificial Intelligence
-          </option>
-          <option value="other">Other</option>
-        </select>
-        <input
-          type="url"
-          id="image"
-          placeholder="Image URL"
-          formControlName="image"
-          [class.invalid]="isFieldInvalid('image')"
-        />
-        <textarea
-          type="description"
-          id="description"
-          placeholder="Description"
-          formControlName="description"
-          [class.invalid]="isFieldInvalid('description')"
-        ></textarea>
-        <p id="error-msg" *ngIf="errorMessage">{{ errorMessage }}</p>
+        <div id="grid-left">
+          <textarea
+            type="title"
+            id="title"
+            placeholder="Title"
+            formControlName="title"
+            [class.invalid]="isFieldInvalid('title')"
+          >
+          </textarea>
 
-        <app-button
-          buttonSize="large"
-          buttonText="Edit"
-          id="edit-button"
-          buttonIcon="edit"
-          [isDisabled]="isButtonDisabled"
-        />
+          <select
+            id="category"
+            formControlName="category"
+            [class.invalid]="isFieldInvalid('category')"
+          >
+            <option value="" disabled selected hidden id="default-option">
+              Select Category...
+            </option>
+            <option value="development">Development</option>
+            <option value="blockchain">Blockchain</option>
+            <option value="artificial-intelligence">
+              Artificial Intelligence
+            </option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+
+        <div id="grid-right">
+          <img
+            [src]="uploadedFilePath != '' ? uploadedFilePath : post.image"
+            alt=""
+          />
+
+          <input
+            type="file"
+            formControlName="image"
+            id="image"
+            [class.invalid]="isFieldInvalid('image')"
+            (change)="onFileSelected($event)"
+          />
+        </div>
+
+        <div id="grid-bottom">
+          <textarea
+            type="description"
+            id="description"
+            placeholder="Description"
+            formControlName="description"
+            [class.invalid]="isFieldInvalid('description')"
+          ></textarea>
+          <p id="error-msg" *ngIf="errorMessage">{{ errorMessage }}</p>
+
+          <app-button
+            buttonSize="large"
+            buttonText="Edit"
+            buttonIcon="edit"
+            id="edit-button"
+            [isDisabled]="isButtonDisabled"
+          />
+        </div>
       </form>
     </ng-container>
   </section>

@@ -9,6 +9,7 @@ import { PostErrorService } from '../../services/post-error.service';
 import { UserService } from 'src/app/user/services/user.service';
 import { specialCharactersValidator } from 'src/app/shared/validators/special-characters.validator';
 import { profanityValidator } from 'src/app/shared/validators/profanity.validator';
+import { StorageService } from 'src/app/core/services/storage.service';
 
 @Component({
   selector: 'app-post-edit',
@@ -21,6 +22,7 @@ export class PostEditComponent implements OnInit, OnDestroy {
     private postService: PostService,
     private postErrorService: PostErrorService,
     private userService: UserService,
+    private storageService: StorageService,
     private router: Router,
     private activatedRoute: ActivatedRoute
   ) {}
@@ -36,6 +38,8 @@ export class PostEditComponent implements OnInit, OnDestroy {
   postId: string = this.activatedRoute.snapshot.params['id'];
   isLoading: boolean = true;
   isButtonDisabled: boolean = false;
+  uploadedFilePath: string = '';
+
   private formSubscription: Subscription = new Subscription();
 
   editForm = this.fb.nonNullable.group({
@@ -50,7 +54,7 @@ export class PostEditComponent implements OnInit, OnDestroy {
       ],
     ],
     category: ['', [Validators.required]],
-    image: ['', [Validators.required, Validators.pattern(/^https?:\/\//)]],
+    image: [''],
     description: [
       '',
       [
@@ -71,7 +75,6 @@ export class PostEditComponent implements OnInit, OnDestroy {
       if (
         this.isFieldInvalid('title') ||
         this.isFieldInvalid('category') ||
-        this.isFieldInvalid('image') ||
         this.isFieldInvalid('description')
       ) {
         this.errorMessage = this.postErrorService.validationErrorHandler(
@@ -103,7 +106,6 @@ export class PostEditComponent implements OnInit, OnDestroy {
     this.editForm.patchValue({
       title: this.post.title,
       category: this.post.category,
-      image: this.post.image,
       description: this.post.description,
     });
   }
@@ -114,6 +116,17 @@ export class PostEditComponent implements OnInit, OnDestroy {
       this.editForm,
       this.isSubmitted
     );
+  }
+
+  onFileSelected(event: Event): void {
+    const inputElement = event.target as HTMLInputElement;
+    const file = inputElement?.files?.[0];
+    if (file) {
+      this.storageService.uploadFile(file).subscribe({
+        next: (path) => (this.uploadedFilePath = path),
+        error: (e) => (this.errorMessage = e.error.message),
+      });
+    }
   }
 
   onSubmit(): void {
@@ -128,8 +141,12 @@ export class PostEditComponent implements OnInit, OnDestroy {
 
     this.isButtonDisabled = true;
 
+    const { title, category, description } = this.editForm.getRawValue();
+    const image =
+      this.uploadedFilePath != '' ? this.uploadedFilePath : this.post.image;
+
     this.postService
-      .editPost(this.postId, this.editForm.getRawValue())
+      .editPost(this.postId, { title, category, description, image })
       .subscribe({
         next: (post) => this.router.navigate(['/posts', post._id]),
         error: (e) => {
