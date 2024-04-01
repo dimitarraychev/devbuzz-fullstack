@@ -6,37 +6,45 @@ By serving as the backend infrastructure, this API contributes to the overall fu
 
 ## Endpoints
 
--   **POST** _/users/register_: Register a new user, authenticate and receive a JWT token and the user's information.
+**Auth**
 
--   **POST** _/users/login_: Authenticate and receive a JWT token and the user's information.
+-   **POST** _/auth/register_: Register a new user, authenticate and receive a JWT token and the user's information.
 
--   **GET** _/users/authenticate_: Check the user's JWT token validty and expiry and return data for the user if logged in.
+-   **POST** _/auth/login_: Authenticate and receive a JWT token and the user's information.
 
--   **GET** _/users/logout_: Logout the authenticated user.
+-   **GET** _/auth/authenticate_: Check the user's JWT token validty and expiry and return data for the user if logged in.
 
--   **GET** _/users/:id_: Returns data for the user's profile.
+-   **GET** _/auth/logout_: Logout the authenticated user.
 
--   **GET** _/users/top_: Returns data for the top three users sorted by most posts.
+**Users**
+
+-   **GET** _/users/:id_: Return data for the user's profile.
+
+-   **GET** _/users/top_: Return data for the top three users sorted by most posts.
+
+**Posts**
 
 -   **GET** _/posts_: Get the latest 6 posts the total pages and the current page. Support queries for pagination, sorting by category and searching by title.
 
--   **POST** _/posts_: Create a new post. User authentication via JWT in the request headers is required.
+-   **POST** _/posts_: Create a new post and return the data for it. User authentication via JWT in the request headers is required.
 
 -   **GET** _/posts/hottest_: Get the hottest 3 posts sorted by most likes. Supports query for sorting by category.
 
--   **GET** _/posts/:id_: Returns information about a specific post with the provided post ID.
+-   **GET** _/posts/:id_: Return information about a specific post with the provided post ID.
 
--   **PATCH** _/posts/:id_: Edit the posts with the specified post ID and returns the edited information. User authentication via JWT in the request headers is required and the ID should match the owner's ID.
+-   **PATCH** _/posts/:id_: Edit the posts with the specified post ID, returning the whole post after update. User authentication via JWT in the request headers is required and the ID should match the owner's ID.
 
--   **DELETE** _/posts/:id_: Delete the post with the provided post ID. User authentication via JWT in the request headers is required and the ID should match the owner's ID.
+-   **DELETE** _/posts/:id_: Delete the post with the provided post ID, all related comments and the reference from the owner. User authentication via JWT in the request headers is required and the ID should match the owner's ID.
 
--   **POST** _/posts/:id/like_: Add the user's ID to the post's array with likes. User authentication via JWT in the request headers is required.
+-   **POST** _/posts/:id/like_: Add the user's ID to the post's array with likes, returning the whole post after update. User authentication via JWT in the request headers is required.
 
--   **POST** _/posts/:id/unlike_: Remove the user's ID from the post's array with likes. User authentication via JWT in the request headers is required.
+-   **POST** _/posts/:id/unlike_: Remove the user's ID from the post's array with likes, returning the whole post after update. User authentication via JWT in the request headers is required.
 
--   **POST** _/comments_: Create a new comment and attached it the corresponding post. User authentication via JWT in the request headers is required.
+**Comments**
 
--   **DELETE** _/comments/:id_: Delete the comment with the provided comment ID. User authentication via JWT in the request headers is required and the ID should match the owner's ID.
+-   **POST** _/comments_: Create a new comment and attaches it the corresponding post, returning the whole post after update. User authentication via JWT in the request headers is required.
+
+-   **DELETE** _/comments/:id_: Delete the comment with the provided comment ID and the reference from the post, returning the whole post after update. User authentication via JWT in the request headers is required and the ID should match the owner's ID.
 
 ## Authentication Process
 
