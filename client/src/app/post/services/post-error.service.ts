@@ -39,8 +39,6 @@ export class PostErrorService {
         return `Oops! ${field} cannot contain any special characters.`;
       if (form.get(field)?.hasError('profane'))
         return `Sorry, ${field} cannot contain profanity.`;
-      if (form.get(field)?.hasError('pattern'))
-        return 'Sorry, image should start with "http://" or "https://".';
     }
     return 'A wild error occurred! Try again.';
   }
