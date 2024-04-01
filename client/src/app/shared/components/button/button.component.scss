@@ -43,7 +43,7 @@ button {
   }
 }
 
-#create-btn {
+#create-btn.enabled {
   img {
     transform: scale(1.3);
   }
@@ -64,21 +64,21 @@ button {
   }
 }
 
-#edit-btn {
+#edit-btn.enabled {
   &:hover img {
     transform: translateX(-1em) scale(1.6);
     fill: #fff;
   }
 }
 
-#login-btn {
+#login-btn.enabled {
   &:hover img {
     transform: translateX(-1.15em) scale(1.6);
     fill: #fff;
   }
 }
 
-#register-btn {
+#register-btn.enabled {
   &:hover img {
     transform: translateX(-1.9em) scale(1.6);
     fill: #fff;
