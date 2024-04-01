@@ -15,7 +15,13 @@
 
   <div id="details-info" *ngIf="!isLoading">
     <div id="details-info-top">
-      <p id="category">{{ post.category }}</p>
+      <p
+        id="category"
+        [routerLink]="['/posts', 'feed']"
+        [queryParams]="{ category: post.category }"
+      >
+        {{ post.category }}
+      </p>
       <p id="post-time">{{ post.createdAt | date }}</p>
     </div>
 
@@ -23,7 +29,9 @@
 
     <div id="details-info-bottom">
       <div id="details-owner">
-        <p id="owner-name">by {{ post.owner.username }}</p>
+        <p id="owner-name" [routerLink]="['/user', post.owner._id]">
+          by {{ post.owner.username }}
+        </p>
       </div>
       <div id="like-container">
         <p id="likes-count">Likes: {{ likesCount }}</p>
