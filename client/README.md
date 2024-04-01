@@ -34,6 +34,8 @@ DevBuzz follows a modular architecture to organize its codebase effectively. Bel
 
   - **Services Folder**: Contains services responsible for handling business logic and interacting with external APIs or data sources. Services facilitate data retrieval, manipulation, and communication between components.
 
+- **A folder containing all types**.
+
 ## Prerequisites
 
 Before you begin, ensure you have the following prerequisites installed on your machine:
