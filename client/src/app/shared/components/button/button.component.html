@@ -4,16 +4,12 @@
   [class.disabled]="isDisabled"
   [class.enabled]="!isDisabled"
   [ngStyle]="buttonStyles"
+  [id]="buttonIcon + '-btn'"
 >
   <p>{{ buttonText }}</p>
   <div class="svg-wrapper-1">
     <div class="svg-wrapper">
-      <img
-        [title]="buttonText"
-        [src]="getButtonIconSrc()"
-        [alt]="buttonIcon"
-        [id]="buttonIcon + '-button'"
-      />
+      <img [title]="buttonText" [src]="getButtonIconSrc()" [alt]="buttonIcon" />
     </div>
   </div>
 </button>

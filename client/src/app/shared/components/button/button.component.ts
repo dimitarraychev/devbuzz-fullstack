@@ -8,7 +8,13 @@ import { Component, Input } from '@angular/core';
 export class ButtonComponent {
   @Input() buttonText: string = '';
   @Input() buttonSize: string = 'default';
-  @Input() buttonIcon: 'create' | 'more' | 'edit' | undefined = undefined;
+  @Input() buttonIcon:
+    | 'create'
+    | 'more'
+    | 'edit'
+    | 'login'
+    | 'register'
+    | undefined = undefined;
   @Input() isDisabled: boolean = false;
 
   get buttonStyles(): { [key: string]: string } {
@@ -35,7 +41,11 @@ export class ButtonComponent {
       case 'more':
         return './assets/images/icon-more.svg';
       case 'edit':
-        return './assets/images/icon-edit.svg';
+        return './assets/images/icon-edit2.svg';
+      case 'login':
+        return './assets/images/icon-login.svg';
+      case 'register':
+        return './assets/images/icon-register.svg';
       default:
         return ''; // or specify a default image source if buttonIcon is undefined
     }

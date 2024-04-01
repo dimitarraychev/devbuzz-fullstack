@@ -33,11 +33,6 @@ button {
     position: relative;
   }
 
-  &:hover img {
-    transform: translateX(-1.7em) scale(1.4);
-    fill: #fff;
-  }
-
   &:hover p {
     opacity: 0;
     transition: 0.5s linear;
@@ -45,6 +40,48 @@ button {
     &:active {
       transform: scale(0.95);
     }
+  }
+}
+
+#create-btn {
+  img {
+    transform: scale(1.3);
+  }
+  &:hover img {
+    transform: translateX(-1.75em) scale(2.2);
+    fill: #fff;
+  }
+}
+
+#more-btn {
+  img {
+    transform: scale(0.9);
+  }
+
+  &:hover img {
+    transform: translateX(-2.5em) scale(1.6);
+    fill: #fff;
+  }
+}
+
+#edit-btn {
+  &:hover img {
+    transform: translateX(-1em) scale(1.6);
+    fill: #fff;
+  }
+}
+
+#login-btn {
+  &:hover img {
+    transform: translateX(-1.15em) scale(1.6);
+    fill: #fff;
+  }
+}
+
+#register-btn {
+  &:hover img {
+    transform: translateX(-1.9em) scale(1.6);
+    fill: #fff;
   }
 }
 
