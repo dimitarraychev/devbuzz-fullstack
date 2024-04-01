@@ -3,7 +3,7 @@ import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 
 import { PostService } from '../../services/post.service';
-import { Post, PostCard, PostCategory } from 'src/app/types/post.type';
+import { PostCard, PostCategory } from 'src/app/types/post.type';
 
 @Component({
   selector: 'app-feed',
