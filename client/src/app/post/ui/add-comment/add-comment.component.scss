@@ -46,7 +46,9 @@ $shadow: 0.2em 0.2em 0.5em rgba(0, 0, 0, 0.5);
   color: $font-color;
 }
 
-app-button {
+#comment-button {
+  width: 2.5em;
+  height: auto;
   margin: auto;
 }
 
@@ -59,4 +61,16 @@ app-button {
 .invalid {
   border: 1px solid red;
   box-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
+}
+
+.enabled {
+  &:hover {
+    cursor: pointer;
+    filter: brightness(0.8);
+  }
+}
+
+.disabled {
+  filter: brightness(0.6);
+  cursor: not-allowed;
 }

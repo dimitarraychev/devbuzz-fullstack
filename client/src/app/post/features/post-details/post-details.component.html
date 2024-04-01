@@ -15,6 +15,7 @@
   <section id="comments-container">
     <app-add-comment
       [username]="loggedUser?.username"
+      [isLogged]="!!loggedUser"
       (add)="onCommentAdd($event)"
     />
 

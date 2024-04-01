@@ -16,6 +16,7 @@ import { Subscription } from 'rxjs';
 })
 export class AddCommentComponent implements OnInit, OnDestroy {
   @Input() username: string | undefined = 'Guest';
+  @Input() isLogged: boolean = false;
 
   @Output() add = new EventEmitter<string>();
 
@@ -40,6 +41,8 @@ export class AddCommentComponent implements OnInit, OnDestroy {
   }
 
   onAdd(): void {
+    if (!this.isLogged) return;
+
     const message: string = this.commentTextControl.value;
 
     if (this.commentTextControl.invalid) return;

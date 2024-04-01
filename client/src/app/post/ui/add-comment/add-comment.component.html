@@ -15,5 +15,14 @@
     (keyup.enter)="onAdd()"
   ></textarea>
   <p id="error-msg" *ngIf="errorMessage">{{ errorMessage }}</p>
-  <app-button buttonSize="small" buttonText="Comment" (click)="onAdd()" />
+  <!-- <app-button buttonSize="small" buttonText="Comment" (click)="onAdd()" /> -->
+  <img
+    [title]="isLogged ? 'Comment' : 'Login required'"
+    src="./assets/images/icon-comment.svg"
+    alt="comment"
+    id="comment-button"
+    [class.disabled]="!isLogged"
+    [class.enabled]="isLogged"
+    (click)="onAdd()"
+  />
 </div>
