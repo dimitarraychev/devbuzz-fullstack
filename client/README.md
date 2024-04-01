@@ -1,18 +1,6 @@
-# DevBuzz - Buzworthy Tech Gossip
+# DevBuzz - Frontend
 
-DevBuzz is a full-stack web application consisting of a frontend, developed as a course project for completing the SoftUni Angular Course, and a backend server built to complement the frontend.
-
-The project aims to provide users with a platform for publishing posts about tech innovations and news and sharing their views about topics by commenting on them.
-
-This addition directs users to the README.md files in the `client` and `server` directories for more detailed instructions and information about the frontend and backend, respectively.
-
-## Frontend
-
-The frontend of DevBuzz is built using Angular, a modern JavaScript framework for building dynamic web applications.
-
-## Backend
-
-The backend of DevBuzz is a server application built using Node.js, Express and Mongoose and follows RESTful principles for communication with the frontend.
+The frontend for DevBuzz is built using HTML, SCSS and Angular, a modern JavaScript framework for building dynamic web applications.
 
 ## Features
 
@@ -58,47 +46,31 @@ Before you begin, ensure you have the following prerequisites installed on your 
   npm install -g @angular/cli
   ```
 
-- **MongoDB**: DevBuzz uses MongoDB as its database system. You can download and install MongoDB Community Server from https://www.mongodb.com/try/download/community.
-
 ## Getting Started
 
-To run DevBuzz locally, follow these steps:
+To run the frontend locally, follow these steps:
 
-1. **Clone the repository**:
+1. **Navigate to the client directory**:
    ```sh
-   git clone https://github.com/dimitarraychev/devbuzz-fullstack
+   cd devbuzz-fullstack/client
    ```
-2. **Navigate to the server directory**:
-   ```sh
-   cd devbuzz-fullstack/server
-   ```
-3. **Install server dependencies**:
+2. **Install client dependencies**:
    ```sh
    npm install
    ```
-4. **Start the server**:
-   ```sh
-   npm start
-   ```
-5. **Open another terminal window/tab**.
-
-6. **Navigate to the client directory**:
-   ```sh
-   cd ../client
-   ```
-7. **Install client dependencies**:
-   ```sh
-   npm install
-   ```
-8. **Run the development server**:
+3. **Run the development server**:
    ```sh
    ng serve
    ```
-9. **Open your browser and navigate to: http://localhost:4200**
+4. **Open your browser and navigate to: http://localhost:4200**
 
 ## Author
 
-- [Dimitar Raychev](https://github.com/dimitarraychev)
+**Dimitar Raychev**
+
+- GitHub: [dimitarraychev](https://github.com/dimitarraychev)
+- LinkedIn: [Dimitar Raychev](https://linkedin.com/in/dimitaraychev)
+- Email: draytchev@gmail.com
 
 ## License
 
