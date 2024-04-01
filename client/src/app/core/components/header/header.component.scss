@@ -38,10 +38,11 @@ nav {
     letter-spacing: -2px;
     font-weight: bold;
     color: $font-color;
-    text-shadow: $shadow;
   }
 
-  i {
+  #icon-logo {
+    height: 1em;
+    width: auto;
     text-shadow: $shadow;
   }
 
