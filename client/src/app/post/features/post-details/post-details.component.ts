@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostBinding, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 
@@ -6,20 +6,16 @@ import { Post } from 'src/app/types/post.type';
 import { PostService } from '../../services/post.service';
 import { UserService } from 'src/app/user/services/user.service';
 import { CommentService } from '../../services/comment.service';
+import { routeAnimationState } from 'src/app/shared/animations/route.animation';
 
 @Component({
   selector: 'app-post-details',
   templateUrl: './post-details.component.html',
   styleUrls: ['./post-details.component.scss'],
+  animations: [routeAnimationState],
 })
 export class PostDetailsComponent implements OnInit {
-  constructor(
-    private postService: PostService,
-    private userService: UserService,
-    private commentService: CommentService,
-    private route: ActivatedRoute,
-    private router: Router
-  ) {}
+  @HostBinding('@routeAnimationTrigger') routeAnimation = true;
 
   post = {} as Post;
   isLoading: boolean = true;
@@ -31,6 +27,14 @@ export class PostDetailsComponent implements OnInit {
   isLiked$ = new BehaviorSubject<boolean>(false);
 
   postId: string = this.route.snapshot.params['id'];
+
+  constructor(
+    private postService: PostService,
+    private userService: UserService,
+    private commentService: CommentService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {}
 
   get loggedUser() {
     return this.userService.user;

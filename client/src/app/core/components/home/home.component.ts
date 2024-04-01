@@ -3,11 +3,21 @@ import { Router } from '@angular/router';
 import { UserService } from '../../../user/services/user.service';
 import { Subscription } from 'rxjs';
 import { ApiUser } from '../../../types/api.type';
+import {
+  slideFromLeftState,
+  slowedSlideFromLeftState,
+  slowestSlideFromLeftState,
+} from 'src/app/shared/animations/element.animation';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
+  animations: [
+    slideFromLeftState,
+    slowedSlideFromLeftState,
+    slowestSlideFromLeftState,
+  ],
 })
 export class HomeComponent implements OnInit, OnDestroy {
   constructor(private router: Router, private userService: UserService) {}
