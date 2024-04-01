@@ -7,6 +7,7 @@ import { PostService } from '../../services/post.service';
 import { PostErrorService } from '../../services/post-error.service';
 import { specialCharactersValidator } from 'src/app/shared/validators/special-characters.validator';
 import { profanityValidator } from 'src/app/shared/validators/profanity.validator';
+import { StorageService } from 'src/app/core/services/storage.service';
 
 @Component({
   selector: 'app-post-create',
@@ -18,6 +19,7 @@ export class PostCreateComponent implements OnInit, OnDestroy {
     private fb: FormBuilder,
     private postService: PostService,
     private postErrorService: PostErrorService,
+    private storageService: StorageService,
     private router: Router
   ) {}
 
@@ -28,6 +30,7 @@ export class PostCreateComponent implements OnInit, OnDestroy {
   errorMessage: string | null = null;
   isSubmitted: boolean = false;
   isButtonDisabled: boolean = true;
+  uploadedFilePath: string = '';
   private formSubscription: Subscription = new Subscription();
 
   createForm = this.fb.nonNullable.group({
@@ -42,7 +45,7 @@ export class PostCreateComponent implements OnInit, OnDestroy {
       ],
     ],
     category: ['', [Validators.required]],
-    image: ['', [Validators.required, Validators.pattern(/^https?:\/\//)]],
+    image: ['', [Validators.required]],
     description: [
       '',
       [
@@ -84,6 +87,17 @@ export class PostCreateComponent implements OnInit, OnDestroy {
     );
   }
 
+  onFileSelected(event: Event): void {
+    const inputElement = event.target as HTMLInputElement;
+    const file = inputElement?.files?.[0];
+    if (file) {
+      this.storageService.uploadFile(file).subscribe({
+        next: (path) => (this.uploadedFilePath = path),
+        error: (e) => (this.errorMessage = e.error.message),
+      });
+    }
+  }
+
   onSubmit(): void {
     this.isSubmitted = true;
 
@@ -96,13 +110,18 @@ export class PostCreateComponent implements OnInit, OnDestroy {
 
     this.isButtonDisabled = true;
 
-    this.postService.createPost(this.createForm.getRawValue()).subscribe({
-      next: (post) => this.router.navigate(['/posts', post._id]),
-      error: (e) => {
-        this.errorMessage = e.error.message;
-        this.isButtonDisabled = false;
-      },
-    });
+    const { title, category, description } = this.createForm.getRawValue();
+    const image = this.uploadedFilePath;
+
+    this.postService
+      .createPost({ title, category, description, image })
+      .subscribe({
+        next: (post) => this.router.navigate(['/posts', post._id]),
+        error: (e) => {
+          this.errorMessage = e.error.message;
+          this.isButtonDisabled = false;
+        },
+      });
   }
 
   ngOnDestroy(): void {

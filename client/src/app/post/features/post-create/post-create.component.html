@@ -4,52 +4,70 @@
 
     <h2>Create Post</h2>
     <form id="create-form" [formGroup]="createForm" (ngSubmit)="onSubmit()">
-      <input
-        type="text"
-        id="title"
-        placeholder="Title"
-        formControlName="title"
-        [class.invalid]="isFieldInvalid('title')"
-      />
+      <div id="grid-left">
+        <textarea
+          type="title"
+          id="title"
+          placeholder="Title"
+          formControlName="title"
+          [class.invalid]="isFieldInvalid('title')"
+        >
+        </textarea>
 
-      <select
-        id="category"
-        formControlName="category"
-        [class.invalid]="isFieldInvalid('category')"
-      >
-        <option value="" disabled selected hidden id="default-option">
-          Select Category...
-        </option>
-        <option value="development">Development</option>
-        <option value="blockchain">Blockchain</option>
-        <option value="artificial-intelligence">Artificial Intelligence</option>
-        <option value="other">Other</option>
-      </select>
+        <select
+          id="category"
+          formControlName="category"
+          [class.invalid]="isFieldInvalid('category')"
+        >
+          <option value="" disabled selected hidden id="default-option">
+            Select Category...
+          </option>
+          <option value="development">Development</option>
+          <option value="blockchain">Blockchain</option>
+          <option value="artificial-intelligence">
+            Artificial Intelligence
+          </option>
+          <option value="other">Other</option>
+        </select>
+      </div>
 
-      <input
-        type="url"
-        id="image"
-        placeholder="Image URL"
-        formControlName="image"
-        [class.invalid]="isFieldInvalid('image')"
-      />
+      <div id="grid-right">
+        <img
+          [src]="
+            uploadedFilePath != ''
+              ? uploadedFilePath
+              : './assets/images/image-placeholder.svg'
+          "
+          alt=""
+        />
 
-      <textarea
-        type="description"
-        id="description"
-        placeholder="Description"
-        formControlName="description"
-        [class.invalid]="isFieldInvalid('description')"
-      ></textarea>
-      <p id="error-msg" *ngIf="errorMessage">{{ errorMessage }}</p>
+        <input
+          type="file"
+          formControlName="image"
+          id="image"
+          [class.invalid]="isFieldInvalid('image')"
+          (change)="onFileSelected($event)"
+        />
+      </div>
 
-      <app-button
-        buttonSize="large"
-        buttonText="Create"
-        buttonIcon="create"
-        id="create-button"
-        [isDisabled]="isButtonDisabled"
-      />
+      <div id="grid-bottom">
+        <textarea
+          type="description"
+          id="description"
+          placeholder="Description"
+          formControlName="description"
+          [class.invalid]="isFieldInvalid('description')"
+        ></textarea>
+        <p id="error-msg" *ngIf="errorMessage">{{ errorMessage }}</p>
+
+        <app-button
+          buttonSize="large"
+          buttonText="Create"
+          buttonIcon="create"
+          id="create-button"
+          [isDisabled]="isButtonDisabled"
+        />
+      </div>
     </form>
   </section>
 </div>
