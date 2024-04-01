@@ -12,7 +12,10 @@ exports.add = async (commentData) => {
 		comment._postId,
 		{ $addToSet: { comments: comment._id } },
 		{ new: true }
-	).populate("comments");
+	).populate({
+		path: "comments",
+		options: { sort: { createdAt: -1 } },
+	});
 
 	return post;
 };
@@ -24,7 +27,10 @@ exports.delete = async (commentId, userId) => {
 		_id: commentId,
 		"owner._id": userId,
 	});
-	const post = await Post.findById(comment._postId).populate("comments");
+	const post = await Post.findById(comment._postId).populate({
+		path: "comments",
+		options: { sort: { createdAt: -1 } },
+	});
 
 	post.comments = post.comments.filter((c) => c.id != commentId);
 	await post.save();
