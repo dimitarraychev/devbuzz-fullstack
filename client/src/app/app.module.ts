@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 
 import { provideFirebaseApp, getApp, initializeApp } from '@angular/fire/app';
+import { getStorage, provideStorage } from '@angular/fire/storage';
 
 import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
@@ -16,6 +17,7 @@ import { interceptorProvider } from './core/interceptors/request.interceptor';
   declarations: [AppComponent],
   imports: [
     provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideStorage(() => getStorage()),
     BrowserModule,
     CoreModule,
     SharedModule,
