@@ -9,6 +9,7 @@ import { UserService } from 'src/app/user/services/user.service';
 export class HeaderComponent {
   constructor(private userService: UserService) {}
 
+  showPopup: boolean = false;
   isMenuOpen: boolean = false;
 
   @HostListener('document:click', ['$event'])
@@ -39,6 +40,14 @@ export class HeaderComponent {
   }
 
   logout(): void {
+    this.showPopup = true;
+  }
+
+  onConfirmedLogout(isConfirmed: boolean): void {
+    this.showPopup = false;
+
+    if (!isConfirmed) return;
+
     this.userService.logout();
   }
 }

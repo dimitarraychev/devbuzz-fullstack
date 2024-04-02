@@ -1,4 +1,9 @@
 <nav>
+  <app-modal-popup
+    *ngIf="showPopup"
+    (confirmed)="onConfirmedLogout($event)"
+    message="Are you sure you want to log out? Remember, you're always welcome back!"
+  />
   <div id="logo-container">
     <img
       title="Logo"
