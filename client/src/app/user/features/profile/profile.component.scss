@@ -17,6 +17,10 @@ $shadow: 0.2em 0.2em 0.5em rgba(0, 0, 0, 0.5);
   flex-direction: column;
   align-content: center;
 
+  p {
+    font-size: 18px;
+  }
+
   h2 {
     font-size: 30px;
     letter-spacing: 0.5px;
