@@ -38,3 +38,9 @@ export const slowestSlideFromLeftState = trigger('slowestSlideFromLeftState', [
     ),
   ]),
 ]);
+
+export const cookiePopupState = trigger('cookiePopupState', [
+  transition(':leave', [
+    animate(300, style({ opacity: 0, transform: 'translate(-50%, 100%)' })),
+  ]),
+]);
