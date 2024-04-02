@@ -60,13 +60,25 @@ app-loader {
   padding-bottom: 2em;
 }
 
+@media screen and (min-width: 1138px) {
+  #latestPostsContainer {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
 @media screen and (max-width: 1000px) {
+  #latestPostsContainer {
+    grid-template-columns: repeat(2, 1fr);
+  }
   .section h2 {
     font-size: 30px;
   }
 }
 
 @media screen and (max-width: 800px) {
+  #latestPostsContainer {
+    grid-template-columns: repeat(1, 1fr);
+  }
   .section h2 {
     font-size: 28px;
   }

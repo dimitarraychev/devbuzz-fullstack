@@ -65,7 +65,17 @@ app-loader {
   padding-bottom: 2em;
 }
 
+@media screen and (min-width: 1138px) {
+  #posts-container {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
 @media screen and (max-width: 1000px) {
+  #posts-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
   #user {
     width: 50%;
   }
@@ -82,6 +92,10 @@ app-loader {
 }
 
 @media screen and (max-width: 800px) {
+  #posts-container {
+    grid-template-columns: repeat(1, 1fr);
+  }
+
   #user {
     width: 60%;
   }
