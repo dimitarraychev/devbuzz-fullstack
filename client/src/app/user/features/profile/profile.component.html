@@ -32,7 +32,11 @@
     </div>
 
     <div id="posts-container" *ngIf="!isLoading">
-      <app-post-card *ngFor="let post of user.posts" [post]="post" />
+      <app-post-card
+        *ngFor="let post of user.posts"
+        [post]="post"
+        moreInfo="time"
+      />
     </div>
 
     <app-pagination
