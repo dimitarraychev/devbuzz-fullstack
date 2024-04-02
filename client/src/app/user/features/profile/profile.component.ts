@@ -32,6 +32,10 @@ export class ProfileComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    if (this.loggedUser?._id != this.userId) {
+      this.router.navigate(['/home']);
+      return;
+    }
     this.routeSubscription = this.subscribeToRouteChanges();
   }
 

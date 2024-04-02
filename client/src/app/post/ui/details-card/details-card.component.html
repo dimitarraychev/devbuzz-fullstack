@@ -29,9 +29,7 @@
 
     <div id="details-info-bottom">
       <div id="details-owner">
-        <p id="owner-name" [routerLink]="['/user', post.owner._id]">
-          by {{ post.owner.username }}
-        </p>
+        <p id="owner-name">by {{ post.owner.username }}</p>
       </div>
       <div id="like-container">
         <p id="likes-count">Likes: {{ likesCount }}</p>
