@@ -14,3 +14,24 @@ footer {
 footer a {
   color: $font-color;
 }
+
+@media screen and (max-width: 1000px) {
+  footer {
+    font-size: 16px;
+    padding: 2em 25% 1em 25%;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  footer {
+    font-size: 14px;
+    padding: 2em 20% 1em 20%;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  footer {
+    font-size: 12px;
+    padding: 2em 15% 1em 15%;
+  }
+}

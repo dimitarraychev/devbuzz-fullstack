@@ -48,3 +48,17 @@ $shadow: 0.2em 0.2em 0.5em rgba(0, 0, 0, 0.5);
   padding: 1em 0.2em 0 0.2em;
   text-shadow: $shadow;
 }
+
+@media screen and (max-width: 800px) {
+  .comment {
+    width: 70%;
+    font-size: 14px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .comment {
+    width: 80%;
+    font-size: 12px;
+  }
+}

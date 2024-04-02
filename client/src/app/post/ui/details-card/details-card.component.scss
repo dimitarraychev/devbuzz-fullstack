@@ -118,3 +118,53 @@ app-loader {
   left: 50%;
   transform: translate(-50%, -50%);
 }
+
+@media screen and (max-width: 1000px) {
+  #details-info {
+    #details-title {
+      font-size: 26px;
+    }
+  }
+}
+
+@media screen and (max-width: 800px) {
+  #details-img {
+    width: 30vw;
+    height: 35vh;
+  }
+
+  #details-description {
+    font-size: 14px;
+  }
+
+  #details-info {
+    #details-title {
+      font-size: 24px;
+    }
+  }
+}
+
+@media screen and (max-width: 500px) {
+  #details-img {
+    width: 90%;
+    height: 30vh;
+  }
+
+  #details-description {
+    font-size: 12px;
+  }
+
+  #details-info {
+    width: 90%;
+    padding: 0.5em;
+
+    #details-title {
+      font-size: 22px;
+    }
+  }
+  #details-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}

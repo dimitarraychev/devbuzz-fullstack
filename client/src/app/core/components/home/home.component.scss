@@ -48,7 +48,7 @@ $shadow: 0.2em 0.2em 0.5em rgba(0, 0, 0, 0.5);
   div {
     background-color: $dark-bg;
 
-    h3 {
+    h2 {
       font-size: 30px;
       letter-spacing: 0.5px;
       margin: auto;
@@ -82,7 +82,7 @@ $shadow: 0.2em 0.2em 0.5em rgba(0, 0, 0, 0.5);
     width: 70%;
   }
 
-  h4 {
+  h3 {
     font-size: 22px;
     text-shadow: $shadow;
   }
@@ -125,39 +125,105 @@ $shadow: 0.2em 0.2em 0.5em rgba(0, 0, 0, 0.5);
 }
 
 @media screen and (max-width: 1000px) {
-  .category img {
-    width: 10em;
-    height: 8em;
+  .home-msg {
+    h1 {
+      font-size: 32px;
+    }
+
+    p {
+      font-size: 16px;
+    }
   }
 
-  .bentogrid {
-    font-size: 14px;
+  .category {
+    h3 {
+      font-size: 20px;
+    }
+
+    p {
+      font-size: 14px;
+    }
   }
 
-  h3 {
-    font-size: 28px;
-  }
-
-  h4 {
-    font-size: 20px;
+  #grid-wrapper {
+    div h2 {
+      font-size: 30px;
+    }
   }
 }
 
 @media screen and (max-width: 800px) {
-  .category img {
-    width: 8em;
-    height: 6em;
+  .home-msg {
+    h1 {
+      font-size: 28px;
+    }
+
+    p {
+      font-size: 14px;
+    }
   }
 
-  .bentogrid {
-    font-size: 12px;
+  .category {
+    img {
+      width: 10em;
+      height: 8em;
+    }
   }
 
-  h3 {
-    font-size: 26px;
+  #grid-wrapper {
+    flex-direction: column;
+
+    div h2 {
+      font-size: 26px;
+    }
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .home-msg {
+    width: 80%;
+
+    h1 {
+      font-size: 26px;
+    }
+
+    p {
+      font-size: 12px;
+    }
   }
 
-  h4 {
-    font-size: 18px;
+  .category {
+    flex-direction: column;
+
+    section {
+      width: 90%;
+      align-items: center;
+    }
+
+    h3 {
+      text-align: center;
+      font-size: 18px;
+    }
+
+    p {
+      font-size: 12px;
+      text-align: center;
+    }
+  }
+
+  #grid-wrapper {
+    flex-direction: column;
+
+    div h2 {
+      font-size: 22px;
+    }
+  }
+
+  #contributors-wrapper {
+    #contributors {
+      p {
+        font-size: 12px;
+      }
+    }
   }
 }

@@ -27,3 +27,23 @@ $shadow: 0.2em 0.2em 0.5em rgba(0, 0, 0, 0.5);
   filter: brightness(0.5);
   cursor: not-allowed;
 }
+
+@media screen and (max-width: 800px) {
+  #pagination-container {
+    .arrow {
+      height: 2em;
+    }
+
+    p {
+      font-size: 12px;
+    }
+  }
+}
+
+@media screen and (max-width: 500px) {
+  #pagination-container {
+    p {
+      font-size: 10px;
+    }
+  }
+}

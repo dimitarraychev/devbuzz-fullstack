@@ -17,7 +17,7 @@ $shadow: 0.2em 0.2em 0.5em rgba(0, 0, 0, 0.5);
   flex-direction: column;
   align-content: center;
 
-  h3 {
+  h2 {
     font-size: 30px;
     letter-spacing: 0.5px;
     margin: auto;
@@ -60,20 +60,25 @@ app-loader {
   padding-bottom: 2em;
 }
 
-@media screen and (min-width: 1138px) {
-  #latestPostsContainer {
-    grid-template-columns: repeat(3, 1fr);
+@media screen and (max-width: 1000px) {
+  .section h2 {
+    font-size: 30px;
   }
 }
 
-@media screen and (max-width: 1138px) {
-  #latestPostsContainer {
-    grid-template-columns: repeat(2, 1fr);
+@media screen and (max-width: 800px) {
+  .section h2 {
+    font-size: 28px;
   }
 }
 
-@media screen and (max-width: 773px) {
+@media screen and (max-width: 500px) {
   #latestPostsContainer {
-    grid-template-columns: 1fr;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .section h2 {
+    font-size: 26px;
   }
 }

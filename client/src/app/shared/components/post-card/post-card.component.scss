@@ -61,3 +61,25 @@ app-button {
   font-size: 18px;
   text-shadow: $shadow;
 }
+
+@media screen and (max-width: 800px) {
+  .post {
+    width: 13em;
+    height: 13em;
+  }
+
+  .post-title {
+    font-size: 16px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .post {
+    width: 10em;
+    height: 10em;
+  }
+
+  .post-title {
+    font-size: 14px;
+  }
+}

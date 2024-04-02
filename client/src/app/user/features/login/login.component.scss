@@ -63,3 +63,76 @@ $bee-yellow: #e9ab17;
   border: 1px solid red;
   box-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
 }
+
+@media screen and (max-width: 1000px) {
+  #login-form-wrapper {
+    min-width: 40%;
+
+    h2 {
+      font-size: 30px;
+    }
+  }
+
+  #login-form {
+    input {
+      font-size: 16px;
+    }
+  }
+
+  #redirect-message {
+    font-size: 16px;
+  }
+
+  #error-msg {
+    width: 80%;
+    text-wrap: wrap;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  #login-form-wrapper {
+    min-width: 50%;
+    h2 {
+      font-size: 28px;
+    }
+  }
+
+  #login-form {
+    input {
+      font-size: 14px;
+      width: 30vw;
+    }
+  }
+
+  #redirect-message {
+    font-size: 14px;
+  }
+
+  #error-msg {
+    font-size: 10px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  #login-form-wrapper {
+    min-width: 60%;
+    h2 {
+      font-size: 28px;
+    }
+  }
+
+  #login-form {
+    input {
+      font-size: 12px;
+      width: 40vw;
+    }
+  }
+
+  #redirect-message {
+    font-size: 12px;
+  }
+
+  #error-msg {
+    font-size: 8px;
+  }
+}
