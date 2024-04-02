@@ -35,3 +35,38 @@ $shadow: 0.2em 0.2em 0.5em rgba(0, 0, 0, 0.5);
     }
   }
 }
+
+@media screen and (max-width: 1000px) {
+  #not-found-container {
+    width: 70%;
+
+    #not-found {
+      width: 30em;
+      height: 25em;
+    }
+  }
+}
+
+@media screen and (max-width: 800px) {
+  #not-found-container {
+    width: 80%;
+
+    #not-found {
+      width: 24em;
+      height: 20em;
+    }
+
+    #home-button {
+      height: 2em;
+    }
+  }
+}
+
+@media screen and (max-width: 500px) {
+  #not-found-container {
+    #not-found {
+      width: 20em;
+      height: 16em;
+    }
+  }
+}
