@@ -4,14 +4,7 @@ import { FormGroup } from '@angular/forms';
 @Injectable({
   providedIn: 'root',
 })
-export class PostErrorService {
-  private postFormFields: string[] = [
-    'title',
-    'category',
-    'image',
-    'description',
-  ];
-
+export class FormValidationService {
   isFieldInvalid(
     field: string,
     form: FormGroup,
@@ -24,7 +17,7 @@ export class PostErrorService {
   }
 
   validationErrorHandler(form: FormGroup): string {
-    for (const field of this.postFormFields) {
+    for (const field of Object.keys(form.controls)) {
       if (form.get(field)?.hasError('required'))
         return `Uh-oh! ${field} is required.`;
       if (form.get(field)?.hasError('minlength'))
@@ -39,6 +32,8 @@ export class PostErrorService {
         return `Oops! ${field} cannot contain any special characters.`;
       if (form.get(field)?.hasError('profane'))
         return `Sorry, ${field} cannot contain profanity.`;
+      if (form.get(field)?.hasError('email'))
+        return `Oops, a valid email email address is required.`;
     }
     return 'A wild error occurred! Try again.';
   }

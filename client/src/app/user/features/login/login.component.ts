@@ -2,8 +2,8 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from '../../services/user.service';
-import { UserErrorService } from '../../services/user-error.service';
 import { Subscription } from 'rxjs';
+import { FormValidationService } from 'src/app/core/services/form-validation.service';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +14,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   constructor(
     private fb: FormBuilder,
     private userService: UserService,
-    private userErrorService: UserErrorService,
+    private formValidationService: FormValidationService,
     private router: Router
   ) {}
 
@@ -42,7 +42,7 @@ export class LoginComponent implements OnInit, OnDestroy {
         return (this.isButtonDisabled = false);
       }
       if (this.isFieldInvalid('email') || this.isFieldInvalid('password')) {
-        this.errorMessage = this.userErrorService.validationErrorHandler(
+        this.errorMessage = this.formValidationService.validationErrorHandler(
           this.loginForm
         );
         return (this.isButtonDisabled = true);
@@ -53,7 +53,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   isFieldInvalid(field: string): boolean | undefined {
-    return this.userErrorService.isFieldInvalid(
+    return this.formValidationService.isFieldInvalid(
       field,
       this.loginForm,
       this.isSubmitted
@@ -66,7 +66,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     const { email, password } = this.loginForm.getRawValue();
 
     if (this.loginForm.invalid) {
-      this.errorMessage = this.userErrorService.validationErrorHandler(
+      this.errorMessage = this.formValidationService.validationErrorHandler(
         this.loginForm
       );
       return;

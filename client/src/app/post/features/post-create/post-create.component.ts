@@ -4,10 +4,10 @@ import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 
 import { PostService } from '../../services/post.service';
-import { PostErrorService } from '../../services/post-error.service';
 import { specialCharactersValidator } from 'src/app/shared/validators/special-characters.validator';
 import { profanityValidator } from 'src/app/shared/validators/profanity.validator';
 import { StorageService } from 'src/app/core/services/storage.service';
+import { FormValidationService } from 'src/app/core/services/form-validation.service';
 
 @Component({
   selector: 'app-post-create',
@@ -18,7 +18,7 @@ export class PostCreateComponent implements OnInit, OnDestroy {
   constructor(
     private fb: FormBuilder,
     private postService: PostService,
-    private postErrorService: PostErrorService,
+    private formValidationService: FormValidationService,
     private storageService: StorageService,
     private router: Router
   ) {}
@@ -69,7 +69,7 @@ export class PostCreateComponent implements OnInit, OnDestroy {
         this.isFieldInvalid('image') ||
         this.isFieldInvalid('description')
       ) {
-        this.errorMessage = this.postErrorService.validationErrorHandler(
+        this.errorMessage = this.formValidationService.validationErrorHandler(
           this.createForm
         );
         return (this.isButtonDisabled = true);
@@ -80,7 +80,7 @@ export class PostCreateComponent implements OnInit, OnDestroy {
   }
 
   isFieldInvalid(field: string): boolean | undefined {
-    return this.postErrorService.isFieldInvalid(
+    return this.formValidationService.isFieldInvalid(
       field,
       this.createForm,
       this.isSubmitted
@@ -102,7 +102,7 @@ export class PostCreateComponent implements OnInit, OnDestroy {
     this.isSubmitted = true;
 
     if (this.createForm.invalid) {
-      this.errorMessage = this.postErrorService.validationErrorHandler(
+      this.errorMessage = this.formValidationService.validationErrorHandler(
         this.createForm
       );
       return;

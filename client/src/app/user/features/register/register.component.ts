@@ -2,10 +2,10 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { UserService } from '../../services/user.service';
 import { Router } from '@angular/router';
-import { UserErrorService } from '../../services/user-error.service';
 import { Subscription } from 'rxjs';
 import { specialCharactersValidator } from 'src/app/shared/validators/special-characters.validator';
 import { profanityValidator } from 'src/app/shared/validators/profanity.validator';
+import { FormValidationService } from 'src/app/core/services/form-validation.service';
 
 @Component({
   selector: 'app-register',
@@ -16,7 +16,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
   constructor(
     private fb: FormBuilder,
     private userService: UserService,
-    private userErrorService: UserErrorService,
+    private formValidationService: FormValidationService,
     private router: Router
   ) {}
 
@@ -74,7 +74,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
         this.isFieldInvalid('password') ||
         this.isFieldInvalid('rePassword')
       ) {
-        this.errorMessage = this.userErrorService.validationErrorHandler(
+        this.errorMessage = this.formValidationService.validationErrorHandler(
           this.registerForm
         );
         return (this.isButtonDisabled = true);
@@ -85,7 +85,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
   }
 
   isFieldInvalid(field: string): boolean | undefined {
-    return this.userErrorService.isFieldInvalid(
+    return this.formValidationService.isFieldInvalid(
       field,
       this.registerForm,
       this.isSubmitted
@@ -99,7 +99,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
       this.registerForm.getRawValue();
 
     if (this.registerForm.invalid) {
-      this.errorMessage = this.userErrorService.validationErrorHandler(
+      this.errorMessage = this.formValidationService.validationErrorHandler(
         this.registerForm
       );
       return;

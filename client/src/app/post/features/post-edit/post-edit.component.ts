@@ -5,11 +5,11 @@ import { Subscription } from 'rxjs';
 
 import { Post } from 'src/app/types/post.type';
 import { PostService } from '../../services/post.service';
-import { PostErrorService } from '../../services/post-error.service';
 import { UserService } from 'src/app/user/services/user.service';
 import { specialCharactersValidator } from 'src/app/shared/validators/special-characters.validator';
 import { profanityValidator } from 'src/app/shared/validators/profanity.validator';
 import { StorageService } from 'src/app/core/services/storage.service';
+import { FormValidationService } from 'src/app/core/services/form-validation.service';
 
 @Component({
   selector: 'app-post-edit',
@@ -20,7 +20,7 @@ export class PostEditComponent implements OnInit, OnDestroy {
   constructor(
     private fb: FormBuilder,
     private postService: PostService,
-    private postErrorService: PostErrorService,
+    private formValidationService: FormValidationService,
     private userService: UserService,
     private storageService: StorageService,
     private router: Router,
@@ -77,7 +77,7 @@ export class PostEditComponent implements OnInit, OnDestroy {
         this.isFieldInvalid('category') ||
         this.isFieldInvalid('description')
       ) {
-        this.errorMessage = this.postErrorService.validationErrorHandler(
+        this.errorMessage = this.formValidationService.validationErrorHandler(
           this.editForm
         );
         return (this.isButtonDisabled = true);
@@ -111,7 +111,7 @@ export class PostEditComponent implements OnInit, OnDestroy {
   }
 
   isFieldInvalid(field: string): boolean | undefined {
-    return this.postErrorService.isFieldInvalid(
+    return this.formValidationService.isFieldInvalid(
       field,
       this.editForm,
       this.isSubmitted
@@ -133,7 +133,7 @@ export class PostEditComponent implements OnInit, OnDestroy {
     this.isSubmitted = true;
 
     if (this.editForm.invalid) {
-      this.errorMessage = this.postErrorService.validationErrorHandler(
+      this.errorMessage = this.formValidationService.validationErrorHandler(
         this.editForm
       );
       return;
