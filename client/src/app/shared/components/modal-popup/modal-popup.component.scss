@@ -18,6 +18,7 @@ $shadow: 0.2em 0.2em 0.5em rgba(0, 0, 0, 0.5);
   z-index: 99;
 
   p {
+    font-size: 18px;
     text-align: center;
     padding: 0 2em 1em 2em;
   }
@@ -50,4 +51,34 @@ $shadow: 0.2em 0.2em 0.5em rgba(0, 0, 0, 0.5);
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 98;
+}
+
+@media screen and (max-width: 1000px) {
+  #confirmation-dialog {
+    width: 30%;
+
+    p {
+      font-size: 16px;
+    }
+  }
+}
+
+@media screen and (max-width: 800px) {
+  #confirmation-dialog {
+    width: 40%;
+
+    p {
+      font-size: 14px;
+    }
+  }
+}
+
+@media screen and (max-width: 500px) {
+  #confirmation-dialog {
+    width: 50%;
+
+    p {
+      font-size: 12px;
+    }
+  }
 }
