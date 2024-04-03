@@ -6,6 +6,22 @@ The project aims to provide users with a platform for publishing posts about tec
 
 This addition directs users to the README.md files in the `client` and `server` directories for more detailed instructions and information about the frontend and backend, respectively.
 
+## Hosting
+
+The project's front-end is deployed on Firebase and accessible through the following URLs:
+
+-   🔗 https://dev-buzz.web.app/
+-   🔗 https://dev-buzz.firebaseapp.com/
+
+Meanwhile, the project's back-end is hosted on Render, and the database is managed by MongoDB Atlas.
+
+## Disclaimer
+
+Cookies are not set from the back-end, they're sent inside the response from the back-end and set from the front-end in order to comply with Google's ongoing migration to privacy preserving solutions and the deprecation of third-party cookies:
+
+More information available on:
+https://developers.google.com/privacy-sandbox/3pcd
+
 ## Prerequisites
 
 Before you begin, ensure you have the following prerequisites installed on your machine:
