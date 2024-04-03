@@ -20,7 +20,7 @@ DevBuzz follows a modular architecture to organize its codebase effectively. Bel
 
 - **Core Module**: Holds all core logic, separated into components, services, interceptors, and guards. Each of these logical components resides in its respective folder within the core module.
 
-- **Shared Module**: Contains shared components, pipes, and validators. Similar to the core module, these shared elements are organized into folders with corresponding names.
+- **Shared Module**: Contains shared components, pipes, animations and validators. Similar to the core module, these shared elements are organized into folders with corresponding names.
 
 - **User Module**: A lazy-loaded module that handles user-related features such as authentication, profile viewing, and user management.
 
