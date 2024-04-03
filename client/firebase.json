@@ -1,1 +1,13 @@
-{}
+{
+  "hosting": {
+    "public": "dist/dev-buzz",
+    "site": "dev-buzz",
+    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
+}
