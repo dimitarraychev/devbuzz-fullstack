@@ -63,6 +63,7 @@ export class PostCreateComponent implements OnInit, OnDestroy {
         this.errorMessage = null;
         return (this.isButtonDisabled = false);
       }
+
       if (
         this.isFieldInvalid('title') ||
         this.isFieldInvalid('category') ||
@@ -74,6 +75,7 @@ export class PostCreateComponent implements OnInit, OnDestroy {
         );
         return (this.isButtonDisabled = true);
       }
+
       this.errorMessage = null;
       return (this.isButtonDisabled = true);
     });

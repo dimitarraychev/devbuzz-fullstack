@@ -41,12 +41,14 @@ export class LoginComponent implements OnInit, OnDestroy {
         this.errorMessage = null;
         return (this.isButtonDisabled = false);
       }
+
       if (this.isFieldInvalid('email') || this.isFieldInvalid('password')) {
         this.errorMessage = this.formValidationService.validationErrorHandler(
           this.loginForm
         );
         return (this.isButtonDisabled = true);
       }
+
       this.errorMessage = null;
       return (this.isButtonDisabled = true);
     });

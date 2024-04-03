@@ -73,7 +73,7 @@ export class PostDetailsComponent implements OnInit {
 
         this.isLiked$.next(true);
       },
-      error: console.log, // TODO handle error?
+      error: (e) => this.router.navigate(['404']),
     });
   }
 
@@ -84,7 +84,7 @@ export class PostDetailsComponent implements OnInit {
 
         this.isLiked$.next(false);
       },
-      error: console.log, // TODO handle error?
+      error: (e) => this.router.navigate(['404']),
     });
   }
 
@@ -93,7 +93,7 @@ export class PostDetailsComponent implements OnInit {
       .addComment({ message, _postId: this.postId })
       .subscribe({
         next: (post) => (this.post.comments = post.comments),
-        error: console.log, // TODO handle error?
+        error: (e) => this.router.navigate(['404']),
       });
   }
 
@@ -114,7 +114,7 @@ export class PostDetailsComponent implements OnInit {
 
   deletePost(): void {
     this.postService.deletePost(this.postId).subscribe({
-      error: console.log, // TODO handle error?
+      error: (e) => this.router.navigate(['404']),
       complete: () => this.router.navigate(['posts/feed']),
     });
   }
@@ -124,7 +124,7 @@ export class PostDetailsComponent implements OnInit {
 
     this.commentService.deleteComent(this.commentToDelete).subscribe({
       next: (post) => (this.post.comments = post.comments),
-      error: console.log, // TODO handle error?
+      error: (e) => this.router.navigate(['404']),
     });
 
     this.commentToDelete = undefined;

@@ -68,6 +68,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
         this.errorMessage = null;
         return (this.isButtonDisabled = false);
       }
+
       if (
         this.isFieldInvalid('username') ||
         this.isFieldInvalid('email') ||
@@ -79,6 +80,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
         );
         return (this.isButtonDisabled = true);
       }
+
       this.errorMessage = null;
       return (this.isButtonDisabled = true);
     });

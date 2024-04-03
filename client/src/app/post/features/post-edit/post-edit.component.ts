@@ -72,6 +72,7 @@ export class PostEditComponent implements OnInit, OnDestroy {
         this.errorMessage = null;
         return (this.isButtonDisabled = false);
       }
+
       if (
         this.isFieldInvalid('title') ||
         this.isFieldInvalid('category') ||
@@ -82,6 +83,7 @@ export class PostEditComponent implements OnInit, OnDestroy {
         );
         return (this.isButtonDisabled = true);
       }
+
       this.errorMessage = null;
       return (this.isButtonDisabled = true);
     });
