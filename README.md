@@ -60,7 +60,7 @@ To run DevBuzz locally, follow these steps:
 
 6. **Navigate to the client directory**:
     ```sh
-    cd ../client
+    cd devbuzz-fullstack/client
     ```
 7. **Install client dependencies**:
     ```sh
