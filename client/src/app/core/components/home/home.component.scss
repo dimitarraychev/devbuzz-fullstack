@@ -117,10 +117,10 @@ $shadow: 0.2em 0.2em 0.5em rgba(0, 0, 0, 0.5);
 }
 
 #no-contributors {
-  font-size: 22px;
+  font-size: 20px;
   width: 70%;
   text-align: center;
-  padding: 2em 0;
+  padding: 1em 0;
 }
 
 @media screen and (max-width: 1000px) {
@@ -145,9 +145,15 @@ $shadow: 0.2em 0.2em 0.5em rgba(0, 0, 0, 0.5);
   }
 
   #grid-wrapper {
+    flex-direction: column;
+
     div h2 {
       font-size: 30px;
     }
+  }
+
+  #no-contributors {
+    font-size: 18px;
   }
 }
 
@@ -170,11 +176,13 @@ $shadow: 0.2em 0.2em 0.5em rgba(0, 0, 0, 0.5);
   }
 
   #grid-wrapper {
-    flex-direction: column;
-
     div h2 {
       font-size: 26px;
     }
+  }
+
+  #no-contributors {
+    font-size: 16px;
   }
 }
 
@@ -224,5 +232,9 @@ $shadow: 0.2em 0.2em 0.5em rgba(0, 0, 0, 0.5);
         font-size: 12px;
       }
     }
+  }
+
+  #no-contributors {
+    font-size: 14px;
   }
 }

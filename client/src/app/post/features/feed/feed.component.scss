@@ -49,10 +49,11 @@ $shadow: 0.2em 0.2em 0.5em rgba(0, 0, 0, 0.5);
 }
 
 .no-posts {
-  font-size: 22px;
+  font-size: 20px;
   margin: auto;
+  width: 70%;
   text-align: center;
-  padding-bottom: 2em;
+  padding: 2em 0;
 }
 
 app-loader {
@@ -73,6 +74,10 @@ app-loader {
   .section h2 {
     font-size: 30px;
   }
+
+  .no-posts {
+    font-size: 18px;
+  }
 }
 
 @media screen and (max-width: 800px) {
@@ -81,6 +86,10 @@ app-loader {
   }
   .section h2 {
     font-size: 28px;
+  }
+
+  .no-posts {
+    font-size: 16px;
   }
 }
 
@@ -92,5 +101,9 @@ app-loader {
 
   .section h2 {
     font-size: 26px;
+  }
+
+  .no-posts {
+    font-size: 14px;
   }
 }

@@ -16,8 +16,9 @@ $dark-bg: rgba(18, 18, 18, 1);
   color: $font-color;
 }
 
-#noComments {
+#no-comments {
   margin: auto;
+  font-size: 20px;
 }
 
 #no-comments-wrapper {
@@ -26,4 +27,34 @@ $dark-bg: rgba(18, 18, 18, 1);
   padding: 1em;
   background-color: $dark-bg;
   text-align: center;
+}
+
+@media screen and (max-width: 1000px) {
+  #no-comments-wrapper {
+    width: 40%;
+  }
+
+  #no-comments {
+    font-size: 18px;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  #no-comments-wrapper {
+    width: 50%;
+  }
+
+  #no-comments {
+    font-size: 16px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  #no-comments-wrapper {
+    width: 60%;
+  }
+
+  #no-comments {
+    font-size: 16px;
+  }
 }
