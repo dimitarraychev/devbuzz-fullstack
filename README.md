@@ -15,6 +15,8 @@ The project's front-end is deployed on Firebase and accessible through the follo
 
 Meanwhile, the project's back-end is hosted on Render, and the database is managed by MongoDB Atlas.
 
+_Note_: The initial load time of the website is longer until Render boots up the Web-Service and afterwards everything starts running smooth and fast.
+
 ## Disclaimer
 
 Cookies are not set from the back-end, they're sent inside the response from the back-end and set from the front-end in order to comply with Google's ongoing migration to privacy preserving solutions and the deprecation of third-party cookies:
@@ -22,7 +24,7 @@ Cookies are not set from the back-end, they're sent inside the response from the
 More information available on:
 https://developers.google.com/privacy-sandbox/3pcd
 
-## Prerequisites
+## Prerequisites For Local Hosting
 
 Before you begin, ensure you have the following prerequisites installed on your machine:
 
@@ -36,7 +38,7 @@ Before you begin, ensure you have the following prerequisites installed on your 
 
 -   **MongoDB**: DevBuzz uses MongoDB as its database system. You can download and install MongoDB Community Server from https://www.mongodb.com/try/download/community.
 
-## Getting Started
+## Getting Started With Local Hosting
 
 To run DevBuzz locally, follow these steps:
 
