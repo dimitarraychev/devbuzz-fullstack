@@ -2,7 +2,7 @@ const User = require("../models/User");
 const Post = require("../models/Post");
 
 exports.getTop = () =>
-	User.find({}, { password: 0, __v: 0 }).sort({ posts: -1 }).limit(3).lean();
+	User.find({}, { password: 0, __v: 0 }).sort({ posts: 1 }).limit(3).lean();
 
 exports.getOne = async (userId, limit, skip) => {
 	const totalPosts = await Post.countDocuments({ "owner._id": userId });
