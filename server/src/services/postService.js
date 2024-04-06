@@ -37,16 +37,34 @@ exports.getLatest = async (search, category, limit, skip) => {
 };
 
 exports.getHottest = async (category) => {
-	let query = {};
+	let pipeline = [
+		{
+			$addFields: {
+				likesCount: { $size: "$likes" },
+			},
+		},
+		{
+			$sort: { likesCount: -1 },
+		},
+		{
+			$limit: 3,
+		},
+		{
+			$project: {
+				_id: 1,
+				title: 1,
+				image: 1,
+				likes: 1,
+				createdAt: 1,
+			},
+		},
+	];
 
-	if (category !== "all") {
-		query.category = category;
+	if (category && category !== "all") {
+		pipeline.unshift({ $match: { category: category } });
 	}
 
-	const posts = Post.find(query)
-		.sort({ likes: -1 })
-		.limit(3)
-		.select("_id title image likes createdAt");
+	const posts = await Post.aggregate(pipeline);
 
 	return posts;
 };
