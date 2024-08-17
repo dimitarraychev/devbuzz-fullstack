@@ -156,8 +156,8 @@ app-close-btn {
 }
 
 @media screen and (max-width: 800px) {
-  #create-form-wrapper h2 {
-    font-size: 28px;
+  #create-form-wrapper {
+    width: 90%;
   }
 
   #create-form {
@@ -192,10 +192,6 @@ app-close-btn {
 }
 
 @media screen and (max-width: 500px) {
-  #create-form-wrapper h2 {
-    font-size: 26px;
-  }
-
   #create-form {
     #grid-left {
       #title,

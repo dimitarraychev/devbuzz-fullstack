@@ -160,8 +160,8 @@ app-loader {
 }
 
 @media screen and (max-width: 800px) {
-  #edit-form-wrapper h2 {
-    font-size: 28px;
+  #edit-form-wrapper {
+    width: 90%;
   }
 
   #edit-form {
@@ -196,10 +196,6 @@ app-loader {
 }
 
 @media screen and (max-width: 500px) {
-  #edit-form-wrapper h2 {
-    font-size: 26px;
-  }
-
   #edit-form {
     #grid-left {
       #title,
