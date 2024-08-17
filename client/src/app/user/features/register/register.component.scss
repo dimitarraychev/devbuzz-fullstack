@@ -91,10 +91,7 @@ $bee-yellow: #e9ab17;
 
 @media screen and (max-width: 800px) {
   #register-form-wrapper {
-    min-width: 50%;
-    h2 {
-      font-size: 28px;
-    }
+    min-width: 70%;
   }
 
   #register-form {
@@ -115,15 +112,11 @@ $bee-yellow: #e9ab17;
 
 @media screen and (max-width: 500px) {
   #register-form-wrapper {
-    min-width: 60%;
-    h2 {
-      font-size: 28px;
-    }
+    min-width: 90%;
   }
 
   #register-form {
     input {
-      font-size: 12px;
       width: 40vw;
     }
   }

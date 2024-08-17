@@ -146,10 +146,6 @@ $shadow: 0.2em 0.2em 0.5em rgba(0, 0, 0, 0.5);
 
   #grid-wrapper {
     flex-direction: column;
-
-    div h2 {
-      font-size: 30px;
-    }
   }
 
   #no-contributors {
@@ -170,15 +166,13 @@ $shadow: 0.2em 0.2em 0.5em rgba(0, 0, 0, 0.5);
 
   .category {
     img {
-      width: 10em;
-      height: 8em;
+      width: 15rem;
+      height: 12rem;
     }
   }
 
   #grid-wrapper {
-    div h2 {
-      font-size: 26px;
-    }
+    width: 90%;
   }
 
   #no-contributors {
@@ -188,14 +182,10 @@ $shadow: 0.2em 0.2em 0.5em rgba(0, 0, 0, 0.5);
 
 @media screen and (max-width: 500px) {
   .home-msg {
-    width: 80%;
+    width: 90%;
 
     h1 {
       font-size: 26px;
-    }
-
-    p {
-      font-size: 12px;
     }
   }
 
@@ -203,27 +193,21 @@ $shadow: 0.2em 0.2em 0.5em rgba(0, 0, 0, 0.5);
     flex-direction: column;
 
     section {
-      width: 90%;
+      width: 100%;
       align-items: center;
     }
 
     h3 {
       text-align: center;
-      font-size: 18px;
     }
 
     p {
-      font-size: 12px;
       text-align: center;
     }
   }
 
   #grid-wrapper {
     flex-direction: column;
-
-    div h2 {
-      font-size: 22px;
-    }
   }
 
   #contributors-wrapper {

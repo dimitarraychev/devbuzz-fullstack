@@ -8,6 +8,10 @@ $bento-border-hover: 1px solid rgba(255, 255, 255, 0.6);
 $bento-shadow-hover: 0 0 0.5em rgba(255, 255, 255, 0.3);
 $shadow-transition: box-shadow 0.5s;
 
+body {
+  background-color: $bg-color;
+}
+
 * {
   margin: 0;
   padding: 0;

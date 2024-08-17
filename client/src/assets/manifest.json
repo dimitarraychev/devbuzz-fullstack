@@ -1,0 +1,15 @@
+{
+  "short_name": "DevBuzz",
+  "name": "DevBuzz - Buzzworthy tech gossip",
+  "icons": [
+    {
+      "src": "assets/apple-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#292929",
+  "theme_color": "#292929"
+}

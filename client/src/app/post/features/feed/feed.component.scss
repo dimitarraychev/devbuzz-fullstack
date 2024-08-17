@@ -81,11 +81,11 @@ app-loader {
 }
 
 @media screen and (max-width: 800px) {
+  .section {
+    width: 90%;
+  }
   #latestPostsContainer {
     grid-template-columns: repeat(1, 1fr);
-  }
-  .section h2 {
-    font-size: 28px;
   }
 
   .no-posts {
@@ -97,10 +97,6 @@ app-loader {
   #latestPostsContainer {
     display: flex;
     flex-direction: column;
-  }
-
-  .section h2 {
-    font-size: 26px;
   }
 
   .no-posts {
