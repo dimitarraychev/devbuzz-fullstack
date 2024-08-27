@@ -96,17 +96,8 @@ $bee-yellow: #e9ab17;
 
   #login-form {
     input {
-      font-size: 14px;
-      width: 30vw;
+      width: 40vw;
     }
-  }
-
-  #redirect-message {
-    font-size: 14px;
-  }
-
-  #error-msg {
-    font-size: 10px;
   }
 }
 
@@ -117,15 +108,7 @@ $bee-yellow: #e9ab17;
 
   #login-form {
     input {
-      width: 40vw;
+      width: 65vw;
     }
-  }
-
-  #redirect-message {
-    font-size: 12px;
-  }
-
-  #error-msg {
-    font-size: 8px;
   }
 }

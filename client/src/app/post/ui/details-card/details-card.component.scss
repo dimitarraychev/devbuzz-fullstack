@@ -131,16 +131,6 @@ app-loader {
     width: 30vw;
     height: 35vh;
   }
-
-  #details-description {
-    font-size: 14px;
-  }
-
-  #details-info {
-    #details-title {
-      font-size: 24px;
-    }
-  }
 }
 
 @media screen and (max-width: 500px) {
@@ -152,16 +142,11 @@ app-loader {
 
   #details-description {
     width: 90%;
-    font-size: 12px;
   }
 
   #details-info {
     width: 90%;
     padding: 0.5em;
-
-    #details-title {
-      font-size: 22px;
-    }
   }
   #details-container {
     display: flex;

@@ -128,20 +128,6 @@ $shadow: 0.2em 0.2em 0.5em rgba(0, 0, 0, 0.5);
     h1 {
       font-size: 32px;
     }
-
-    p {
-      font-size: 16px;
-    }
-  }
-
-  .category {
-    h3 {
-      font-size: 20px;
-    }
-
-    p {
-      font-size: 14px;
-    }
   }
 
   #grid-wrapper {
@@ -154,16 +140,6 @@ $shadow: 0.2em 0.2em 0.5em rgba(0, 0, 0, 0.5);
 }
 
 @media screen and (max-width: 800px) {
-  .home-msg {
-    h1 {
-      font-size: 28px;
-    }
-
-    p {
-      font-size: 14px;
-    }
-  }
-
   .category {
     img {
       width: 15rem;
@@ -183,10 +159,6 @@ $shadow: 0.2em 0.2em 0.5em rgba(0, 0, 0, 0.5);
 @media screen and (max-width: 500px) {
   .home-msg {
     width: 90%;
-
-    h1 {
-      font-size: 26px;
-    }
   }
 
   .category {
@@ -208,17 +180,5 @@ $shadow: 0.2em 0.2em 0.5em rgba(0, 0, 0, 0.5);
 
   #grid-wrapper {
     flex-direction: column;
-  }
-
-  #contributors-wrapper {
-    #contributors {
-      p {
-        font-size: 12px;
-      }
-    }
-  }
-
-  #no-contributors {
-    font-size: 14px;
   }
 }
