@@ -1,2 +1,4 @@
-<app-loader *ngIf="isAuthenticating" />
+<div *ngIf="isAuthenticating" class="loading">
+  <app-loader />
+</div>
 <ng-content *ngIf="!isAuthenticating" />
