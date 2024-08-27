@@ -8,5 +8,5 @@ export const environment = {
     appId: '1:29423022440:web:326f56ed25416e6175e6dd',
     measurementId: 'G-WES5XKDMQ8',
   },
-  apiUrl: 'http://127.0.0.1:3000',
+  apiUrl: 'https://devbuzz-rest-api.onrender.com',
 };

@@ -146,17 +146,20 @@ app-close-btn {
     #grid-right {
       input {
         font-size: 16px;
+        width: 65vw;
       }
     }
 
     #grid-bottom #description {
       font-size: 16px;
+      width: 65vw;
     }
   }
 }
 
 @media screen and (max-width: 800px) {
   #create-form-wrapper {
+    max-width: 90%;
     width: 90%;
   }
 
@@ -165,48 +168,20 @@ app-close-btn {
     flex-direction: column;
 
     #grid-left {
-      width: 80%;
+      width: 100%;
       align-items: center;
 
       #title,
       #category {
-        font-size: 14px;
-        width: 100%;
+        width: 65vw;
       }
     }
 
     #grid-right {
-      input {
-        font-size: 14px;
-      }
       img {
         width: 100%;
         height: 25vh;
       }
-    }
-
-    #grid-bottom #description {
-      font-size: 14px;
-    }
-  }
-}
-
-@media screen and (max-width: 500px) {
-  #create-form {
-    #grid-left {
-      #title,
-      #category {
-        font-size: 12px;
-      }
-    }
-
-    #grid-right input {
-      font-size: 12px;
-    }
-
-    #grid-bottom #description {
-      font-size: 12px;
-      width: 100%;
     }
   }
 }
