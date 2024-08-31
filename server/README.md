@@ -60,31 +60,6 @@ The authentication process involves user registration and login using bcrypt for
 -   bcrypt
 -   cookie-parser
 
-## Prerequisites
-
-Before you begin, ensure you have the following prerequisites installed on your machine:
-
--   **Node.js**: DevBuzz requires Node.js to run both the frontend and backend servers. You can download and install Node.js from [https://nodejs.org/](https://nodejs.org/).
-
--   **MongoDB**: DevBuzz uses MongoDB as its database system. You can download and install MongoDB Community Server from https://www.mongodb.com/try/download/community.
-
-## Getting Started
-
-To run the server locally, follow these steps:
-
-1. **Navigate to the server directory**:
-    ```sh
-    cd devbuzz-fullstack/server
-    ```
-2. **Install server dependencies**:
-    ```sh
-    npm install
-    ```
-3. **Start the server**:
-    ```sh
-    npm start
-    ```
-
 ## Author
 
 **Dimitar Raychev**
