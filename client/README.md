@@ -36,36 +36,6 @@ DevBuzz follows a modular architecture to organize its codebase effectively. Bel
 
 - **A folder containing all types**.
 
-## Prerequisites
-
-Before you begin, ensure you have the following prerequisites installed on your machine:
-
-- **Node.js**: DevBuzz requires Node.js to run both the frontend and backend servers. You can download and install Node.js from [https://nodejs.org/](https://nodejs.org/).
-
-- **Angular CLI**: To run the Angular frontend, you need to have Angular CLI installed globally on your machine. You can install it using npm (Node Package Manager) by running the following command:
-
-  ```sh
-  npm install -g @angular/cli
-  ```
-
-## Getting Started
-
-To run the frontend locally, follow these steps:
-
-1. **Navigate to the client directory**:
-   ```sh
-   cd devbuzz-fullstack/client
-   ```
-2. **Install client dependencies**:
-   ```sh
-   npm install
-   ```
-3. **Run the development server**:
-   ```sh
-   ng serve
-   ```
-4. **Open your browser and navigate to: http://localhost:4200**
-
 ## Author
 
 **Dimitar Raychev**
